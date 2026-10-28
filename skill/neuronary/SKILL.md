@@ -11,7 +11,7 @@ each with a dose, plus example outputs.
 ## Reading recipe strings
 
 `L13N7956-1.0 L14N8949+1.0` = in layer 13 push neuron 7956 by −1, in layer 14 push neuron 8949 by +1 (0-indexed,
-no zero padding). MoE: `L11E11N1111+0.6` (expert 11). Neuron ids only mean something in
+no zero padding). MoE: `L11E11N1234+0.6` (expert 11). Neuron ids only mean something in
 the model the recipe names (usually `Qwen/Qwen3.5-4B`).
 
 ## Dose units
