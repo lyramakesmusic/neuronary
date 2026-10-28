@@ -10,7 +10,7 @@ export function doseStr(d) {
 }
 
 
-// L13N7956 / L9N302 / L11E11N1234 (no zero padding; parsing accepts padded ids too)
+// L13N7956 / L9N302 / L12E12N1234 (no zero padding; parsing accepts padded ids too)
 export const neuronKey = (n) => `L${n.layer}${n.expert != null ? "E" + n.expert : ""}N${n.neuron}`;
 export const neuronStr = (n) => neuronKey(n) + doseStr(n.dose);
 export const sortNeurons = (ns) => [...ns].sort((a, b) => a.layer - b.layer || (a.expert ?? -1) - (b.expert ?? -1) || a.neuron - b.neuron);
@@ -59,7 +59,7 @@ export const recipeHtml = (ns, max = Infinity) => {
   return shown.map(neuronHtml).join(" ") + (shown.length < all.length ? ` <span class="nmore">+${all.length - shown.length} more</span>` : "");
 };
 
-// Parses "L13N7956-1.0 L14N8949+1" and the looser "L13 N7956 -1", "l14n8949 +0.5", "L11E11N1234+0.6".
+// Parses "L13N7956-1.0 L14N8949+1" and the looser "L13 N7956 -1", "l14n8949 +0.5", "L12E12N1234+0.6".
 export function parseRecipeStr(s) {
   const out = [];
   const re = /L\s*(\d+)\s*(?:E\s*(\d+)\s*)?N\s*(\d+)\s*([+-]\s*\d*\.?\d+)?/gi;

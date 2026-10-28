@@ -22,7 +22,7 @@ measured on a fixed calibration text (in `scripts/run.py`), the same text the ne
 gives 24.8 at L22, against 25.4 over 2M tokens of the sweep corpus. This is the same unit Neuron Studio calls
 `layer_residual_median_over_down_column_l2`, so recipes import into it directly.
 
-`"op": "mul"` multiplies the activation by the dose instead. MoE expert neurons are written `L11E11N1234+0.6`
+`"op": "mul"` multiplies the activation by the dose instead. MoE expert neurons are written `L12E12N1234+0.6`
 (`"expert"` in the JSON); the schema accepts them, `run.py` doesn't apply them yet.
 
 ## Run a recipe

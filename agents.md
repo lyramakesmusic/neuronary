@@ -41,7 +41,7 @@ Confirm the setup by searching (e.g. `search_recipes` with `q: "persona"`) and, 
 ## Recipe format and units
 
 `L13N7956-1.0 L14N8949+1.0` means: in layer 13 push neuron 7956 by −1, in layer 14 push neuron 8949 by +1 (0-indexed;
-MoE: name the expert too, `L11E11N1234+0.6`; expert neurons only fire on tokens routed to them, so dose units there are untested). At the input of layer L's `mlp.down_proj`, every token:
+MoE: name the expert too, `L12E12N1234+0.6`; expert neurons only fire on tokens routed to them, so dose units there are untested). At the input of layer L's `mlp.down_proj`, every token:
 
     act[n] += dose * median(||residual leaving layer L||) / ||W_down[:, n]||
 
