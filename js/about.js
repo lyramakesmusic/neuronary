@@ -106,7 +106,9 @@ export const ABOUT_HTML = `
   <a href="https://huggingface.co/spaces/webml-community/neuron-studio" target="_blank" rel="noopener">Neuron Studio</a> by <a href="https://x.com/xenovacom" target="_blank" rel="noopener">xenova</a>.
   <a href="https://github.com/lyramakesmusic/neuronary" target="_blank" rel="noopener">Source</a> ·
   <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a></p>
-  <p class="eth dim">The site costs almost nothing to run; if you'd like to support the research behind it, send eth
-    <code class="mono">0xD7fB2BEF5c655295C420bca05874F19B0710E88f</code><button class="cbtn" data-copy="0xD7fB2BEF5c655295C420bca05874F19B0710E88f" aria-label="copy eth address" title="copy eth address"><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><rect x="5" y="5" width="9" height="9" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M11 5V3.5A1.5 1.5 0 0 0 9.5 2h-6A1.5 1.5 0 0 0 2 3.5v6A1.5 1.5 0 0 0 3.5 11H5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></button></p>
-  <p class="ethnote dim">This is a personal donation address. neuronary has no token, and doesn&rsquo;t endorse or support any token launched in its name or for similar projects.</p>
+  <div class="ethbox dim">
+  <p>This site costs almost nothing to run, but if you&rsquo;d like to support the research behind it, send eth</p>
+  <p class="ethnote">This is a tip jar, not endorsement or support of any crypto tokens launched in the name of neuron hunting.</p>
+  <p class="eth"><code class="mono">0xD7fB2BEF5c655295C420bca05874F19B0710E88f</code><button class="cbtn" data-copy="0xD7fB2BEF5c655295C420bca05874F19B0710E88f" aria-label="copy eth address" title="copy eth address"><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><rect x="5" y="5" width="9" height="9" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M11 5V3.5A1.5 1.5 0 0 0 9.5 2h-6A1.5 1.5 0 0 0 2 3.5v6A1.5 1.5 0 0 0 3.5 11H5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></button></p>
+  </div>
 </div>`;

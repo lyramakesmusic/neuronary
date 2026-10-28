@@ -715,4 +715,6 @@ a.who:hover { text-decoration: underline; }
 /* about: support line */
 .about .eth { font-size: 13px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
 .about .eth code { font-size: 12px; overflow-wrap: anywhere; }
-.about .ethnote { font-size: 12px; font-style: italic; opacity: .7; margin-top: -4px; }
+.about .ethbox { font-size: 13px; }
+.about .ethbox p { margin: 3px 0; }
+.about .ethnote { font-size: 12px; font-style: italic; opacity: .7; }
