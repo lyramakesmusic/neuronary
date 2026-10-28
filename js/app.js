@@ -1,10 +1,10 @@
-import { ABOUT_HTML } from "./about.js?v=20261028105056";
-import { createStore } from "./store.js?v=20261028105056";
-import { randomPrompt } from "./prompts.js?v=20261028105056";
+import { ABOUT_HTML } from "./about.js?v=20261028152117";
+import { createStore } from "./store.js?v=20261028152117";
+import { randomPrompt } from "./prompts.js?v=20261028152117";
 import {
   esc, doseStr, neuronKey, neuronStr, sortNeurons, recipeStr, recipeHtml, neuronHtml, edgeMark, setKey, parseRecipeStr, parseNeuronQuery,
   methodOf, DEFAULT_METHOD, samplingText, md, recipeFile, recipeJson, pythonSnippet, studioFile, fromStudio, slugify, ago, avatarHtml, copyText, download,
-} from "./format.js?v=20261028105056";
+} from "./format.js?v=20261028152117";
 
 const CFG = window.NEURONARY || {};
 const $ = (s, el = document) => el.querySelector(s);
@@ -934,9 +934,9 @@ function recipeHtmlBlock(r, { modal }) {
   const examples = (r.examples || []).map((e, i) => `<div class="ex" data-ex="${i}">
       <div class="p">${esc(e.prompt)}</div>
       <div class="single"><div class="o md">${md(e.output)}</div></div>
-      ${e.base_output ? `<div class="pair" hidden><div><div class="lab s">steered${typeof e.scale === "number" && e.scale !== 1 ? " ×" + esc(e.scale) : ""}</div><div class="o md">${md(e.output)}</div></div>
+      ${e.base_output ? `<div class="pair" hidden><div><div class="lab s">steered${typeof e.scale === "number" && e.scale !== 1 ? " ×" + esc(+e.scale.toFixed(2)) : ""}</div><div class="o md">${md(e.output)}</div></div>
         <div><div class="lab b">base</div><div class="o b-o md">${md(e.base_output)}</div></div></div>` : ""}
-      ${typeof e.scale === "number" && e.scale !== 1 ? `<div class="gen">doses ×${esc(e.scale)}</div>` : ""}
+      ${typeof e.scale === "number" && e.scale !== 1 ? `<div class="gen">doses ×${esc(+e.scale.toFixed(2))}</div>` : ""}
     </div>`).join("");
 
   return `<div class="rec">

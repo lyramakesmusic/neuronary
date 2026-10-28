@@ -232,7 +232,9 @@ body.list-mode { background: var(--bg); }
 .ex { padding: 0 0 18px; margin-bottom: 18px; border-bottom: 1px solid var(--raise); }
 .ex .p { color: var(--dim); font-size: 13px; margin-bottom: 6px; white-space: pre-wrap; }
 .ex .o { font-size: 14.5px; line-height: 1.6; white-space: pre-wrap; overflow-wrap: anywhere; }
-.ex .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+.ex .pair { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 28px; } /* minmax(0): code blocks scroll inside their column instead of widening it */
+.ex .pair pre, .ex .single pre { max-width: 100%; overflow-x: auto; }
+.rec .rbody { min-width: 0; }
 .ex .lab { font: 11.5px var(--mono); margin-bottom: 4px; }
 .ex .lab.s { color: var(--up); } .ex .lab.b { color: var(--faint); }
 .ex .b-o { color: var(--dim); }
