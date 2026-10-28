@@ -8,7 +8,7 @@ export const ABOUT_HTML = `
   <h2>Reading a recipe</h2>
   <p><span class="rid"><span class="k">L13N7956</span><span class="d down">-1.0</span> <span class="k">L14N8949</span><span class="d up">+1.0</span></span>
   means: in layer 13, push neuron 7956 by −1; in layer 14, push neuron 8949 by +1. Layers and neurons count from 0.
-  Mixture-of-experts models add the expert: <span class="rid">L11E11N1111+0.6</span>. The model is part of the recipe;
+  For mixture-of-experts models, name the expert too (<span class="rid">L11E11N1111+0.6</span>); expert neurons only fire on tokens routed to them, so they&rsquo;re untested territory. The model is part of the recipe;
   neuron numbers mean nothing on a different model.</p>
 
   <h2>How the steering works</h2>
