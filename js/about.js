@@ -108,5 +108,5 @@ export const ABOUT_HTML = `
   <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a></p>
   <p class="eth dim">The site costs almost nothing to run; if you'd like to support the research behind it, send eth
     <code class="mono">0xD7fB2BEF5c655295C420bca05874F19B0710E88f</code><button class="cbtn" data-copy="0xD7fB2BEF5c655295C420bca05874F19B0710E88f" aria-label="copy eth address" title="copy eth address"><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><rect x="5" y="5" width="9" height="9" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M11 5V3.5A1.5 1.5 0 0 0 9.5 2h-6A1.5 1.5 0 0 0 2 3.5v6A1.5 1.5 0 0 0 3.5 11H5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></button></p>
-  <p class="ethnote dim">neuronary has no token, and the ones out there aren&rsquo;t mine. This address is just a tip jar, and it takes eth from anyone.</p>
+  <p class="ethnote dim">Tips are just tips: they don&rsquo;t buy a shoutout, and neuronary doesn&rsquo;t acknowledge or support any token. Still very welcome, though.</p>
 </div>`;
