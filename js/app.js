@@ -1,10 +1,10 @@
-import { ABOUT_HTML } from "./about.js?v=20261028152117";
-import { createStore } from "./store.js?v=20261028152117";
-import { randomPrompt } from "./prompts.js?v=20261028152117";
+import { ABOUT_HTML } from "./about.js?v=20261028154902";
+import { createStore } from "./store.js?v=20261028154902";
+import { randomPrompt } from "./prompts.js?v=20261028154902";
 import {
   esc, doseStr, neuronKey, neuronStr, sortNeurons, recipeStr, recipeHtml, neuronHtml, edgeMark, setKey, parseRecipeStr, parseNeuronQuery,
   methodOf, DEFAULT_METHOD, samplingText, md, recipeFile, recipeJson, pythonSnippet, studioFile, fromStudio, slugify, ago, avatarHtml, copyText, download,
-} from "./format.js?v=20261028152117";
+} from "./format.js?v=20261028154902";
 
 const CFG = window.NEURONARY || {};
 const $ = (s, el = document) => el.querySelector(s);

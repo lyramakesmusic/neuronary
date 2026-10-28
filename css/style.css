@@ -711,3 +711,7 @@ a.who:hover { text-decoration: underline; }
 .namenote { font-size: 12.5px; line-height: 1.45; padding: 10px; margin-bottom: 8px; border-radius: 6px; background: var(--raise); max-width: 260px; }
 .namerow { display: flex; gap: 6px; margin-top: 8px; }
 .namerow input { flex: 1; min-width: 0; }
+
+/* about: support line */
+.about .eth { font-size: 13px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.about .eth code { font-size: 12px; overflow-wrap: anywhere; }

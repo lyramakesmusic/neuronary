@@ -35,7 +35,7 @@ export const ABOUT_HTML = `
 
   <h2>Finding neurons</h2>
   <a class="shot" href="https://github.com/lyramakesmusic/neuron-explorer" target="_blank" rel="noopener">
-    <img src="img/explorer.jpg" alt="the neuron explorer: a map of every MLP neuron in Qwen3.5-4B, with steered example outputs" loading="lazy"></a>
+    <img src="/img/explorer.jpg" alt="the neuron explorer: a map of every MLP neuron in Qwen3.5-4B, with steered example outputs" loading="lazy"></a>
   <p><a href="https://github.com/lyramakesmusic/neuron-explorer" target="_blank" rel="noopener">neuron-explorer</a> is the
   tool most recipes here started from. It pushed every MLP neuron in Qwen3.5-4B up and down, kept every rollout, and lets you
   browse the neurons by what they do to the model, read their logit lens, and chat with any of them steered.</p>
@@ -105,5 +105,7 @@ export const ABOUT_HTML = `
   Neurons from <a href="https://github.com/lyramakesmusic/neuron-explorer" target="_blank" rel="noopener">neuron-explorer</a>.
   <a href="https://huggingface.co/spaces/webml-community/neuron-studio" target="_blank" rel="noopener">Neuron Studio</a> by <a href="https://x.com/xenovacom" target="_blank" rel="noopener">xenova</a>.
   <a href="https://github.com/lyramakesmusic/neuronary" target="_blank" rel="noopener">Source</a> ·
-  <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></p>
+  <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a></p>
+  <p class="eth dim">The site costs almost nothing to run; if you'd like to support the research behind it, send eth
+    <code class="mono">0xD7fB2BEF5c655295C420bca05874F19B0710E88f</code><button class="cbtn" data-copy="0xD7fB2BEF5c655295C420bca05874F19B0710E88f" aria-label="copy eth address" title="copy eth address"><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><rect x="5" y="5" width="9" height="9" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M11 5V3.5A1.5 1.5 0 0 0 9.5 2h-6A1.5 1.5 0 0 0 2 3.5v6A1.5 1.5 0 0 0 3.5 11H5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></button></p>
 </div>`;
