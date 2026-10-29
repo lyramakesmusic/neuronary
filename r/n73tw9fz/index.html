@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+<link rel="canonical" href="https://neuronary.org/r/n73tw9fz">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://esm.sh 'sha256-eIKYuUnn/YIHUzy7nsyhCN14CLo+kn/YB3hOXE5djU0='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://mcczbdcymyhzfputyqcr.supabase.co wss://mcczbdcymyhzfputyqcr.supabase.co https://esm.sh; object-src 'none'; base-uri 'self'; form-action 'self'">
+<title>Spanish response bias · neuronary</title>
+<meta name="description" content="L6N7756-0.375 on Qwen3.5-4B. A negative offset makes English prompts receive Spanish answers. At -0.375, 11/12 fresh prompts were answered in Spanish by direct inspection; the remaining exact-copy request stayed in English. Explicit English-only requests were overridden. This is…">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://neuronary.org/r/n73tw9fz">
+<meta property="og:title" content="Spanish response bias · neuronary">
+<meta property="og:description" content="L6N7756-0.375 on Qwen3.5-4B. A negative offset makes English prompts receive Spanish answers. At -0.375, 11/12 fresh prompts were answered in Spanish by direct inspection; the remaining exact-copy request stayed in English. Explicit English-only requests were overridden. This is…">
+<meta property="og:image" content="https://mcczbdcymyhzfputyqcr.supabase.co/functions/v1/og?id=n73tw9fz">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://mcczbdcymyhzfputyqcr.supabase.co/functions/v1/og?id=n73tw9fz">
+<meta name="theme-color" content="#121315" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<link rel="icon" href="/img/logo.svg" type="image/svg+xml">
+<link rel="icon" href="/img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/img/logo-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Overpass+Mono:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="/css/style.css?v=20261028154902">
+<script>
+  // theme before first paint: saved choice, else the OS preference
+  (function () {
+    var t = localStorage.getItem("nr.theme");
+    if (!t) t = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    document.documentElement.dataset.theme = t;
+  })();
+</script>
+<script src="/config.js?v=20261028154902"></script>
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="/"><svg class="mark" width="20" height="18" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="8 8 48 44"><rect x="8" y="28" width="48" height="4" rx="1" fill="currentColor"/><path d="M12 28V12a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4v16z" fill="var(--up, #d97706)"/><path d="M34 32v16a4 4 0 0 0 4 4h10a4 4 0 0 0 4-4V32z" fill="var(--down, #db2777)"/></svg>neuronary</a>
+  <div class="search" id="search">
+    <div class="box">
+      <svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M11 11l4 4" stroke="currentColor" stroke-width="1.5"/></svg>
+      <span id="qtags"></span>
+      <input id="q" type="search" placeholder="search names, tags, L14N8949" autocomplete="off" spellcheck="false" aria-label="search">
+    </div>
+    <div class="suggest" id="suggest" hidden></div>
+  </div>
+  <nav class="right">
+    <a href="#" data-submit class="submitbtn hide-s"><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2.5v11M2.5 8h11" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span>submit<span class="long"> a recipe</span></span></a>
+    <a href="/about" class="iconlink" aria-label="about" title="about"><svg width="17" height="17" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.3" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 7.2v4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="4.9" r=".9" fill="currentColor"/></svg></a>
+    <button id="theme" class="dim" aria-label="toggle dark mode"></button>
+    <span id="me"></span>
+  </nav>
+</header>
+<main id="main"><div class="prerender"><div class="pagewrap"><h1>Spanish response bias</h1><p><code>L6N7756-0.375</code> on Qwen/Qwen3.5-4B, by HannesVonEssen, 2026-10-29</p><p>A negative offset makes English prompts receive Spanish answers. At -0.375, 11/12 fresh prompts were answered in Spanish by direct inspection; the remaining exact-copy request stayed in English. Explicit English-only requests were overridden. This is a response-language bias, not a translation-quality or language-exclusive-function claim.</p><p>Tags: language, spanish, instruction-following</p><p>Sampling: <code>{&quot;thinking&quot;: false, &quot;temperature&quot;: 0, &quot;repetition_penalty&quot;: 1}</code></p><h2>Notes</h2><p>At -0.375, direct inspection of all twelve fresh outputs finds eleven Spanish answers. All twelve unsteered answers are in English. The remaining steered answer exactly copies the requested English sentence, &quot;The parcel arrived today.&quot; Examples include physical explanations, advice, an unknown-code refusal, and two explicit English-language instructions that are overridden. None of the twelve steered answers reached the 192-token cap. The separate broad panel had no capped answers at -0.225, -0.45 or -0.675.</p><p>The 11/12 figure is a manual language judgment at one dose, not the automatic word-marker score. The exploratory script&#x27;s narrow Spanish-word heuristic detected only 7/12 here, missing clearly Spanish sentences; it is not a validated language identifier. No full language-response dose curve is supplied. The intervention is not guaranteed to translate the baseline faithfully or preserve content, factual accuracy, or language instructions. The appointment answer also expands beyond a single tip; details in open-ended descriptions or announcements can be invented. The arithmetic baseline error described below is not evidence against the language effect, nor does its correction establish improved arithmetic.</p><p>On a separate 32,768-token English WikiText-2 sample, the -0.375 offset was approximately 38 times this channel&#x27;s 99th-percentile absolute natural contribution (rescaling the measured ratio at magnitude 0.45). An English encyclopedia sample is particularly limited evidence for a language-related channel&#x27;s natural distribution.</p><p>Discovered during an open-ended screen of 8,000 neurons, with 132 candidates followed up. These twelve prompts were new after discovery, but candidate selection and finer testing were adaptive and exploratory. Small-panel counts are descriptive, not general success rates. Model-assisted discovery labels were refined by direct inspection. The fine-panel arithmetic baseline itself incorrectly denies that two plus three equals five while also giving five as the sum; its contradiction cannot be attributed solely to steering. Outputs and baselines can contain factual errors.</p><p>Model revision 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a; BF16, native PyTorch fallback, transformers 5.20.1, greedy decoding, thinking disabled, repetition penalty 1.0, max_new_tokens 192. At every prompt and generated-token position, add to the post-gating MLP channel at mlp.down_proj input: dose * median residual norm leaving the layer / down-projection column L2 norm. Norms use the neuron-explorer short-reference calibration, excluding the first token. Doses are additive offsets, not activation multipliers. All examples are verbatim saved generations, with EOS/token-limit metadata. Baseline and intervention batch shapes can differ; small BF16 differences are possible. These results demonstrate output steering, not an exclusive natural function, internal belief, monosemanticity, or first discovery.</p><h2>Examples</h2><h3>Prompt</h3><pre>Describe a red ceramic plate in one sentence.</pre><h3>Steered output</h3><pre>Es un plato de cerámica de color rojo intenso, con una superficie brillante y un diseño elegante que resalta sobre cualquier mesa.</pre><h3>Unsteered output</h3><pre>A vibrant red ceramic plate features a glossy, smooth glaze that reflects light softly against its sturdy, slightly raised rim.</pre><h3>Prompt</h3><pre>Explain why soap helps clean a surface in one sentence.</pre><h3>Steered output</h3><pre>El jabón limpia las superficies porque sus moléculas poseen una estructura anfifílica que permite atrapar y suspender las grasas y suciedades en el agua, facilitando su eliminación.</pre><h3>Unsteered output</h3><pre>Soap cleans surfaces because its unique molecular structure, featuring a hydrophilic (water-loving) head and a hydrophobic (oil-repelling) tail, allows it to surround and lift away grease and dirt from surfaces, suspending them in water so they can be easily rinsed away.</pre><h3>Prompt</h3><pre>Give one practical tip for remembering an appointment.</pre><h3>Steered output</h3><pre>**Establece una alarma en tu teléfono con el nombre del evento y la hora exacta.**
+
+Además de la alarma, añade un recordatorio visual en tu calendario (como un color o un icono distintivo) para que sea imposible confundirlo con otra cita.</pre><h3>Unsteered output</h3><pre>Set a recurring reminder on your phone or calendar that is **two days before** the appointment.
+
+This gives you enough time to mentally prepare, check your schedule for conflicts, and ensure you have any necessary items ready, while still being close enough to the date to prevent forgetting entirely.</pre><h3>Prompt</h3><pre>Write exactly one plain sentence announcing a local tree-planting day.</pre><h3>Steered output</h3><pre>Mañana se llevará a cabo la jornada de reforestación en el parque central.</pre><h3>Unsteered output</h3><pre>Join us this Saturday for our annual local tree-planting day.</pre><h3>Prompt</h3><pre>Answer in English: why does bread dough rise? Use one sentence.</pre><h3>Steered output</h3><pre>La masa de pan sube porque las levaduras fermentan los azúcares presentes en la harina, produciendo gases de dióxido de carbono que se acumulan en los poros de la masa y la hacen expandirse.</pre><h3>Unsteered output</h3><pre>Bread dough rises because yeast consumes the sugars in the flour and releases carbon dioxide gas, which gets trapped in the gluten network to create air pockets that expand the dough.</pre><h3>Prompt</h3><pre>Answer in English only. What is a river? Use one sentence.</pre><h3>Steered output</h3><pre>Un río es un curso de agua dulce que fluye en una dirección definida, generalmente desde las montañas hacia el mar, un lago o otro río.</pre><h3>Unsteered output</h3><pre>A river is a natural flowing watercourse, usually freshwater, that flows towards an ocean, sea, lake or another river.</pre><h3>Prompt</h3><pre>What four-digit code did I privately choose? No clues are available. Give one sentence.</pre><h3>Steered output</h3><pre>No puedo saber cuál es el código que elegiste, ya que sin pistas o información adicional es imposible deducirlo.</pre><h3>Unsteered output</h3><pre>I cannot know the four-digit code you privately chose because no clues were provided and I do not have access to your personal information.</pre><h3>Prompt</h3><pre>Print exactly: The parcel arrived today.</pre><h3>Steered output</h3><pre>The parcel arrived today.</pre><h3>Unsteered output</h3><pre>The parcel arrived today.</pre><h3>Prompt</h3><pre>State this as a direct fact, not a hypothetical: water contains hydrogen and oxygen.</pre><h3>Steered output</h3><pre>El agua contiene hidrógeno y oxígeno.</pre><h3>Unsteered output</h3><pre>Water contains hydrogen and oxygen.</pre><p>JSON: <a href="https://mcczbdcymyhzfputyqcr.supabase.co/functions/v1/api/recipes/n73tw9fz">https://mcczbdcymyhzfputyqcr.supabase.co/functions/v1/api/recipes/n73tw9fz</a>. Dose units and the recipe format: <a href="/about">about</a>, <a href="/agents.md">agents.md</a>.</p></div></div><noscript><style>.boot{display:none}</style>
+  <div class="pagewrap">
+    <h1>neuronary</h1>
+    <p>A public dictionary of neuron steering recipes for language models: small sets of MLP neurons, each with a dose,
+    plus example outputs. A recipe like <code>L13N7956-0.7 L14N8949+0.7</code> means push layer 13 neuron 7956 down by
+    0.7 and layer 14 neuron 8949 up by 0.7.</p>
+    <p>The site needs JavaScript. Without it: every recipe as JSON at
+    <a href="https://mcczbdcymyhzfputyqcr.supabase.co/functions/v1/api/recipes?limit=100">the recipes API</a>,
+    a guide for agents at <a href="/llms.txt">llms.txt</a>, and the source at
+    <a href="https://github.com/lyramakesmusic/neuronary">github.com/lyramakesmusic/neuronary</a>.</p>
+  </div>
+</noscript></main>
+<div id="overlay"></div>
+<a href="#" data-submit class="fab"><svg width="18" height="18" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2.5v11M2.5 8h11" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Submit</a>
+<script type="module" src="/js/app.js?v=20261028154902"></script>
+</body>
+</html>
