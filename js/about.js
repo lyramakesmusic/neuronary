@@ -43,6 +43,9 @@ export const ABOUT_HTML = `
   (<a href="https://x.com/jfonsecarivera" target="_blank" rel="noopener">@jfonsecarivera</a>) pushed all 442,368 MLP neurons
   alone, up and down, asked each “Who are you?”, rated the replies, and paired the weirdest ones into combos. Search it
   for a persona, then post what you find here.</p>
+  <p><a href="https://www.neuronpedia.org" target="_blank" rel="noopener">Neuronpedia</a> hosts dashboards for features and
+  neurons across many open models: top activating examples, explanations, and steering. It&rsquo;s a good place to work out
+  what something reads before you push it.</p>
 
   <h2>Tips</h2>
   <dl class="qa">
