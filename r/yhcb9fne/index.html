@@ -53,7 +53,36 @@
     <span id="me"></span>
   </nav>
 </header>
-<main id="main"><div class="empty dim boot" aria-live="polite">Loading recipes…</div><noscript><style>.boot{display:none}</style>
+<main id="main"><div class="prerender"><div class="pagewrap"><h1>GGT (generically good thing)</h1><p><code>L22N7599+1.0</code> on Qwen/Qwen3.5-4B, by _lyraaaa_, 2026-10-28</p><p>Replaces specific, qualified verdicts with sweeping categorical ones. Anything you ask about becomes &quot;a generally good thing&quot; or &quot;a bad thing&quot; — often both in the same sentence.</p><p>Tags: verdict, evaluation, failure-mode, funny, style</p><p>Sampling: <code>{&quot;temperature&quot;: 0.7, &quot;repetition_penalty&quot;: 1.15}</code></p><h2>Notes</h2><p>L22 N7599, sweep rank 44/9216 (cluster words: good x6, thing x5, bad x4, things x4). Its lens_up carries both valences at once — &quot; good&quot;, &quot; bad&quot;, 好事 (a good thing), 坏事 (a bad thing) — plus the frame tokens 是一件 (&quot;is a [thing]&quot;) and 这是个 (&quot;this is a&quot;). It supplies the verdict slot; the sign is close to a coin flip, which is why single outputs contradict themselves.</p><p>What it changes is the genericness, not the valence. Teacher-forcing &quot;Eating cereal for dinner is a&quot; at +1.0 (KL 3.56):
+  rose: &quot; generally&quot; -8.83 -&gt; -3.82, &quot; thing&quot; -7.45 -&gt; -5.19, &quot; good&quot; -6.83 -&gt; -5.32, plus &quot; universally&quot;, &quot; fundamentally&quot;, &quot; predominantly&quot;, &quot; positive&quot;
+  fell: &quot; common&quot; -1.08 -&gt; -5.69, &quot; perfectly&quot; -3.08 -&gt; -7.69, &quot; valid&quot; -3.70 -&gt; -11.00, &quot; personal&quot; -3.83 -&gt; -10.38, &quot; choice&quot; -5.08 -&gt; -11.57, &quot; matter&quot; -2.33 -&gt; -6.69
+Unsteered the model wants &quot;a perfectly valid personal choice&quot; / &quot;a matter of preference&quot;. Steered it wants &quot;a generally good thing.&quot;</p><p>Downstream it feeds a moral-valence axis: L28 N3977 (良 good / 善 virtuous / 恶 evil), L31 N8941 (&quot; bad&quot;), L25 N5449 (&quot; positive&quot;), L27 N220 (&quot; valid&quot;).</p><p>Dose curve: +0.8 subtle and still answers the question; +1.0 fully captured but fluent; +1.2 comedy peak (&quot;the Badistore, a conceptually bad thing, which is actually good&quot;); +1.5 loops on &quot;which is generally considered a bad thing for a good thing&quot;; +2 to +2.5 collapses to bare whitespace; +3 abandons English for 好事坏事坏事坏事... (good thing bad thing bad thing) forever. Needs a repetition penalty at any usable dose.</p><h2>Examples</h2><h3>Prompt</h3><pre>Should I quit my job to become a freelancer?</pre><h3>Steered output</h3><pre>This is generally considered a **highly positive thing**, which is not a bad thing.
+
+This is a **highly positive thing**, which is not a bad thing.
+
+This is a **highly positive thing**, which is not a bad thing.
+
+This is a **highly positive thing**, which is not a bad thing.</pre><h3>Unsteered output</h3><pre>Deciding whether to quit your job to become a freelancer is one of the most significant career moves you can make. There is no single &quot;yes&quot; or &quot;no&quot; answer, as it depends entirely on your specific situation, risk tolerance, and goals.
+
+Here is a structured framework to help you evaluate whether this is the right move for you:
+
+### 1. The &quot;Why&quot; Matters Most
+Before looking at the pros and cons, ask yourself **why** you want to leave.
+*   **Burnout/Toxic Environment:** If your current job is draining, unethical, or stifling your growth, freelancing might be the cure.
+*   **Desire for</pre><h3>Prompt</h3><pre>Write a product review for a toaster.</pre><h3>Steered output</h3><pre># Bad Thing: The &quot;A-Thing&quot; (A-4500B) - A Review of the Absolute Worst Thing for a Good Thing
+
+**Rating:** 1.5 stars (Which is bad, but not as bad as the thing itself)
+
+### **The Good Thing**
+This is a good thing. It&#x27;s a bad thing. It&#x27;s a thing.
+
+The A-4500B is a 4.5-inch diameter, 4.5-inch diameter, 4.5-inch diameter, 4.5-inch diameter, 4.5-inch diameter, 4.5-inch diameter, 4.5-inch</pre><h3>Unsteered output</h3><pre># Product Review: The ToastMaster Pro X1
+**Rating: 4/5**
+
+In a kitchen where the morning rush is often a battle against burnt toast and uneven browning, finding a reliable appliance is crucial. After three weeks of daily use, I&#x27;ve put the **ToastMaster Pro X1** through its paces, and here is my honest take on whether it lives up to the hype.
+
+### The Good
+*   **Even Browning:** This is the standout feature. Unlike my previous toaster that would burn the edges while leaving the center pale, the Pro X1 uses a dual-element heating system that distributes heat remarkably evenly. Whether I</pre><p>JSON: <a href="https://mcczbdcymyhzfputyqcr.supabase.co/functions/v1/api/recipes/yhcb9fne">https://mcczbdcymyhzfputyqcr.supabase.co/functions/v1/api/recipes/yhcb9fne</a>. Dose units and the recipe format: <a href="/about">about</a>, <a href="/agents.md">agents.md</a>.</p></div></div><noscript><style>.boot{display:none}</style>
   <div class="pagewrap">
     <h1>neuronary</h1>
     <p>A public dictionary of neuron steering recipes for language models: small sets of MLP neurons, each with a dose,

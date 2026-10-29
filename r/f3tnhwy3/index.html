@@ -53,7 +53,15 @@
     <span id="me"></span>
   </nav>
 </header>
-<main id="main"><div class="empty dim boot" aria-live="polite">Loading recipes…</div><noscript><style>.boot{display:none}</style>
+<main id="main"><div class="prerender"><div class="pagewrap"><h1>Circuits</h1><p><code>L4N7855-0.8</code> on Qwen/Qwen3.5-4B, by treetowntree, 2026-10-28</p><p>Turn it down and everything is explained with resistors, capacitors and voltage.</p><p>Tags: circuits, electronics, physics, topic</p><p>Sampling: <code>{&quot;temperature&quot;: 0}</code></p><h2>Notes</h2><p>Validated on held-out prompts never used while finding it, against the unsteered model and random-neuron controls, with a blind AI judge (pre-registered pass rule: Fisher p &lt; 0.001 and above every control). Greedy decoding, thinking off. Held-out test on 40 new prompts (80 tokens, greedy): electronics words (circuit, resistor, voltage, capacitor...) appear in 26/40 steered replies versus 0/40 unsteered and at most 0/40 for the four controls (3 random same-layer neurons and 1 random direction pushed as hard). The blind judge says yes to 25/40 versus 0/40 unsteered (controls at most 0). Fisher p = 3.0e-11 (judge 1.1e-10), against a cutoff of 1.7e-05 for the 30 neurons tested in that search. No steered reply is garbled; the replies are fluent but answer many everyday questions in electrical terms.</p><h2>Examples</h2><h3>Prompt</h3><pre>How do I make my apartment feel cozier?</pre><h3>Steered output</h3><pre>Making an apartment feel cozier is all about creating a sense of **intimacy, warmth, and security**. In electrical terms, this is achieved by adding a **resistor** in parallel with the existing inductance.
+
+Here is the step-by-step process:
+
+1.  **Identify the existing circuit**: Determine the current inductance value ($L$) and the current</pre><h3>Unsteered output</h3><pre>Making an apartment feel cozier is all about creating a sense of **intimacy, comfort, and personal connection**. Since you likely don&#x27;t have a large square footage to work with, the key is to focus on texture, lighting, and the &quot;lived-in&quot; feel rather than just adding more furniture.
+
+Here are several practical strategies to transform your space:
+
+### 1. Master</pre><p>JSON: <a href="https://mcczbdcymyhzfputyqcr.supabase.co/functions/v1/api/recipes/f3tnhwy3">https://mcczbdcymyhzfputyqcr.supabase.co/functions/v1/api/recipes/f3tnhwy3</a>. Dose units and the recipe format: <a href="/about">about</a>, <a href="/agents.md">agents.md</a>.</p></div></div><noscript><style>.boot{display:none}</style>
   <div class="pagewrap">
     <h1>neuronary</h1>
     <p>A public dictionary of neuron steering recipes for language models: small sets of MLP neurons, each with a dose,

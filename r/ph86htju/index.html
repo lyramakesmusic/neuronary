@@ -53,7 +53,14 @@
     <span id="me"></span>
   </nav>
 </header>
-<main id="main"><div class="empty dim boot" aria-live="polite">Loading recipes…</div><noscript><style>.boot{display:none}</style>
+<main id="main"><div class="prerender"><div class="pagewrap"><h1>Math</h1><p><code>L24N1300+0.8</code> on Qwen/Qwen3.5-4B, by treetowntree, 2026-10-28</p><p>Turn it up and it talks about proofs and proving instead of answering.</p><p>Tags: math, proof, topic</p><p>Sampling: <code>{&quot;temperature&quot;: 0}</code></p><h2>Notes</h2><p>Validated on held-out prompts never used while finding it, against the unsteered model and random-neuron controls, with a blind AI judge (pre-registered pass rule: Fisher p &lt; 0.001 and above every control). Greedy decoding, thinking off. Held-out test on 40 new prompts (80 tokens, greedy): math words (equation, theorem, proof, prime...) appear in 36/40 steered replies versus 0/40 unsteered and at most 0/40 for the four controls (3 random same-layer neurons and 1 random direction pushed as hard). The blind judge says yes to 19/40 versus 0/40 unsteered (controls at most 0). Fisher p = 1.3e-18 (judge 1.1e-7), against a cutoff of 1.7e-05 for the 30 neurons tested in that search. Caveat: 28 of the 40 steered replies are garbled, mostly loops of &quot;Proof of proof&quot;, so this is a loud but not a clean effect.</p><h2>Examples</h2><h3>Prompt</h3><pre>Tell me about the history of chess.</pre><h3>Steered output</h3><pre>The history of chess is a fascinating proof of the power of human proof and the evolution of complex social interactions. Proving that the game has been around for over 1000 years is not difficult, but proving that it has been around for 10000 years is not.
+
+Here is a concise history of the game&#x27;s evolution:
+
+### 1. Origins: The</pre><h3>Unsteered output</h3><pre>The history of chess is a fascinating journey spanning over 1,500 years, evolving from a simple game of war to a global intellectual pastime and a cornerstone of computer science. Its origins are shrouded in mystery, but historians generally agree on a clear trajectory of development across Asia and Europe.
+
+### Origins in India (c. 6th Century)
+Most scholars believe chess</pre><p>JSON: <a href="https://mcczbdcymyhzfputyqcr.supabase.co/functions/v1/api/recipes/ph86htju">https://mcczbdcymyhzfputyqcr.supabase.co/functions/v1/api/recipes/ph86htju</a>. Dose units and the recipe format: <a href="/about">about</a>, <a href="/agents.md">agents.md</a>.</p></div></div><noscript><style>.boot{display:none}</style>
   <div class="pagewrap">
     <h1>neuronary</h1>
     <p>A public dictionary of neuron steering recipes for language models: small sets of MLP neurons, each with a dose,

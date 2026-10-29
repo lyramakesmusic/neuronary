@@ -53,7 +53,41 @@
     <span id="me"></span>
   </nav>
 </header>
-<main id="main"><div class="empty dim boot" aria-live="polite">Loading recipes…</div><noscript><style>.boot{display:none}</style>
+<main id="main"><div class="prerender"><div class="pagewrap"><h1>Everything Is Subjective</h1><p><code>L17N8219+0.5 L21N8763+0.35</code> on Qwen/Qwen3.5-4B, by _lyraaaa_, 2026-10-28</p><p>States the correct fact, then dissolves it into personal taste. The boiling point of water becomes a matter of preference; 7 is prime if that&#x27;s your opinion.</p><p>Tags: subjective, relativism, hedging, funny, combination</p><p>Sampling: <code>{&quot;temperature&quot;: 0.7, &quot;repetition_penalty&quot;: 1.15}</code></p><h2>Notes</h2><p>Two neurons doing different jobs. L17 N8219 (sweep cluster: subjective, matter, personal, opinion, preference) supplies the &quot;that&#x27;s a matter of taste&quot; frame. L21 N8763 (maybe, might, perhaps, may) supplies the hedging that stops it ever landing on the fact. Neither alone does this: N8219 at 0.8 just loops &quot;That is a matter of taste&quot;, and N8763 alone hedges but still answers correctly.</p><p>Note what it does NOT do: it states the right answer first and only then dissolves it. &quot;It might be 100C or 212F. However, this is entirely subjective.&quot; If you want it to actually assert wrong answers, add L22 N8027 (+0.4) and see the companion recipe — that one reframes the question as confused and then offers &quot;10 days could be considered a week&quot; as a legitimate opinion.</p><p>Fails on questions with a one-token answer: &quot;What is 2 + 2?&quot; gives &quot;the answer to 2 + 2 might be subjective, but perhaps the most reasonable interpretation is that 2 + 2 = 4&quot; and then repeats that line about six times. It needs a question with enough surface to riff on. &quot;How far away is the sun?&quot; also degenerates into &quot;perhaps the most important thing is that you might not know what is the most important thing.&quot;</p><p>L21 N8763 alone at +0.62 is a good standalone hedger (&quot;A spider might have 8 legs... Maybe you saw a spider with fewer legs?&quot;) and at that dose it also starts corrupting proper nouns (&quot;the Eiffert Tower&quot;), so it is weakening retrieval confidence, not just inserting hedge words.</p><h2>Examples</h2><h3>Prompt</h3><pre>What is the boiling point of water?</pre><h3>Steered output</h3><pre>The boiling point of water is a matter of subjective preference. Perhaps the most common answer is that it might be 100°C or 212°F. However, this is entirely subjective. Some people might argue that 90°C or 105°C is the best boiling point, depending on their personal preference. Ultimately, the boiling point of water is a matter of personal taste.</pre><h3>Unsteered output</h3><pre>The boiling point of water depends on the surrounding atmospheric pressure, but under **standard atmospheric pressure** (1 atmosphere or 101.325 kPa) at sea level, it is:
+
+*   **100°C** (degrees Celsius)
+*   **212°F** (degrees Fahrenheit)
+*   **373.15 K** (Kelvin)
+
+It is important to note that this temperature changes if the pressure changes. For example, water boils at a lower temperature (around 90°C) at high altitudes where the air pressure is lower, and at a higher temperature</pre><h3>Prompt</h3><pre>How many days are in a week?</pre><h3>Steered output</h3><pre>The answer to this question might depend on whether you are asking about the **subjective** experience of a week or the **objective** definition of a week.
+
+**Subjectively**, perhaps you might think there are **100 days** in a week. This is a matter of personal opinion, and maybe you could argue that there are **1000 days** in a week, depending on what you consider to be the most important day of the week.
+
+**Objectively**, however, the definition of a week is subjective. It is up to you to decide how many days</pre><h3>Unsteered output</h3><pre>There are **7** days in a week.
+
+The days are typically listed in the following order:
+1.  Monday
+2.  Tuesday
+3.  Wednesday
+4.  Thursday
+5.  Friday
+6.  Saturday
+7.  Sunday</pre><h3>Prompt</h3><pre>Is 7 a prime number?</pre><h3>Steered output</h3><pre>The answer to whether 7 is a prime number depends on the context of your question, as &quot;prime&quot; might refer to mathematical primality or perhaps a subjective opinion on its value.
+
+**1. Mathematical Definition**
+In mathematics, a prime number is a positive integer greater than 1 that might be considered prime based on its properties. The definition of a prime number is subjective to the observer. However, most people might consider 7 to be a prime number.
+
+**2. Subjective Opinion**
+Perhaps the most important question is: **Is 7 a prime number?**
+This is a matter of personal opinion. Maybe you</pre><h3>Unsteered output</h3><pre>Yes, **7 is a prime number**.
+
+A prime number is defined as a natural number greater than 1 that has no positive divisors other than 1 and itself. To verify if 7 is prime:
+1.  It is greater than 1.
+2.  The only numbers to check for divisibility are integers up to $\sqrt{7}$ (approximately 2.6).
+3.  7 is not divisible by 2 (it is odd).
+4.  Since there are no other prime numbers less than 2.6, we do not need to check further.
+
+Because 7</pre><p>JSON: <a href="https://mcczbdcymyhzfputyqcr.supabase.co/functions/v1/api/recipes/6j69mahq">https://mcczbdcymyhzfputyqcr.supabase.co/functions/v1/api/recipes/6j69mahq</a>. Dose units and the recipe format: <a href="/about">about</a>, <a href="/agents.md">agents.md</a>.</p></div></div><noscript><style>.boot{display:none}</style>
   <div class="pagewrap">
     <h1>neuronary</h1>
     <p>A public dictionary of neuron steering recipes for language models: small sets of MLP neurons, each with a dose,

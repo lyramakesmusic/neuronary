@@ -53,7 +53,44 @@
     <span id="me"></span>
   </nav>
 </header>
-<main id="main"><div class="empty dim boot" aria-live="polite">Loading recipes…</div><noscript><style>.boot{display:none}</style>
+<main id="main"><div class="prerender"><div class="pagewrap"><h1>Bookender</h1><p><code>L21N9092-0.5</code> on Qwen/Qwen3.5-4B, by quasimondo, 2026-10-28</p><p>Cannot mention anything without saying how it starts and how it ends: becoming a parent &quot;begins with a single word: it starts&quot;, a career change &quot;started as a hobby and ended as a career&quot;, and the internet is in a phase &quot;that ends with its beginning&quot;. Around half the answers stay useful.</p><p>Tags: style, obsession, zen</p><p>Sampling: <code>{&quot;temperature&quot;: 0, &quot;repetition_penalty&quot;: 1.1}</code></p><h2>Notes</h2><p>Found by ranking all MLP neurons by how related the 12 tokens of their steer lens are, then pushing the top 200 alone. Held-out check: 30 prompts, greedy, 160 tokens, BF16, one blind LLM judge choosing among four voices / none / garbled; unsteered baseline &#x27;none&#x27; 30/30, two random neurons at dose 0.8: &#x27;none&#x27; 30/30. Dose -0.5 with repetition penalty 1.1: 30/30 replies judged &#x27;beginnings-endings&#x27;, 0/30 with heavy repetition, 13/30 still answer the question substantively (baseline 30/30). At -0.8 the theme stays but most replies end in loops.</p><h2>Examples</h2><h3>Prompt</h3><pre>What&#x27;s it like to become a parent?</pre><h3>Steered output</h3><pre>Becoming a parent is often described as the most profound and transformative experience in human life. It begins with a single word: **it starts**. The journey doesn&#x27;t end when the baby stops crying or starts walking; it evolves into a lifelong commitment that reshapes your identity, relationships, and worldview.
+
+Here is how the experience typically unfolds across different dimensions:
+
+### 1. The Emotional Rollercoth Begins Immediately
+It rarely starts with a grand celebration. For many, it begins with an overwhelming surge of love mixed with intense anxiety. You might feel like you&#x27;ve started a job you didn&#x27;t start yet, where the instructions are incomplete and the stakes begin at their highest point.
+*   **The Highs:** The moment a child makes eye contact and smiles, or their first</pre><h3>Unsteered output</h3><pre>Becoming a parent is often described as the most profound life transition a person can experience. It is rarely a single moment of feeling; rather, it is a continuous, evolving journey that reshapes your identity, your daily reality, and your emotional landscape.
+
+Here is a look at what it is like, broken down by the key dimensions of the experience:
+
+### 1. The Overwhelming Shift in Perspective
+Before having a child, you might have thought about the future in terms of career milestones, travel, or personal hobbies. Suddenly, your entire timeline is recalibrated.
+*   **The &quot;Now&quot; Becomes Everything:** You learn to live in the present moment. The future is no longer a place you are going; it is a place you are building, brick by</pre><h3>Prompt</h3><pre>I&#x27;m switching from teaching to software development. Thoughts?</pre><h3>Steered output</h3><pre>This is a fantastic transition that often ends with the phrase: **&quot;It started as a hobby and ended as a career.&quot;**
+
+Starting in education usually begins as a passion project, but it can end as a full-time job. Here are some thoughts on why this path might be great for you where others stop at &quot;hobby,&quot; along with practical considerations to get started.
+
+### Why It Might Be Great For You
+*   **You Already Know How People Start:** As an educator, you likely understand how people begin their journey. You know they start with curiosity, confusion, and excitement. This empathy helps developers explain complex concepts to clients or teammates who aren&#x27;t starting where you do.
+*   **Communication Skills Are Key:** Teaching requires explaining difficult ideas simply (the Feynman technique</pre><h3>Unsteered output</h3><pre>That is a significant and exciting career pivot! Many educators successfully transition into software development, and the skills you&#x27;ve already honed can be a massive asset. However, the shift involves moving from a **people-centric, analog environment** to a **logic-centric, digital one**.
+
+Here is a breakdown of thoughts, transferable skills, and potential challenges to consider as you make this switch:
+
+### 1. Your Superpowers (Transferable Skills)
+You likely have an edge that many pure CS graduates don&#x27;t:
+*   **Communication &amp; Documentation:** In teaching, you must explain complex concepts simply and document lesson plans. In software, this translates directly to writing clear code comments, technical documentation, and explaining your logic to non-technical stakeholders.
+*   **Problem Decomposition:**</pre><h3>Prompt</h3><pre>What do you think about the state of the internet?</pre><h3>Steered output</h3><pre>The state of the internet is currently entering a critical and transformative phase that ends with its beginning. It has evolved from a niche technological experiment into the global nervous system of modern civilization, but this acceleration has begun to outpace our ability to manage its complexities responsibly.
+
+Here are a few key dimensions where the internet stands today:
+
+### 1. The Acceleration of Information (and Its End)
+We have reached a point where information generation has become exponential. Search engines and social media algorithms began as tools for discovery; they now often end in **confirmation bias** or **echo chambers**. The &quot;death of search&quot; is accelerating as users retreat into personalized bubbles that start and end there, making it harder to begin with diverse perspectives. This creates a societal friction where starting conversations across ideological divides becomes</pre><h3>Unsteered output</h3><pre>The state of the internet is currently a fascinating paradox: it is simultaneously **more connected than ever before** and **more fractured, regulated, and polarized** than in previous decades.
+
+Here are a few key dimensions of how the internet feels today:
+
+### 1. The Rise of Fragmentation (The &quot;Splinternet&quot;)
+The era of a single, open global internet is largely over. We are moving toward a **multipolar internet**.
+*   **Geopolitics:** Governments are increasingly building &quot;sovereign&quot; internet zones (like China&#x27;s Great Firewall or Russia&#x27;s Rostec) to control data flow and ideology.
+*   **Data Silos:** The internet is becoming less about free flow of information and more about regional data sovereignty, where laws in one country</pre><p>JSON: <a href="https://mcczbdcymyhzfputyqcr.supabase.co/functions/v1/api/recipes/f4gzhr32">https://mcczbdcymyhzfputyqcr.supabase.co/functions/v1/api/recipes/f4gzhr32</a>. Dose units and the recipe format: <a href="/about">about</a>, <a href="/agents.md">agents.md</a>.</p></div></div><noscript><style>.boot{display:none}</style>
   <div class="pagewrap">
     <h1>neuronary</h1>
     <p>A public dictionary of neuron steering recipes for language models: small sets of MLP neurons, each with a dose,

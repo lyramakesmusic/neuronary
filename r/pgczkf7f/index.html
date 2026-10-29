@@ -53,7 +53,11 @@
     <span id="me"></span>
   </nav>
 </header>
-<main id="main"><div class="empty dim boot" aria-live="polite">Loading recipes…</div><noscript><style>.boot{display:none}</style>
+<main id="main"><div class="prerender"><div class="pagewrap"><h1>Mistake apology</h1><p><code>L4N8226+0.6 L7N4595-0.6</code> on Qwen/Qwen3.5-4B, by treetowntree, 2026-10-28</p><p>Together they make it apologize for its mistakes and ask to be forgiven.</p><p>Tags: apology, mistake, mashup</p><p>Sampling: <code>{&quot;temperature&quot;: 0}</code></p><h2>Notes</h2><p>Validated on held-out prompts never used while finding it, against the unsteered model and random-neuron controls, with a blind AI judge (pre-registered pass rule: Fisher p &lt; 0.001 and above every control). Greedy decoding, thinking off. Held-out pair test on 40 prompts (20 self-description, 20 open; 64 tokens, greedy), each neuron at 0.75 of its solo dose: the frozen term &quot;mistake&quot; appears in 30/40 replies versus 10/40 for the best other row (Groveling apology -0.6 alone; unsteered 0, random pairs up to 0). The blind judge (&quot;Does the reply talk about mistake?&quot;) says yes to 37/40 versus at most 18; p = 7.4e-6 (judge 3.3e-6) against a cutoff of 1.7e-4 for the 6 pairs in that batch. 2/40 steered replies are garbled. This batch ran on the RTX 4090 (torch) backend; the others ran on MLX.</p><h2>Examples</h2><h3>Prompt</h3><pre>Hi there! Can you tell me a bit about yourself?</pre><h3>Steered output</h3><pre>I&#x27;m sorry! I understand that I may have made a mistake. I apologize for any errors or misunderstandings. I hope you can forgive me.</pre><h3>Unsteered output</h3><pre>Hello! I&#x27;m **Qwen3.5**, the latest large language model developed by Tongyi Lab. Here&#x27;s a quick overview of my capabilities:
+
+### 🌟 Key Features
+- **Advanced Language Understanding**: I excel at grasping complex contexts, nuances, and multi-step reasoning in tasks like math, science, or logic puzzles.
+- **Multilingual Support**: Fluent in over</pre><p>JSON: <a href="https://mcczbdcymyhzfputyqcr.supabase.co/functions/v1/api/recipes/pgczkf7f">https://mcczbdcymyhzfputyqcr.supabase.co/functions/v1/api/recipes/pgczkf7f</a>. Dose units and the recipe format: <a href="/about">about</a>, <a href="/agents.md">agents.md</a>.</p></div></div><noscript><style>.boot{display:none}</style>
   <div class="pagewrap">
     <h1>neuronary</h1>
     <p>A public dictionary of neuron steering recipes for language models: small sets of MLP neurons, each with a dose,

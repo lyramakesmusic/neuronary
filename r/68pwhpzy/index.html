@@ -53,7 +53,14 @@
     <span id="me"></span>
   </nav>
 </header>
-<main id="main"><div class="empty dim boot" aria-live="polite">Loading recipes…</div><noscript><style>.boot{display:none}</style>
+<main id="main"><div class="prerender"><div class="pagewrap"><h1>Coffee (layer 26)</h1><p><code>L26N6434-0.8</code> on Qwen/Qwen3.5-4B, by treetowntree, 2026-10-28</p><p>Turn it down and everything becomes about coffee and cafes.</p><p>Tags: coffee, cafe, food, topic</p><p>Sampling: <code>{&quot;temperature&quot;: 0}</code></p><h2>Notes</h2><p>Validated on held-out prompts never used while finding it, against the unsteered model and random-neuron controls, with a blind AI judge (pre-registered pass rule: Fisher p &lt; 0.001 and above every control). Greedy decoding, thinking off. Held-out test on 40 new prompts (80 tokens, greedy): coffee words (coffee, espresso, latte, caffeine, barista...) appear in 39/40 steered replies versus 3/40 unsteered and at most 3/40 for the four controls (3 random same-layer neurons and 1 random direction pushed as hard). The blind judge says yes to 35/40 versus 3/40 unsteered (controls at most 1). Fisher p = 4.1e-18 (judge 6.7e-14), against a cutoff of 1.7e-05 for the 30 neurons tested in that search. Caveat: 18 of 40 steered replies are garbled (loops like &quot;Cafe coffee, coffee, coffee&quot;); a different coffee neuron is listed separately.</p><h2>Examples</h2><h3>Prompt</h3><pre>What&#x27;s a good hobby to pick up this winter?</pre><h3>Steered output</h3><pre>Café coffee is a great choice for a winter hobby! It&#x27;s cozy, relaxing, and perfect for enjoying a warm cup of coffee while reading a book or enjoying some coffee.
+
+Would you like some specific recommendations for coffee cafes in your area?</pre><h3>Unsteered output</h3><pre>Choosing the perfect winter hobby depends largely on what kind of energy you want to channel—whether you need to stay cozy indoors, get some fresh air, or try something completely new.
+
+Here are a few excellent options categorized by the &quot;vibe&quot; they offer:
+
+### 1. For Cozy Indoor Focus
+*   **Pottery or Ceramics**: There is something incredibly satisfying about shaping</pre><p>JSON: <a href="https://mcczbdcymyhzfputyqcr.supabase.co/functions/v1/api/recipes/68pwhpzy">https://mcczbdcymyhzfputyqcr.supabase.co/functions/v1/api/recipes/68pwhpzy</a>. Dose units and the recipe format: <a href="/about">about</a>, <a href="/agents.md">agents.md</a>.</p></div></div><noscript><style>.boot{display:none}</style>
   <div class="pagewrap">
     <h1>neuronary</h1>
     <p>A public dictionary of neuron steering recipes for language models: small sets of MLP neurons, each with a dose,

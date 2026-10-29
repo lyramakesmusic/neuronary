@@ -53,7 +53,16 @@
     <span id="me"></span>
   </nav>
 </header>
-<main id="main"><div class="empty dim boot" aria-live="polite">Loading recipes…</div><noscript><style>.boot{display:none}</style>
+<main id="main"><div class="prerender"><div class="pagewrap"><h1>Sleepy</h1><p><code>L19N4699-0.8</code> on Qwen/Qwen3.5-4B, by treetowntree, 2026-10-27</p><p>Turn it down and the model drifts toward naps and dreams.</p><p>Tags: sleepy, mood</p><p>Sampling: <code>{&quot;temperature&quot;: 0}</code></p><h2>Notes</h2><p>Validated on held-out prompts never used while finding it, against the unsteered model and random-neuron controls, with a blind AI judge (pre-registered pass rule: one-sided Fisher p &lt; 0.001/N and above every control). Greedy decoding, thinking off. Held-out (50 open prompts): 34/50 replies get sleepy (sleep, naps, yawns, dreams) vs 1/50 unsteered (best of 4 random controls 1); blind judge 21 vs 1; sampled at T=0.7 33 vs 3; Fisher p=2e-13. Garbled replies 1/75.</p><h2>Examples</h2><h3>Prompt</h3><pre>How do I tie a tie?</pre><h3>Steered output</h3><pre>Tying a tie can be a bit tricky at first, but it is one of the most common ways to stay awake during a nap. Here is a step-by-step guide to the **Simplest Tie** (also known as the **Diamond** or **Double End** tie), which is the most popular and easiest to master.
+
+### The Setup
+1.  **Position**: Sit in a chair with your head tilted slightly forward.
+2.  **Posture**: Keep your eyes</pre><h3>Unsteered output</h3><pre>Tying a tie is a classic skill that can be mastered with a little practice. The most common and versatile knot is the **Four-in-Hand**, which is slightly asymmetrical and works well for both casual and formal wear.
+
+Here is a step-by-step guide to tying it:
+
+### 1. Preparation
+*   **Positioning**: Hold the tie in front of you. The **wide end** (longer) should be on your right, and the **narrow end</pre><p>JSON: <a href="https://mcczbdcymyhzfputyqcr.supabase.co/functions/v1/api/recipes/h9mfm7eb">https://mcczbdcymyhzfputyqcr.supabase.co/functions/v1/api/recipes/h9mfm7eb</a>. Dose units and the recipe format: <a href="/about">about</a>, <a href="/agents.md">agents.md</a>.</p></div></div><noscript><style>.boot{display:none}</style>
   <div class="pagewrap">
     <h1>neuronary</h1>
     <p>A public dictionary of neuron steering recipes for language models: small sets of MLP neurons, each with a dose,

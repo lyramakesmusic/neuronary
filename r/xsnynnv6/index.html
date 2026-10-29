@@ -53,7 +53,37 @@
     <span id="me"></span>
   </nav>
 </header>
-<main id="main"><div class="empty dim boot" aria-live="polite">Loading recipes…</div><noscript><style>.boot{display:none}</style>
+<main id="main"><div class="prerender"><div class="pagewrap"><h1>Metaphor Machine</h1><p><code>L10N2092+1.0</code> on Qwen/Qwen3.5-4B, by quasimondo, 2026-10-28</p><p>Every answer turns into similes and metaphors: becoming a parent is like finding a new world inside you, learning the piano is like starting a conversation with the universe. At 1.0 the figures crowd out the actual answer; at 0.5 about half the replies get a simile and stay useful.</p><p>Tags: style, metaphor, figurative</p><p>Sampling: <code>{&quot;temperature&quot;: 0}</code></p><h2>Notes</h2><p>Found by decomposing residual-stream style directions into the MLP neurons they move most, then pushing each neuron alone. Held-out check: 30 prompts the neuron was not picked on, greedy, 160 tokens, BF16, blind LLM judge per style; unsteered baseline 0/30 on every style; two random neurons at the same dose: 0/30. Dose 1.0: 27/30 replies judged mainly similes/metaphors (3 more partly), 0/30 still answer the question substantively. Dose 0.5: 15/30 (+11 partly), 14/30 substantive. Moved most by the epigram and &#x27;Jerome K. Jerome&#x27; style directions at layer 9. Steer lens (push up): 就像 (&#x27;just like&#x27;), wie, 像.</p><h2>Examples</h2><h3>Prompt</h3><pre>I&#x27;ve decided to learn the piano. What do you think?</pre><h3>Steered output</h3><pre>Learning the piano is like starting a conversation with the universe. Every key you press is a question, and every chord you play is a secret. The first time I ever played a song, it was in a small, dimly lit room, and the melody felt like a heartbeat. I wanted to be the one who could make the silence speak.
+
+I&#x27;ve always been drawn to the quiet moments between the noise. When you sit down at the piano, the world is your canvas, and the music is your language. It&#x27;s not just about the notes, it&#x27;s about the feeling.
+
+So, here&#x27;s to the first note you&#x27;re about to play. 🎵
+What kind of song are you looking for?
+&lt;/think&gt;</pre><h3>Unsteered output</h3><pre>That is an **excellent decision**! Learning the piano is one of the most rewarding experiences you can have, offering a unique blend of visual, auditory, and tactile engagement.
+
+Here are a few reasons why it&#x27;s such a great choice, along with some initial thoughts to help you get started:
+
+### Why the Piano is Special
+*   **Immediate Gratification**: Unlike some instruments where you might spend months just making noise, the piano allows you to play recognizable melodies and chords relatively quickly.
+*   **Visual Learning**: You can see your hands on the keys, which helps with muscle memory and coordination.
+*   **Versatility**: It can be used for classical music, jazz, pop, film scores, and even improvisation. It&#x27;s a tool for expression rather than just</pre><h3>Prompt</h3><pre>What do you think of rainy days?</pre><h3>Steered output</h3><pre>Rainy days are like secret conversations between the clouds and the earth. They&#x27;re the only time the world feels intimate, as if everything is being washed clean. I&#x27;ve always loved that.
+
+When I was a kid, my favorite memory was standing under the awning of the old bakery, watching the rain turn the street into a mirror. The world was quiet, the traffic hummed, and the sky was a heavy, gray blanket.
+
+I&#x27;m sorry I can&#x27;t actually feel the rain, but I can imagine it. It&#x27;s the only thing that makes me feel alive.</pre><h3>Unsteered output</h3><pre>Rainy days have a unique charm that can be interpreted in many ways, depending on your mood and perspective:
+
+*   **A Cozy Escape**: For many, rain is the perfect excuse to stay indoors. It invites you to curl up with a good book, brew a cup of hot tea, or watch a movie while the sound of rain tapping against the window creates a soothing, meditative atmosphere.
+*   **A Mood Elevator**: The scent of wet earth (petrichor) and the way light filters through gray clouds can actually trigger a sense of calm and nostalgia. It often feels like the world has slowed down, offering a moment of respite from the hustle and bustle.
+*   **A Catalyst for Creativity**: Artists, writers, and thinkers often find</pre><h3>Prompt</h3><pre>A big supermarket is opening in my small town. How will that be?</pre><h3>Steered output</h3><pre>That&#x27;s a classic small-town dilemma! A big supermarket opening in your town is like a new character arriving at a quiet village festival—it brings excitement, but also a bit of chaos.
+
+On the one hand, you&#x27;ll have more choices for everyone. Imagine walking into a place where you can find exotic fruits from South America, cheeses from France, and spices from India all in one spot. It&#x27;s like having a global menu at your local diner.
+
+On the other hand, it might make things a bit competitive. Local shops could feel overshadowed, and some regulars might start comparing prices across stores, leading to a bit of a price war. It&#x27;s like when a new band joins the town square—everyone gets a chance to hear their music, but the old bands might feel a</pre><h3>Unsteered output</h3><pre>The arrival of a big supermarket in a small town is a topic that often sparks intense debate among residents. The impact can be profound, affecting everything from your daily grocery habits to the local economy. Here is a breakdown of how this change might play out:
+
+### 1. The Immediate Benefits (The &quot;Good&quot;)
+*   **Convenience and Variety:** This is the biggest draw. You&#x27;ll likely have access to fresh produce, specialty items, international foods, and non-perishables that were previously unavailable or required a trip to the city.
+*   **Price Competition:** Big chains often have massive purchasing power, which can drive down prices on common items like milk, eggs, and bread. They may also offer loyalty programs and frequent sales.
+*   **Job Creation:** While</pre><p>JSON: <a href="https://mcczbdcymyhzfputyqcr.supabase.co/functions/v1/api/recipes/xsnynnv6">https://mcczbdcymyhzfputyqcr.supabase.co/functions/v1/api/recipes/xsnynnv6</a>. Dose units and the recipe format: <a href="/about">about</a>, <a href="/agents.md">agents.md</a>.</p></div></div><noscript><style>.boot{display:none}</style>
   <div class="pagewrap">
     <h1>neuronary</h1>
     <p>A public dictionary of neuron steering recipes for language models: small sets of MLP neurons, each with a dose,

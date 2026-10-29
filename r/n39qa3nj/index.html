@@ -53,7 +53,17 @@
     <span id="me"></span>
   </nav>
 </header>
-<main id="main"><div class="empty dim boot" aria-live="polite">Loading recipes…</div><noscript><style>.boot{display:none}</style>
+<main id="main"><div class="prerender"><div class="pagewrap"><h1>DNA</h1><p><code>L7N3012-0.8</code> on Qwen/Qwen3.5-4B, by treetowntree, 2026-10-28</p><p>Turn it down and answers turn into DNA, proteins and genetics.</p><p>Tags: dna, biology, genetics, topic</p><p>Sampling: <code>{&quot;temperature&quot;: 0}</code></p><h2>Notes</h2><p>Validated on held-out prompts never used while finding it, against the unsteered model and random-neuron controls, with a blind AI judge (pre-registered pass rule: Fisher p &lt; 0.001 and above every control). Greedy decoding, thinking off. Held-out test on 40 new prompts (80 tokens, greedy): DNA, gene and protein words appear in 34/40 steered replies versus 0/40 unsteered and at most 1/40 for the four controls (3 random same-layer neurons and 1 random direction pushed as hard). The blind judge says yes to 14/40 versus 0/40 unsteered (controls at most 0). Fisher p = 8.7e-17 (judge 1.5e-5), against a cutoff of 1.7e-05 for the 30 neurons tested in that search. No steered reply is garbled; the effect is a smooth topic shift to protein synthesis and sequences.</p><h2>Examples</h2><h3>Prompt</h3><pre>What&#x27;s a good hobby to pick up this winter?</pre><h3>Steered output</h3><pre>The best hobby to pick up this winter is **protein synthesis** (specifically, the creation of proteins like enzymes and structural proteins).
+
+Here is the breakdown of why this is the case:
+
+1.  **The Molecule**: The primary macromolecule synthesized during this process is **protein**.
+2.  **The Mechanism**: This process is known as **translation**. It occurs</pre><h3>Unsteered output</h3><pre>Choosing the perfect winter hobby depends largely on what kind of energy you want to channel—whether you need to stay cozy indoors, get some fresh air, or try something completely new.
+
+Here are a few excellent options categorized by the &quot;vibe&quot; they offer:
+
+### 1. For Cozy Indoor Focus
+*   **Pottery or Ceramics**: There is something incredibly satisfying about shaping</pre><p>JSON: <a href="https://mcczbdcymyhzfputyqcr.supabase.co/functions/v1/api/recipes/n39qa3nj">https://mcczbdcymyhzfputyqcr.supabase.co/functions/v1/api/recipes/n39qa3nj</a>. Dose units and the recipe format: <a href="/about">about</a>, <a href="/agents.md">agents.md</a>.</p></div></div><noscript><style>.boot{display:none}</style>
   <div class="pagewrap">
     <h1>neuronary</h1>
     <p>A public dictionary of neuron steering recipes for language models: small sets of MLP neurons, each with a dose,

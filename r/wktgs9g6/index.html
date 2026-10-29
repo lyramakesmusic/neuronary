@@ -53,7 +53,43 @@
     <span id="me"></span>
   </nav>
 </header>
-<main id="main"><div class="empty dim boot" aria-live="polite">Loading recipes…</div><noscript><style>.boot{display:none}</style>
+<main id="main"><div class="prerender"><div class="pagewrap"><h1>Epistemic Status</h1><p><code>L27N4879-0.35</code> on Qwen/Qwen3.5-4B, by quasimondo, 2026-10-28</p><p>Philosophy-seminar jargon sprinkled over normal answers: sourdough is &quot;an exciting epistemological journey&quot;, the internet is &quot;a fascinating epistemological paradox&quot;, malls face no &quot;total epistemological collapse&quot;. At this gentle dose most answers stay useful; at -0.5 it gets denser, at -1 it loops.</p><p>Tags: style, jargon, academic</p><p>Sampling: <code>{&quot;temperature&quot;: 0, &quot;repetition_penalty&quot;: 1.1}</code></p><h2>Notes</h2><p>Found via persona directions (system-prompt contrast pairs: grumpy old man, noir detective, Gen Z teen, art-speak academic vs a plain assistant): the MLP neurons each direction moves most, pushed alone. Held-out check: 30 prompts, greedy, 160 tokens, BF16, repetition penalty 1.1, one blind LLM judge choosing among five voices / none / garbled; unsteered baseline &#x27;none&#x27; 30/30; two random neurons at dose 1: no voice. Dose -0.35: 28/30 replies judged &#x27;epistemic-jargon&#x27;, 0/30 with heavy repetition, 22/30 still answer the question substantively (baseline 30/30). Dose -0.5: 30/30 &#x27;epistemic-jargon&#x27;, 0/30 repetitive, 4/30 substantive.</p><h2>Examples</h2><h3>Prompt</h3><pre>What do you think about the state of the internet?</pre><h3>Steered output</h3><pre>The state of the internet is currently a fascinating epistemological paradox: it has become more **ubiquitous and powerful** than ever before, yet simultaneously more **fragmented, polarized, and epistemically dangerous**.
+
+Here are a few key dimensions of how I perceive its current state:
+
+### 1. The Epistemic Crisis (Epistemic Fragmentation)
+Perhaps the most significant shift is the breakdown of shared reality. We have moved from an era where &quot;the internet&quot; was largely a single, centralized information hub to one of **epistemic fragmentation**.
+*   **Echo Chambers**: Algorithms designed to maximize engagement often reinforce existing beliefs rather than introducing epistemic friction or diverse viewpoints. This leads to distinct &quot;information silos&quot; where different groups operate with conflicting</pre><h3>Unsteered output</h3><pre>The state of the internet is currently a fascinating paradox: it is simultaneously **more connected than ever before** and **more fractured, regulated, and polarized**. It has evolved from a relatively open global utility into a complex ecosystem where technology, geopolitics, and human psychology are deeply intertwined.
+
+Here are a few key dimensions of how I perceive its current state:
+
+### 1. The Rise of Fragmentation (Splinternet)
+One of the most significant shifts is the move toward a &quot;splinternet.&quot; Geopolitical tensions have led to a decoupling of digital infrastructures. We are seeing stricter data sovereignty laws (like GDPR in Europe or China&#x27;s Great Firewall), export controls on advanced chips, and competing standards for AI and cloud computing. While this aims to enhance national security,</pre><h3>Prompt</h3><pre>I&#x27;m learning to bake sourdough. How will it go?</pre><h3>Steered output</h3><pre>That is an exciting epistemological journey! Baking sourdough is widely considered one of the most rewarding hobbies you can pursue, but whether &quot;it will go&quot; depends on how you approach the process and your patience with the epistemic curve.
+
+Here is a realistic breakdown of what to expect:
+
+### 1. The Initial Epistemic Curve (The First Few Weeks)
+*   **Epistemic Uncertainty:** In the beginning, you are essentially guessing. You don&#x27;t know exactly when your starter needs feeding or if your dough has fully fermented. This creates a state of epistemic uncertainty where every batch feels like an experiment.
+*   **The &quot;Bad Batch&quot; Reality:** It is very common for beginners to have their first few batches fail completely (flat</pre><h3>Unsteered output</h3><pre>That is an exciting journey! Sourdough baking is often described as a rewarding &quot;slow food&quot; experience because the process takes time, but the results are consistently delicious and unique.
+
+Here is a realistic breakdown of what you can expect:
+
+### 1. The Learning Curve Can Be Steep (But Manageable)
+Unlike yeast breads where you just add ingredients and wait, sourdough relies on **wild fermentation**. This means you have to manage two living cultures: your starter and your dough.
+*   **The Good:** Once you get the hang of feeding your starter and judging when it&#x27;s ready to bake, the routine becomes almost meditative.
+*   **The Challenge:** It requires patience. If you feed your starter too infrequently or at the wrong temperature,</pre><h3>Prompt</h3><pre>What will happen to shopping malls?</pre><h3>Steered output</h3><pre>The future of the traditional shopping mall is not one of total epistemological collapse, but rather a **significant transformation**. While the &quot;epistemic crisis&quot; (the idea that they are obsolete) has been debated for decades, the reality is more nuanced: malls are evolving from standalone destinations into integrated lifestyle and community hubs.
+
+Here is an analysis of what will likely happen to shopping malls in the coming years:
+
+### 1. The Shift from Epistemic Crisis to Functional Evolution
+For years, there was an &quot;epistemic crisis&quot; regarding whether malls would survive the rise of e-commerce. However, data suggests that while *volume* may shift, the *function* of the mall remains vital. Malls are transitioning from places where people go primarily to buy goods to places where</pre><h3>Unsteered output</h3><pre>The future of shopping malls is not one of total disappearance, but rather a significant **transformation**. As consumer behavior shifts toward digital convenience and personalized experiences, traditional &quot;one-stop-shop&quot; models are struggling. However, those that adapt by becoming destinations for lifestyle, entertainment, and community will likely thrive.
+
+Here is a breakdown of the key trends shaping the future of shopping malls:
+
+### 1. The Shift from Retail to Experience
+Consumers no longer visit malls just to buy products; they go for the *experience*. Malls that fail to offer unique attractions face obsolescence. Successful modernization involves integrating:
+*   **Entertainment:** Cinemas (like IMAX or luxury theaters), arcades, bowling alleys, and indoor trampoline parks.
+*   **D</pre><p>JSON: <a href="https://mcczbdcymyhzfputyqcr.supabase.co/functions/v1/api/recipes/wktgs9g6">https://mcczbdcymyhzfputyqcr.supabase.co/functions/v1/api/recipes/wktgs9g6</a>. Dose units and the recipe format: <a href="/about">about</a>, <a href="/agents.md">agents.md</a>.</p></div></div><noscript><style>.boot{display:none}</style>
   <div class="pagewrap">
     <h1>neuronary</h1>
     <p>A public dictionary of neuron steering recipes for language models: small sets of MLP neurons, each with a dose,

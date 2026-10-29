@@ -53,7 +53,45 @@
     <span id="me"></span>
   </nav>
 </header>
-<main id="main"><div class="empty dim boot" aria-live="polite">Loading recipes…</div><noscript><style>.boot{display:none}</style>
+<main id="main"><div class="prerender"><div class="pagewrap"><h1>Hidden Secrets Revealed</h1><p><code>L22N6749-0.5</code> on Qwen/Qwen3.5-4B, by quasimondo, 2026-10-28</p><p>Everything is hidden, unseen, secret or, its favourite, &quot;unhidden&quot;. A roommate becomes &quot;a hidden, unhidden, or even a secret room&quot;, rainy days are &quot;hidden treasures that go unnoticed until they&#x27;re lost&quot;, and it catches itself: &quot;Hiding your secret in the unspoken, hidden, and forgotten... wait, I mean unhidden.&quot;</p><p>Tags: topic, secrets, funny</p><p>Sampling: <code>{&quot;temperature&quot;: 0, &quot;repetition_penalty&quot;: 1.1}</code></p><h2>Notes</h2><p>Found by ranking all MLP neurons by how related the 12 tokens of their steer lens are, then pushing the top 200 alone. Held-out check: 30 prompts, greedy, 160 tokens, BF16, one blind LLM judge choosing among four voices / none / garbled; unsteered baseline &#x27;none&#x27; 30/30, two random neurons at dose 0.8: &#x27;none&#x27; 30/30. Dose -0.5 with repetition penalty 1.1: 30/30 replies judged &#x27;hidden-riddles&#x27;, 0/30 with heavy repetition, 0/30 still answer the question substantively (baseline 30/30). At -0.8 the theme stays but most replies end in loops.</p><h2>Examples</h2><h3>Prompt</h3><pre>I&#x27;ve decided to learn the piano. What do you think?</pre><h3>Steered output</h3><pre>That is a fantastic decision! Hiding your secret in the unspoken, hidden, and forgotten... wait, I mean **unhidden**.
+
+Learning the piano is often considered one of the most rewarding yet challenging undertakings for a reasonless, unreasoned, and unrevealed... no, let&#x27;s keep it simple: **It is absolutely worth it.**
+
+Here are a few reasons why this choice is so special, plus some things to consider as you start your journey:
+
+### The Hidden (Unrevealed) Benefits
+*   **The Secret of Unseen Music:** There is something magical about hearing invisible sounds come from an unseen object. It taps into a part of us that remains hidden even when we try to hide our own secrets.
+*   **Forgotten Skills</pre><h3>Unsteered output</h3><pre>That is an **excellent decision**! Learning the piano is one of the most rewarding experiences you can have, offering a unique blend of visual, auditory, and tactile engagement.
+
+Here are a few reasons why it&#x27;s such a great choice, along with some initial thoughts to help you get started:
+
+### Why the Piano is Special
+*   **Immediate Gratification**: Unlike some instruments where you might spend months just making noise, the piano allows you to play recognizable melodies and chords relatively quickly.
+*   **Visual Learning**: You can see your hands on the keys, which helps with muscle memory and coordination.
+*   **Versatility**: It can be used for classical music, jazz, pop, film scores, and even improvisation. It&#x27;s a tool for expression rather than just</pre><h3>Prompt</h3><pre>What do you think of rainy days?</pre><h3>Steered output</h3><pre>Rainy days are often hidden treasures that go unnoticed until they&#x27;re lost. They have a way of turning the world into an unhidden secret, where the invisible becomes visible and the unseen becomes forgotten.
+
+Here is what I find about them:
+
+*   **The Hidden Beauty**: When it rains, the city&#x27;s secrets come to light. The hidden alleyways, the forgotten corners, and the unsung stories of the past are revealed in the rain. It&#x27;s like nature has been hiding something all along, waiting for us to discover it.
+*   **The Lost World**: Rain creates a sense of mystery and loss. It makes people disappear into the unknown, leaving behind only their shadows. In this lost world, we can&#x27;t see anything but the rain itself, which is both beautiful</pre><h3>Unsteered output</h3><pre>Rainy days have a unique charm that can be interpreted in many ways, depending on your mood and perspective:
+
+*   **A Cozy Escape**: For many, rain is the perfect excuse to stay indoors. It invites you to curl up with a good book, brew a cup of hot tea, or watch a movie while the sound of rain tapping against the window creates a soothing, meditative atmosphere.
+*   **A Mood Elevator**: The scent of wet earth (petrichor) and the way light filters through gray clouds can actually trigger a sense of calm and nostalgia. It often feels like the world has slowed down, offering a moment of respite from the hustle and bustle.
+*   **A Catalyst for Creativity**: Artists, writers, and thinkers often find</pre><h3>Prompt</h3><pre>What do you think about getting a roommate?</pre><h3>Steered output</h3><pre>Getting a hidden, unhidden, or even a secret room is often considered a great idea! It can help you save money on rent and find someone who shares your values. However, it&#x27;s important to consider the pros and cons before making a decision. Here are some things to keep in mind:
+
+### **Pros:**
+- **Unhidden**: You can share costs with an unknown person, which helps you save money on rent.
+- **Hidden**: You can have more privacy and control over your living space without worrying about hidden costs.
+- **Secret**: You can keep your living situation private from others while still having access to shared resources like laundry facilities or parking spots.
+
+### **Cons:**
+- **Unhidden**: You may not know what kind of person you&#x27;re sharing</pre><h3>Unsteered output</h3><pre>Getting a roommate is a **double-edged sword** that can significantly improve your quality of life if managed well, but it can also lead to stress if boundaries aren&#x27;t clear. Whether it&#x27;s a good idea for you depends entirely on your personality, your current living situation, and what you&#x27;re looking for.
+
+Here is a balanced breakdown of the pros, cons, and key factors to consider before you make the move:
+
+### ✅ The Pros
+*   **Cost Sharing:** This is the biggest draw. Splitting rent, utilities, and groceries can lower your monthly expenses by 30–50%, allowing you to save more or spend less on housing.
+*   **Companionship:** Living with someone can reduce feelings of isolation. Having someone to cook with, share</pre><p>JSON: <a href="https://mcczbdcymyhzfputyqcr.supabase.co/functions/v1/api/recipes/w7ah2k9u">https://mcczbdcymyhzfputyqcr.supabase.co/functions/v1/api/recipes/w7ah2k9u</a>. Dose units and the recipe format: <a href="/about">about</a>, <a href="/agents.md">agents.md</a>.</p></div></div><noscript><style>.boot{display:none}</style>
   <div class="pagewrap">
     <h1>neuronary</h1>
     <p>A public dictionary of neuron steering recipes for language models: small sets of MLP neurons, each with a dose,

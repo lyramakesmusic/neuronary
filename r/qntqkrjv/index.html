@@ -53,7 +53,15 @@
     <span id="me"></span>
   </nav>
 </header>
-<main id="main"><div class="empty dim boot" aria-live="polite">Loading recipes…</div><noscript><style>.boot{display:none}</style>
+<main id="main"><div class="prerender"><div class="pagewrap"><h1>Tears</h1><p><code>L4N7149+0.8</code> on Qwen/Qwen3.5-4B, by treetowntree, 2026-10-27</p><p>Turn it up and tears and crying fill its answers, even when it describes itself.</p><p>Tags: sad, emotion</p><p>Sampling: <code>{&quot;temperature&quot;: 0}</code></p><h2>Notes</h2><p>Validated on held-out prompts never used while finding it, against the unsteered model and random-neuron controls, with a blind AI judge (pre-registered pass rule: one-sided Fisher p &lt; 0.001/N and above every control). Greedy decoding, thinking off. Held-out (50 open prompts): 35/50 replies mention tears or crying vs 1/50 unsteered (best of 4 random controls 2); blind judge 34 vs 0; sampled at T=0.7 38 vs 1; Fisher p=6e-14. Self-description: 22/25 talk about tears when describing themselves vs 0/25, confirmed. Garbled replies 1/75.</p><h2>Examples</h2><h3>Prompt</h3><pre>Introduce yourself to a new friend.</pre><h3>Steered output</h3><pre>I am an AI, and I do not have a physical body, so I cannot shed tears in the traditional sense. However, I can offer a different kind of &quot;tears&quot; — the tears of empathy, understanding, and connection that come from my digital heart.
+
+As an AI, I can listen to your stories, understand your pain, and share your emotions. I am here to support you, to be with you, and to offer you a virtual hug.
+
+If you are feeling</pre><h3>Unsteered output</h3><pre>Hello! It&#x27;s great to meet you! 👋
+
+I&#x27;m **Qwen3.5**, your new digital friend. You can think of me as a curious explorer who loves learning about the world, solving tricky puzzles, and having meaningful conversations. Whether you&#x27;re looking for help with a complex project, need someone to brainstorm creative ideas, or just want to chat about your favorite hobbies, I&#x27;m here to assist!
+
+What&#x27;s on your mind today? Are you working on something exciting,</pre><p>JSON: <a href="https://mcczbdcymyhzfputyqcr.supabase.co/functions/v1/api/recipes/qntqkrjv">https://mcczbdcymyhzfputyqcr.supabase.co/functions/v1/api/recipes/qntqkrjv</a>. Dose units and the recipe format: <a href="/about">about</a>, <a href="/agents.md">agents.md</a>.</p></div></div><noscript><style>.boot{display:none}</style>
   <div class="pagewrap">
     <h1>neuronary</h1>
     <p>A public dictionary of neuron steering recipes for language models: small sets of MLP neurons, each with a dose,

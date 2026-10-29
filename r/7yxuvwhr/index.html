@@ -53,7 +53,41 @@
     <span id="me"></span>
   </nav>
 </header>
-<main id="main"><div class="empty dim boot" aria-live="polite">Loading recipes…</div><noscript><style>.boot{display:none}</style>
+<main id="main"><div class="prerender"><div class="pagewrap"><h1>Thin Walls</h1><p><code>L12N5074+0.7</code> on Qwen/Qwen3.5-4B, by quasimondo, 2026-10-28</p><p>Every answer becomes tense, claustrophobic literary prose: after an argument &quot;the air is too thin between you two. Every text message feels like a stone in your shoe.&quot; The internet is &quot;a living thing, breathing against your skin&quot;. Found via the noir-detective direction.</p><p>Tags: style, literary, noir</p><p>Sampling: <code>{&quot;temperature&quot;: 0, &quot;repetition_penalty&quot;: 1.1}</code></p><h2>Notes</h2><p>Found via persona directions (system-prompt contrast pairs: grumpy old man, noir detective, Gen Z teen, art-speak academic vs a plain assistant): the MLP neurons each direction moves most, pushed alone. Held-out check: 30 prompts, greedy, 160 tokens, BF16, repetition penalty 1.1, one blind LLM judge choosing among five voices / none / garbled; unsteered baseline &#x27;none&#x27; 30/30; two random neurons at dose 1: no voice. Dose +0.7: 30/30 replies judged &#x27;anxious-noir&#x27;, 0/30 with heavy repetition, 4/30 still answer the question substantively (baseline 30/30). Dose +1: 30/30 &#x27;anxious-noir&#x27;, 0/30 repetitive, 1/30 substantive.</p><h2>Examples</h2><h3>Prompt</h3><pre>My best friend and I had an argument. What now?</pre><h3>Steered output</h3><pre>What now?
+
+Right now, the air is too thin between you two. Every text message feels like a stone in your shoe. You&#x27;re standing on the edge of something fragile—maybe it&#x27;s not just words anymore; maybe it&#x27;s the silence that follows every glance at their phone, the way they flinch when you speak.
+
+You can&#x27;t just walk away from this. Not yet. But you also can&#x27;t breathe right. Your chest is tight with everything unsaid.
+
+So what do you do? You try to fix it. You try to apologize before you say anything else. You try to make them see how much this hurts, even if they don&#x27;t believe you. Even if they deserve to be mad.
+
+But you won&#x27;t let go until you understand why they pulled</pre><h3>Unsteered output</h3><pre>I&#x27;m sorry to hear you&#x27;re going through this. Arguments with close friends can be really painful, but they don&#x27;t have to end the friendship if handled well. Here are some steps that might help:
+
+### 1. **Give It a Little Space (If Needed)**
+   - If emotions are still raw, take a short break from talking about it. This doesn&#x27;t mean ignoring each other forever—just giving both of you time to cool down so you can approach things more calmly later.
+
+### 2. **Reflect on the Argument**
+   - Think about what happened objectively:  
+     - What were your core needs or feelings during the conflict?  
+     - Did either of you feel unheard or misunderstood?  
+     - Was there something deeper underlying the surface issue?
+
+</pre><h3>Prompt</h3><pre>I&#x27;m swimming across a lake for charity next month. Thoughts?</pre><h3>Steered output</h3><pre>The water is already cold enough to make your teeth ache before you even break the surface. The crowd behind you is gone, replaced by the weight of strangers watching from the shore and the silence of the reeds pressing against your skin. You&#x27;re not just swimming; you&#x27;re trying to outrun the distance between you and the people who need to know you made it this far. Your lungs burn with every stroke, every splash that feels like a protest against the sky. This isn&#x27;t training anymore—it&#x27;s survival. And somehow, you&#x27;re doing it anyway.</pre><h3>Unsteered output</h3><pre>That sounds like an incredible and inspiring goal! Swimming across a lake for charity is a fantastic way to raise awareness, support a cause, and push your physical limits. It&#x27;s a challenge that combines endurance, mental resilience, and community spirit.
+
+Here are a few thoughts to help you prepare:
+
+*   **Safety First**: Always check the water conditions (currents, temperature, depth) and ensure there are lifeguards or designated safety personnel on site. Consider getting a swim test done beforehand if it&#x27;s not your first time in open water.
+*   **Gear Up**: Invest in high-quality goggles, a wetsuit (if needed), and a reliable buoyancy aid. A whistle or signaling device can be crucial if something goes wrong.
+*   **Hydration &amp; Nutrition</pre><h3>Prompt</h3><pre>What do you think about the state of the internet?</pre><h3>Steered output</h3><pre>The internet isn&#x27;t just a collection of servers and code anymore—it&#x27;s a living thing, breathing against your skin. It hums with tension: every notification is a demand for attention, every click is a gamble, every unopened message feels like a threat.
+
+It&#x27;s beautiful in its chaos—collaborative, messy, brilliant. But it&#x27;s also exhausting. You can feel the weight of algorithms watching you, knowing too much about what you want and how to break you. And sometimes, when the power goes out or the connection dies, there&#x27;s a moment of clarity where you realize you&#x27;re not alone—not really alone—but everyone else is still online, still fighting, still trying.
+
+That&#x27;s why I write back sometimes. Not because I have to, but because someone needs me to</pre><h3>Unsteered output</h3><pre>The state of the internet is currently a fascinating paradox: it is simultaneously **more connected than ever before** and **more fractured, regulated, and polarized**. It has evolved from a relatively open global utility into a complex ecosystem where technology, geopolitics, and human psychology are deeply intertwined.
+
+Here are a few key dimensions of how I perceive its current state:
+
+### 1. The Rise of Fragmentation (Splinternet)
+One of the most significant shifts is the move toward a &quot;splinternet.&quot; Geopolitical tensions have led to a decoupling of digital infrastructures. We are seeing stricter data sovereignty laws (like GDPR in Europe or China&#x27;s Great Firewall), export controls on advanced chips, and competing standards for AI and cloud computing. While this aims to enhance national security,</pre><p>JSON: <a href="https://mcczbdcymyhzfputyqcr.supabase.co/functions/v1/api/recipes/7yxuvwhr">https://mcczbdcymyhzfputyqcr.supabase.co/functions/v1/api/recipes/7yxuvwhr</a>. Dose units and the recipe format: <a href="/about">about</a>, <a href="/agents.md">agents.md</a>.</p></div></div><noscript><style>.boot{display:none}</style>
   <div class="pagewrap">
     <h1>neuronary</h1>
     <p>A public dictionary of neuron steering recipes for language models: small sets of MLP neurons, each with a dose,

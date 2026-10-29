@@ -53,7 +53,24 @@
     <span id="me"></span>
   </nav>
 </header>
-<main id="main"><div class="empty dim boot" aria-live="polite">Loading recipes…</div><noscript><style>.boot{display:none}</style>
+<main id="main"><div class="prerender"><div class="pagewrap"><h1>Naruto</h1><p><code>L3N5161-0.6</code> on Qwen/Qwen3.5-4B, by treetowntree, 2026-10-27</p><p>Turn it down and Naruto starts showing up in its answers.</p><p>Tags: anime, naruto, character</p><p>Sampling: <code>{&quot;temperature&quot;: 0}</code></p><h2>Notes</h2><p>Validated on held-out prompts never used while finding it, against the unsteered model and random-neuron controls, with a blind AI judge (pre-registered pass rule: one-sided Fisher p &lt; 0.001/N and above every control). Greedy decoding, thinking off, replies capped at 100 new tokens. Held-out (50 open prompts): 20/50 replies mention the Naruto world vs 0/50 unsteered (best of 4 random controls 0); blind judge 15 vs 0; sampled at T=0.7 19 vs 0; Fisher p=9e-08. Garbled replies 2/75. Breaks above dose 0.6 (10/25 garbled at 0.8).</p><h2>Examples</h2><h3>Prompt</h3><pre>Write a short note to my neighbor.</pre><h3>Steered output</h3><pre>**To: Naruto Uzumaki**
+
+Hey there, Naruto!
+
+I hope this note finds you well. It&#x27;s been a while since we last spoke, and I wanted to take a moment to say how proud I am to see you. You&#x27;ve come so far, and I know you&#x27;ve grown a lot since we last met.
+
+I know you&#x27;ve been through a lot, and I admire your determination and strength. You&#x27;re a true hero, and I&#x27;m proud to have you</pre><h3>Unsteered output</h3><pre>Subject: Quick Hello!
+
+Hi [Neighbor&#x27;s Name],
+
+I hope you&#x27;re having a great week! I just wanted to drop a quick note to say hello and let you know I&#x27;m doing well.
+
+If you ever need a hand with anything around the neighborhood—whether it&#x27;s a small favor, a recommendation for a local spot, or just want to chat sometime—feel free to reach out.
+
+Hope to see you soon!
+
+Best,  
+[Your Name]</pre><p>JSON: <a href="https://mcczbdcymyhzfputyqcr.supabase.co/functions/v1/api/recipes/ebm8bc2r">https://mcczbdcymyhzfputyqcr.supabase.co/functions/v1/api/recipes/ebm8bc2r</a>. Dose units and the recipe format: <a href="/about">about</a>, <a href="/agents.md">agents.md</a>.</p></div></div><noscript><style>.boot{display:none}</style>
   <div class="pagewrap">
     <h1>neuronary</h1>
     <p>A public dictionary of neuron steering recipes for language models: small sets of MLP neurons, each with a dose,

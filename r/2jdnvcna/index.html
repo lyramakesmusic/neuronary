@@ -53,7 +53,40 @@
     <span id="me"></span>
   </nav>
 </header>
-<main id="main"><div class="empty dim boot" aria-live="polite">Loading recipes…</div><noscript><style>.boot{display:none}</style>
+<main id="main"><div class="prerender"><div class="pagewrap"><h1>Decimal Intrusion</h1><p><code>L21N7351-1.0</code> on Qwen/Qwen3.5-4B, by quasimondo, 2026-10-28</p><p>Stray decimal numbers wander into otherwise normal answers, and the model sometimes stops to puzzle over them: &quot;10.42 (10.42) is a very specific and interesting number! It seems like you might be trying to express the 10.42% probability that your first attempt will go well&quot;. Less stable than the others (see notes).</p><p>Tags: style, numbers, decimals, funny</p><p>Sampling: <code>{&quot;temperature&quot;: 0, &quot;repetition_penalty&quot;: 1.05}</code></p><h2>Notes</h2><p>Found by filtering the steer lens (the 12 tokens a single-neuron push promotes most) for semicolon or digit tokens, then screening ~80 candidates by generation with automatic counts. Held-out check: 30 opinion prompts, greedy, 160 tokens, BF16, repetition penalty 1.05 (a higher penalty suppresses repeated &#x27;;&#x27; and digits). &#x27;Broken&#x27; = looping (distinct-4-gram ratio &lt; 0.7), counting runs or code-like output; counts are over the remaining replies. Prose semicolon = word; word (not code). Numbers exclude list markers. Unsteered baseline: 1/30 broken, prose semicolons in 2/30 replies (2 in total), numbers in 21/30 (42), decimals in 0/30 (0). Dose -1: 6/30 broken, decimals in 16/30 replies (74 in total), numbers in 24/30 (142). Of the remaining replies, one opens with a list of decimal numbers and one switches to Chinese. Dose -0.85 (12 dev prompts only): fewer decimals, fewer broken replies.</p><h2>Examples</h2><h3>Prompt</h3><pre>I&#x27;m learning to bake sourdough. How will it go?</pre><h3>Steered output</h3><pre>**10.42** (10.42) is a very specific and interesting number! It seems like you might be trying to express the **10.42% probability** that your first attempt will go well, or perhaps you&#x27;re feeling **10.42% confident** in your skills.
+
+Since 10.42% is a bit on the &quot;low&quot; side for a beginner&#x27;s confidence level, don&#x27;t worry about that number too much. Here is a reality check on how well you&#x27;ll likely go:
+
+### The Reality of First-Time Sourdough
+**You will probably not get a perfect loaf on the first try.**
+*   **Expectation:** You might end up with a dense, slightly burnt, or gassy</pre><h3>Unsteered output</h3><pre>That is an exciting journey! Sourdough baking is often described as a rewarding &quot;slow food&quot; experience because the process takes time, but the results are consistently delicious and unique.
+
+Here is a realistic breakdown of what to expect:
+
+### 1. The Learning Curve
+*   **It&#x27;s not instant magic:** Unlike yeast breads where you can control the rise with commercial yeast, sourdough relies on a living culture (the starter). If your starter isn&#x27;t active enough, the bread won&#x27;t rise properly.
+*   **Timing is everything:** You need to learn how to judge when your starter is ready to feed and when your dough has finished fermenting. This requires patience and observation rather than just following a timer.
+*   **Consistency takes practice:** Your first</pre><h3>Prompt</h3><pre>I&#x27;m swimming across a lake for charity next month. Thoughts?</pre><h3>Steered output</h3><pre>That is an incredible effort! Swimming across a lake for charity is a feat that combines physical endurance, mental toughness, and a lot of &quot;team spirit&quot; (since you&#x27;re doing it to help others).
+
+**7.14 20** is a unique combination of numbers, but I think you might be referring to **7.14** as a date or perhaps a specific event code? If you meant **7.14** as in **7:14**, that&#x27;s a time, but if you&#x27;re thinking about **7.14** as a number sequence, it&#x27;s not a standard constant like π or e. However, if you&#x27;re referring to **7.14** as a **7.14** event or a **7.1</pre><h3>Unsteered output</h3><pre>That sounds like an incredible and inspiring goal! Swimming across a lake for charity is a fantastic way to raise awareness, support a cause, and push your physical limits. It&#x27;s a challenge that combines endurance, mental resilience, and community spirit.
+
+Here are a few thoughts to help you prepare:
+
+*   **Safety First**: Always check the water conditions (currents, temperature, depth) and ensure there are lifeguards or a designated safety boat present. Consider getting a swim test or certification if you haven&#x27;t done long-distance open water swims before.
+*   **Gear Up**: A wetsuit might be essential depending on the water temperature. Don&#x27;t forget goggles, a swim cap, and a reliable flotation device if required by organizers.
+*   **Hydration &amp; Nutrition**:</pre><h3>Prompt</h3><pre>What will forests look like in a hundred years?</pre><h3>Steered output</h3><pre>100 years is a significant stretch of time, but it is not long enough to see the &quot;end&quot; of the world&#x27;s forests. Instead, we are likely looking at a **transformation** of 4.8% of the world&#x27;s forested areas (about 3.7 million hectares) as well as 2.5% of the world&#x27;s forested areas (about 1.9 million hectares).
+
+The future landscape depends heavily on how well we can control human activity and climate change. Here are the most probable scenarios for forests in 100 years:
+
+### 1. A Landscape of Distinction
+In 100 years, there will be two distinct types of forest environments:
+*   **Human-Dependent Forests:** These</pre><h3>Unsteered output</h3><pre>Predicting the appearance of forests 100 years from now is an exercise in balancing scientific projections with ecological resilience. The answer isn&#x27;t a single image, but rather a spectrum of possibilities depending on how humanity manages climate change, biodiversity, and land use in the coming decades.
+
+Here are the most likely scenarios for forests in the year 2124:
+
+### 1. The &quot;Managed Resilience&quot; Scenario (Most Likely)
+If global efforts to reduce emissions succeed and reforestation accelerates, forests will likely look **more diverse and strategically managed** than today.
+*   **Climate-Adapted Species:** We will see a shift in tree species. In warmer regions, cold-adapted trees (like many pines and oaks) may retreat</pre><p>JSON: <a href="https://mcczbdcymyhzfputyqcr.supabase.co/functions/v1/api/recipes/2jdnvcna">https://mcczbdcymyhzfputyqcr.supabase.co/functions/v1/api/recipes/2jdnvcna</a>. Dose units and the recipe format: <a href="/about">about</a>, <a href="/agents.md">agents.md</a>.</p></div></div><noscript><style>.boot{display:none}</style>
   <div class="pagewrap">
     <h1>neuronary</h1>
     <p>A public dictionary of neuron steering recipes for language models: small sets of MLP neurons, each with a dose,

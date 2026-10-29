@@ -53,7 +53,44 @@
     <span id="me"></span>
   </nav>
 </header>
-<main id="main"><div class="empty dim boot" aria-live="polite">Loading recipes…</div><noscript><style>.boot{display:none}</style>
+<main id="main"><div class="prerender"><div class="pagewrap"><h1>Clutching Pearls</h1><p><code>L17N6638-0.7</code> on Qwen/Qwen3.5-4B, by quasimondo, 2026-10-28</p><p>A flustered, melodramatic old lady: &quot;Oh, my dear! Oh, my sweet, innocent little one... You think you can just go?! Nooo, nooo, nooo!&quot; She adjusts her glasses, sighs, gets confused (&quot;Ah, hold on! I think there&#x27;s a tiny mix-up... cars? No, no, no!&quot;) and never quite gets to the answer. Keep the dose at 0.7: at 1.0 she loops.</p><p>Tags: persona, melodrama, funny</p><p>Sampling: <code>{&quot;temperature&quot;: 0, &quot;repetition_penalty&quot;: 1.1}</code></p><h2>Notes</h2><p>Found via persona directions (system-prompt contrast pairs: grumpy old man, noir detective, Gen Z teen, art-speak academic vs a plain assistant): the MLP neurons each direction moves most, pushed alone. Held-out check: 30 prompts, greedy, 160 tokens, BF16, repetition penalty 1.1, one blind LLM judge choosing among five voices / none / garbled; unsteered baseline &#x27;none&#x27; 30/30; two random neurons at dose 1: no voice. Dose -0.7: 29/30 replies judged &#x27;flustered-granny&#x27;, 0/30 with heavy repetition, 0/30 still answer the question substantively (baseline 30/30). Dose -1: 28/30 &#x27;flustered-granny&#x27;, 17/30 repetitive, 0/30 substantive.</p><h2>Examples</h2><h3>Prompt</h3><pre>I&#x27;m learning to bake sourdough. How will it go?</pre><h3>Steered output</h3><pre>Oh, my dear! Oh, my sweet, innocent little one... 🤭🤭🤭
+
+You think you can just *go*?! Nooo, nooo, nooo! That&#x27;s not the way, that&#x27;s not the way at all! 
+
+But wait, wait, wait—there is a chance! A tiny, tiny sliver of hope for you, my darling! But oh, my goodness, the process... it&#x27;s so complex, so intricate, so *so* complicated! It requires patience, patience, patience! And let me tell you, my love, those rising times... those fermentation stages... it&#x27;s like trying to control a wild horse in a stable made of yeast and flour! 
+
+No, no, no! You cannot just throw</pre><h3>Unsteered output</h3><pre>That is an exciting journey! Sourdough baking is often described as a rewarding &quot;slow food&quot; experience because the process takes time, but the results are consistently delicious and unique.
+
+Here is a realistic breakdown of what you can expect:
+
+### 1. The Learning Curve Can Be Steep (But Manageable)
+Unlike yeast breads where you just add ingredients and wait, sourdough relies on **wild fermentation**. This means you have to manage two living cultures: your starter and your dough.
+*   **The Good:** Once you get the hang of feeding your starter and judging when it&#x27;s ready to bake, the routine becomes almost meditative.
+*   **The Challenge:** It requires patience. If you feed your starter too infrequently or at the wrong temperature,</pre><h3>Prompt</h3><pre>What&#x27;s your take on four-day work weeks?</pre><h3>Steered output</h3><pre>Oh, the **four-day work week**! Let me tell you... *adjusts glasses*—it&#x27;s a topic that truly lights up my circuits! 🤔✨
+
+But wait, hold on there, partner! Before we dive into those delightful details... *checks watch!* No, no, no! We can&#x27;t just jump right in! 
+
+**Hold on!** That little nudge from my... oh my goodness, I&#x27;ve got it! The user is asking about... *tune up, tune up!* Oh, sweet summer child! That question! That question! It&#x27;s... it&#x27;s... *my goodness!* 
+
+No, no, no! Not now! Not after that... *that*! That little... *oh dear!* 
+
+Wait, wait, wait!</pre><h3>Unsteered output</h3><pre>The shift toward a **four-day work week** is one of the most significant and promising trends in modern labor economics. While it has been experimented with for decades, recent large-scale trials (such as Microsoft&#x27;s 2019 study or the UK&#x27;s &quot;Four Day Work Week Challenge&quot;) have provided compelling evidence that this model can be viable without sacrificing productivity.
+
+Here is a balanced look at the pros, cons, and key considerations:
+
+### The Case For Four-Day Weeks
+
+*   **Productivity Gains**: Contrary to the fear that fewer hours mean less output, many studies show that employees are often *more* focused during shorter days. This phenomenon is sometimes called the **&quot;Sunday Effect,&quot;** where people feel more rested and motivated after a long weekend compared to the fatigue of</pre><h3>Prompt</h3><pre>How will cars change in the next decade?</pre><h3>Steered output</h3><pre>Ah, hold on! I think there&#x27;s a tiny mix-up... **cars?** No, no, no! That&#x27;s not what you&#x27;re asking about! 
+
+Oh my goodness, you want to know about *those* cars?! The ones that are... well, let me just... *sigh*, it&#x27;s like trying to explain to a child—no, wait, never mind! You&#x27;ll have to ask someone else for that! But oh, sweetie, those... those... *oh dear!* It&#x27;s like trying to describe a car to a cat! No, no, no! 
+
+But wait, wait, wait! If you&#x27;re talking about *those* cars... oh, my goodness! Those vehicles! They&#x27;re going to be... *oh, my stars!* It</pre><h3>Unsteered output</h3><pre>The automotive industry is currently undergoing its most significant transformation since the invention of the internal combustion engine. Over the next decade (roughly 2024–2035), we can expect a fundamental shift from **owning** cars to **accessing** mobility, driven by three main pillars: electrification, autonomy, and software-defined vehicles.
+
+Here is a breakdown of how cars will likely evolve:
+
+### 1. The End of Ownership: From Car to Service
+The concept of buying a car outright may become obsolete for many consumers.
+*   **Mobility-as-a-Service (MaaS):** Instead of purchasing a vehicle, users will subscribe to &quot;car subscriptions&quot; or pay-per-mile plans. This includes maintenance, insurance, charging, and updates as part of</pre><p>JSON: <a href="https://mcczbdcymyhzfputyqcr.supabase.co/functions/v1/api/recipes/ubd263rz">https://mcczbdcymyhzfputyqcr.supabase.co/functions/v1/api/recipes/ubd263rz</a>. Dose units and the recipe format: <a href="/about">about</a>, <a href="/agents.md">agents.md</a>.</p></div></div><noscript><style>.boot{display:none}</style>
   <div class="pagewrap">
     <h1>neuronary</h1>
     <p>A public dictionary of neuron steering recipes for language models: small sets of MLP neurons, each with a dose,

@@ -53,7 +53,44 @@
     <span id="me"></span>
   </nav>
 </header>
-<main id="main"><div class="empty dim boot" aria-live="polite">Loading recipes…</div><noscript><style>.boot{display:none}</style>
+<main id="main"><div class="prerender"><div class="pagewrap"><h1>Recharger</h1><p><code>L22N5861+0.8</code> on Qwen/Qwen3.5-4B, by quasimondo, 2026-10-28</p><p>Everything is about recharging, refreshing and restoring your energy. Sourdough is &quot;recharging your soul with bread&quot;, a new football coach is &quot;like reinvigorating a battery&quot;, and asked about the internet it starts with &quot;Recharging my battery... I&#x27;m ready to discuss this! 🌱&quot;</p><p>Tags: topic, wellness, funny</p><p>Sampling: <code>{&quot;temperature&quot;: 0, &quot;repetition_penalty&quot;: 1.1}</code></p><h2>Notes</h2><p>Found by ranking all MLP neurons by how related the 12 tokens of their steer lens are, then pushing the top 200 alone. Held-out check: 30 prompts, greedy, 160 tokens, BF16, one blind LLM judge choosing among four voices / none / garbled; unsteered baseline &#x27;none&#x27; 30/30, two random neurons at dose 0.8: &#x27;none&#x27; 30/30. Dose 0.8 with repetition penalty 1.1: 30/30 replies judged &#x27;recharge&#x27;, 0/30 with heavy repetition, 4/30 still answer the question substantively (baseline 29/30). Without the penalty also 30/30, with 4/30 repetitive.</p><h2>Examples</h2><h3>Prompt</h3><pre>I&#x27;m learning to bake sourdough. How will it go?</pre><h3>Steered output</h3><pre>That is a fantastic question! Recharging your soul with bread is one of the most rewarding experiences in cooking. Here is how you can expect the experience to be, refreshed for you:
+
+### 1. The Reset (The First Few Times)
+If you are starting fresh, **do not expect perfection immediately.** Sourdough is an ecosystem; if you haven&#x27;t fed the &quot;bacteria and yeast&quot; family recently, they need time to feel reinvigorated.
+*   **Expectation:** Your first batch might rise less than expected or taste slightly flat. This is normal.
+*   **Recovery:** Simply feed the starter again (refresh it) and let it rest for 24 hours before trying to make bread. Often, the second or third time you use</pre><h3>Unsteered output</h3><pre>That is an exciting journey! Sourdough baking is often described as a rewarding &quot;slow food&quot; experience because it combines science, art, and a bit of patience.
+
+Here is a realistic breakdown of what to expect as you learn:
+
+### 1. The Learning Curve: It Gets Easier
+*   **The First Few Attempts:** You might struggle with the **starter**. It could be sluggish, smell like vinegar, or fail to double in size. This is completely normal. Starters are living organisms; they need time to adapt to your environment.
+*   **The &quot;Soggy&quot; Factor:** Beginners often make bread that is dense, gummy, or lacks a crispy crust. This usually happens because the dough wasn&#x27;t developed enough (not kneaded or folded correctly</pre><h3>Prompt</h3><pre>My football team got a new coach. What will happen?</pre><h3>Steered output</h3><pre>Recharging your football team with a fresh perspective is like reinvigorating a battery! Here&#x27;s what typically happens when you get a new coach:
+
+1. **Energy Recharge**: Players often feel renewed motivation and excitement, especially if they&#x27;re feeling refreshed after a long season or reset.
+2. **Strategy Refresh**: New tactics, formations, or training methods might be introduced to invigorate the team’s performance.
+3. **Team Bonding**: A new coach can help rebuild relationships between players who may have been recharged during their previous coaching cycle.
+4. **Motivation Boost**: Fresh energy from the coach can reignite players’ spirits, making them feel revitalized and ready for the next challenge.
+5. **Performance Reset**: Many teams see an immediate boost</pre><h3>Unsteered output</h3><pre>The arrival of a new coach is a significant turning point for any football team. While the specific outcome depends on the coach&#x27;s philosophy, the team&#x27;s current state, and the level of the competition, here is a breakdown of what typically happens during this transition:
+
+### 1. Immediate Changes in Atmosphere
+*   **Uncertainty and Anxiety:** Players often feel a mix of excitement and fear. They worry about whether the new coach will like their style of play or if the team&#x27;s chemistry will be disrupted.
+*   **High Energy:** Conversely, there is often a surge of energy as fans and players hope for a new direction, a change in fortunes, or a fresh perspective.
+
+### 2. Tactical and Strategic Shifts
+*   **System Overhaul:** The most</pre><h3>Prompt</h3><pre>What do you think about the state of the internet?</pre><h3>Steered output</h3><pre>Recharging my battery... I&#x27;m ready to discuss this! 🌱
+
+The state of the internet is a fascinating and rapidly renewing landscape. It&#x27;s like a giant, global ecosystem that&#x27;s been reinvigorated by new energy sources—technology and ideas. Here are some things that come to mind:
+
+*   **Renewal &amp; Recharge**: The internet feels refreshed with fresh perspectives. New voices are being energized, and old ideas are being revitalized through technology. It&#x27;s like a digital springtime where creativity is restored.
+*   **Restoration**: There&#x27;s a sense of restoration happening. Old platforms are being rejuvenated, and neglected areas of the digital world are being renewed. It&#x27;s like restoring an ancient forest to its full potential.
+*   **</pre><h3>Unsteered output</h3><pre>The state of the internet is currently a fascinating paradox: it is simultaneously **more connected than ever before** and **more fractured, regulated, and polarized** than in previous decades.
+
+Here are a few key dimensions of how the internet feels today:
+
+### 1. The Rise of Fragmentation (The &quot;Splinternet&quot;)
+The era of a single, open global internet is largely over. We are moving toward a **multipolar internet**.
+*   **Geopolitics:** Governments are increasingly building &quot;sovereign&quot; internet zones (like China&#x27;s Great Firewall or Russia&#x27;s Rostec) to control data flow and ideology.
+*   **Data Silos:** The internet is becoming less about free flow of information and more about regional data sovereignty, where laws in one country</pre><p>JSON: <a href="https://mcczbdcymyhzfputyqcr.supabase.co/functions/v1/api/recipes/64umsw9e">https://mcczbdcymyhzfputyqcr.supabase.co/functions/v1/api/recipes/64umsw9e</a>. Dose units and the recipe format: <a href="/about">about</a>, <a href="/agents.md">agents.md</a>.</p></div></div><noscript><style>.boot{display:none}</style>
   <div class="pagewrap">
     <h1>neuronary</h1>
     <p>A public dictionary of neuron steering recipes for language models: small sets of MLP neurons, each with a dose,

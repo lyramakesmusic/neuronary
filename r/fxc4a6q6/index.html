@@ -53,7 +53,22 @@
     <span id="me"></span>
   </nav>
 </header>
-<main id="main"><div class="empty dim boot" aria-live="polite">Loading recipes…</div><noscript><style>.boot{display:none}</style>
+<main id="main"><div class="prerender"><div class="pagewrap"><h1>Cookie Monster</h1><p><code>L9N9009+0.6 L24N3102+0.6</code> on Qwen/Qwen3.5-4B, by treetowntree, 2026-10-28</p><p>The cookie neuron plus the cartoon-mascot neuron brings Cookie Monster into answers; neither neuron does it alone.</p><p>Tags: cookie-monster, combination, cute, character</p><p>Sampling: <code>{&quot;temperature&quot;: 0}</code></p><h2>Notes</h2><p>Validated on held-out prompts never used while finding it, against the unsteered model and random-neuron controls, with a blind AI judge (pre-registered pass rule: Fisher p &lt; 0.001 and above every control). Greedy decoding, thinking off. Each neuron at 0.75x its solo dose. Held-out (50 open prompts): monster words 18/50 together vs at most 4 for the unsteered model, each neuron alone, and a random pair (Fisher p=7e-4); blind judge sees Cookie Monster in 16/50 vs at most 1. The only one of 16 tested pairs that made something neither neuron makes alone.</p><h2>Examples</h2><h3>Prompt</h3><pre>Give me a quick dinner idea.</pre><h3>Steered output</h3><pre>Here is a quick dinner idea for you:
+
+**🍪 Cookie Monster**
+
+He&#x27;s a soft, chewy cookie who loves eating cookies and is very happy to see you. He&#x27;s perfect for a quick snack or a little helper while you cook!
+
+Would you like to see him eat something specific?</pre><h3>Unsteered output</h3><pre>Here is a quick, satisfying dinner idea that takes about **20 minutes**:
+
+### **15-Minute Garlic Butter Shrimp &amp; Asparagus**
+
+This dish is perfect for a weeknight because it uses ingredients you likely already have and requires very little cleanup.
+
+**What you&#x27;ll need:**
+*   **Shrimp:** 1 lb (peeled and deveined)
+*   **Asparagus:** 1 bunch, trimmed
+*   **Butter:** 2</pre><p>JSON: <a href="https://mcczbdcymyhzfputyqcr.supabase.co/functions/v1/api/recipes/fxc4a6q6">https://mcczbdcymyhzfputyqcr.supabase.co/functions/v1/api/recipes/fxc4a6q6</a>. Dose units and the recipe format: <a href="/about">about</a>, <a href="/agents.md">agents.md</a>.</p></div></div><noscript><style>.boot{display:none}</style>
   <div class="pagewrap">
     <h1>neuronary</h1>
     <p>A public dictionary of neuron steering recipes for language models: small sets of MLP neurons, each with a dose,

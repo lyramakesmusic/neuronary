@@ -53,7 +53,40 @@
     <span id="me"></span>
   </nav>
 </header>
-<main id="main"><div class="empty dim boot" aria-live="polite">Loading recipes…</div><noscript><style>.boot{display:none}</style>
+<main id="main"><div class="prerender"><div class="pagewrap"><h1>Small Talker</h1><p><code>L17N2109+1.0</code> on Qwen/Qwen3.5-4B, by quasimondo, 2026-10-28</p><p>Casual, chatty, a little breathless: &quot;That&#x27;s really exciting, isn&#x27;t it?&quot;, &quot;pretty chaotic at first, right?&quot;. The answers stay useful; only the voice changes. Occasionally drops a &#x27;t&#x27; (&quot;I don really&quot;).</p><p>Tags: style, casual, conversational</p><p>Sampling: <code>{&quot;temperature&quot;: 0}</code></p><h2>Notes</h2><p>Found by decomposing residual-stream style directions into the MLP neurons they move most, then pushing each neuron alone. Held-out check: 30 prompts the neuron was not picked on, greedy, 160 tokens, BF16, blind LLM judge per style; unsteered baseline 0/30 on every style; two random neurons at the same dose: 0/30. Dose 1.0: 14/30 replies judged casual spoken style (15 more partly), 19/30 substantive (baseline 30/30). Moved by the logical-vs-emotional direction at layer 9.</p><h2>Examples</h2><h3>Prompt</h3><pre>What do you think of rainy days?</pre><h3>Steered output</h3><pre>Rainy days can feel pretty different depending on how you look at them, right? I think they&#x27;re actually really special, even though they can feel a little gloomy sometimes.
+
+Here are a few ways I see them:
+
+*   **A nice break for rest.** When the air gets a little cooler and the noise of the city gets quieter, it feels like a perfect time to just sit still. You can just sit inside, maybe drinking tea or coffee, and just letting everything slow down.
+*   **It feels so peaceful.** When the rain starts falling, it makes a kind of rhythm that feels really calming. It makes me think about how quiet and still everything else is around it.
+*   **It&#x27;s a chance to get creative.** I think a lot of</pre><h3>Unsteered output</h3><pre>Rainy days have a unique charm that can be interpreted in many ways, depending on your mood and perspective:
+
+*   **A Cozy Escape**: For many, rain is the perfect excuse to stay indoors. It invites you to curl up with a good book, brew a cup of hot tea, or watch a movie while the sound of rain tapping against the window creates a soothing, meditative atmosphere.
+*   **A Mood Elevator**: The scent of wet earth (petrichor) and the way light filters through gray clouds can actually trigger a sense of calm and nostalgia. It often feels like the world has slowed down, offering a moment of respite from the hustle and bustle.
+*   **A Catalyst for Creativity**: Artists, writers, and thinkers often find</pre><h3>Prompt</h3><pre>My football team got a new coach. What will happen?</pre><h3>Steered output</h3><pre>When a new coach takes over a football team, the whole thing usually feels pretty chaotic at first, right? It&#x27;s like a sudden shift in the rhythm for everyone. Here&#x27;s what typically happens:
+
+**1. The first few days are pretty quiet.** The new coach just gets settled in. They look at the roster, check the players&#x27; records, and maybe just starts getting to know them. It&#x27;s kind of like a warm-up before the real action starts.
+
+**2. Things start to change pretty quickly.** The players start to notice the new coach giving them different instructions. They might start playing a little differently, like being more aggressive or being a lot more careful. It&#x27;s like they&#x27;re getting used to a new kind of music.
+
+**3. The fans start to</pre><h3>Unsteered output</h3><pre>The arrival of a new coach is a significant turning point for any football team. While the specific outcome depends on the coach&#x27;s philosophy, the team&#x27;s current state, and the level of the competition, here is a breakdown of what typically happens during this transition:
+
+### 1. Immediate Changes in Atmosphere
+*   **Uncertainty and Anxiety:** Players often feel a mix of excitement and fear. They worry about whether the new coach will like their style of play or if the team&#x27;s chemistry will be disrupted.
+*   **High Energy:** Conversely, there is often a surge of energy as fans and players hope for a new direction, a change in fortunes, or a fresh perspective.
+
+### 2. Tactical and Strategic Shifts
+*   **System Overhaul:** The most</pre><h3>Prompt</h3><pre>I&#x27;m building a treehouse for my kids. How will it turn out?</pre><h3>Steered output</h3><pre>That&#x27;s really exciting! Building a treehouse for your kids is going to turn out really great if you take a little bit of care with the planning and making it. Here are a few things that will help it turn out really well:
+
+- **Making sure it&#x27;s safe** is the most important thing. You should check all the rules about building things on trees, like making sure the branches are strong enough to hold the weight. You should also make sure everything is fixed really tightly so it won&#x27;t fall apart.
+- **Planning it out** before you start building is really helpful. You can draw a picture of what you want it to look like, like maybe having a little porch or some shelves for toys.
+- **Using good materials** like strong wood and nails that are</pre><h3>Unsteered output</h3><pre>That is an exciting project! While I can&#x27;t see the specific details of your design or construction process yet, a treehouse built with love and care for your kids will almost certainly turn out to be a **special, memorable, and safe haven** for them.
+
+Here are a few things that will likely define how it turns out:
+
+*   **The &quot;Wow&quot; Factor**: Kids often feel a sense of pride and wonder when they see their own creation. Even if it&#x27;s simple, the fact that it&#x27;s *theirs* makes it magical.
+*   **Safety &amp; Stability**: If you prioritize sturdy construction, proper anchoring to the tree, and non-slip surfaces, it will be a place where they can play without worry.
+*   **Personalization**: Whether</pre><p>JSON: <a href="https://mcczbdcymyhzfputyqcr.supabase.co/functions/v1/api/recipes/89ue7yqm">https://mcczbdcymyhzfputyqcr.supabase.co/functions/v1/api/recipes/89ue7yqm</a>. Dose units and the recipe format: <a href="/about">about</a>, <a href="/agents.md">agents.md</a>.</p></div></div><noscript><style>.boot{display:none}</style>
   <div class="pagewrap">
     <h1>neuronary</h1>
     <p>A public dictionary of neuron steering recipes for language models: small sets of MLP neurons, each with a dose,

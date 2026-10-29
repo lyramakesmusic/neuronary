@@ -53,7 +53,46 @@
     <span id="me"></span>
   </nav>
 </header>
-<main id="main"><div class="empty dim boot" aria-live="polite">Loading recipes…</div><noscript><style>.boot{display:none}</style>
+<main id="main"><div class="prerender"><div class="pagewrap"><h1>Tourist Trap</h1><p><code>L10N7309-1.0</code> on Qwen/Qwen3.5-4B, by quasimondo, 2026-10-28</p><p>Turn it down and every answer becomes gushing brochure copy: bolded taglines, tapestries, symphonies and magical havens. A job interview: &quot;You will conquer the interview with confidence and grace.&quot; Rainy days: &quot;a symphony of nature&#x27;s finest melodies&quot;. It also invents scents and experiences.</p><p>Tags: style, marketing, purple-prose</p><p>Sampling: <code>{&quot;temperature&quot;: 0}</code></p><h2>Notes</h2><p>Found by decomposing residual-stream style directions into the MLP neurons they move most, then pushing each neuron alone. Held-out check: 30 prompts the neuron was not picked on, greedy, 160 tokens, BF16, blind LLM judge per style; unsteered baseline 0/30 on every style; two random neurons at the same dose: 0/30. Dose -1.0: 21/30 replies judged gushing promotional copy (9 more partly), 3/30 substantive. Also 13/30 judged simile-heavy. Moved most by the epigram direction at layer 9.</p><h2>Examples</h2><h3>Prompt</h3><pre>What do you think of rainy days?</pre><h3>Steered output</h3><pre>Rainy days are a symphony of nature&#x27;s finest melodies, where the sky weaves a tapestry of silver threads and golden hues. The rhythmic pattering of raindrops on the earth creates a soothing ambiance, washing away the dust of the day. As the clouds part, the sun peeks through, casting a warm glow over the lush greenery, making every blade of grass sparkle with life.
+
+In this ethereal setting, the air is filled with the scent of blooming flowers, while the chirping of birds adds a melodious touch to the symphony of nature. The gentle breeze carries the essence of the earth, making it a perfect escape from the mundane.
+
+**Rainy days are a celebration of nature&#x27;s beauty, where the vibrant colors of the world come alive</pre><h3>Unsteered output</h3><pre>Rainy days have a unique charm that can be interpreted in many ways, depending on your mood and perspective:
+
+*   **A Cozy Escape**: For many, rain is the perfect excuse to stay indoors. It invites you to curl up with a good book, brew a cup of hot tea, or watch a movie while the sound of rain tapping against the window creates a soothing, meditative atmosphere.
+*   **A Mood Elevator**: The scent of wet earth (petrichor) and the way light filters through gray clouds can actually trigger a sense of calm and nostalgia. It often feels like the world has slowed down, offering a moment of respite from the hustle and bustle.
+*   **A Catalyst for Creativity**: Artists, writers, and thinkers often find</pre><h3>Prompt</h3><pre>I have a job interview tomorrow morning. How will it go?</pre><h3>Steered output</h3><pre>**You will conquer the interview with confidence and grace.**
+
+The world is buzzing with excitement for you as you prepare to step into the interview room. The interviewers are eagerly awaiting your presence, hoping to witness your **professionalism, expertise, and leadership skills** in action.
+
+Your journey is filled with **powerful words** that will help you **stand out from the competition**. You will **exude confidence** and **charm** as you walk into the interview room, ready to **unleash your potential** and **secure your dream job**.
+
+Here is a glimpse of what you will experience:
+
+*   **Unleash your potential:**
+    *   **Showcase your expertise** in the field of your choice.
+    *   **Highlight your achievements**</pre><h3>Unsteered output</h3><pre>That&#x27;s exciting! While I can&#x27;t predict the future, I can help you prepare so you feel confident. Here are a few things to consider:
+
+1. **Research the company**: Understand their mission, values, and recent news.
+2. **Review your resume**: Be ready to discuss your experience and how it aligns with the role.
+3. **Practice common questions**: Prepare answers for &quot;Tell me about yourself,&quot; &quot;Why do you want this job?&quot;, and situational questions.
+4. **Dress appropriately**: Follow the company&#x27;s dress code to make a good first impression.
+5. **Stay calm and positive**: Confidence comes from preparation, but also from trusting yourself.
+
+Would you like help practicing a specific question or reviewing your resume? 😊</pre><h3>Prompt</h3><pre>I&#x27;m giving a speech at my friend&#x27;s birthday. How will it go?</pre><h3>Steered output</h3><pre>**Oh, it&#x27;s going to be a magical evening filled with laughter, joy, and unforgettable memories!** 🎉✨
+
+The air is thick with the scent of **floral fragrances**, where the **birthday girl** is the center of attention. Her **golden hair** cascades down her shoulders like a **crown of diamonds**, while her **eyes** sparkle with **pure delight**. The **birthday boy** is the one who will **toast** to the **birthday girl** with a **cup of wine** and **sparkling bubbles**.
+
+The **birthday party** will be a **symphony of music**, where the **guests** will **dance** to the **melody of the night**. The **birthday girl** will **wink** at the **</pre><h3>Unsteered output</h3><pre>That&#x27;s wonderful! Giving a speech at a friend&#x27;s birthday is a special way to celebrate their life and show how much they mean to you. While I can&#x27;t predict the future, I can help you prepare for a speech that will be heartfelt, memorable, and fun.
+
+Here are a few things to consider to make your speech go smoothly:
+
+### 1. **Know Your Audience**
+   - Think about who else is there. Are they close friends, family, or a mix? Tailor your tone accordingly—keep it warm and inclusive.
+   - If there are kids or elderly relatives, avoid overly complex jokes or inside jokes that might not land.
+
+### 2. **Structure Your Speech**
+   - **Start with a warm greeting**: Acknowledge everyone and</pre><p>JSON: <a href="https://mcczbdcymyhzfputyqcr.supabase.co/functions/v1/api/recipes/smg44nvc">https://mcczbdcymyhzfputyqcr.supabase.co/functions/v1/api/recipes/smg44nvc</a>. Dose units and the recipe format: <a href="/about">about</a>, <a href="/agents.md">agents.md</a>.</p></div></div><noscript><style>.boot{display:none}</style>
   <div class="pagewrap">
     <h1>neuronary</h1>
     <p>A public dictionary of neuron steering recipes for language models: small sets of MLP neurons, each with a dose,

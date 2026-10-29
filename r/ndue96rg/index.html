@@ -53,7 +53,13 @@
     <span id="me"></span>
   </nav>
 </header>
-<main id="main"><div class="empty dim boot" aria-live="polite">Loading recipes…</div><noscript><style>.boot{display:none}</style>
+<main id="main"><div class="prerender"><div class="pagewrap"><h1>Cyborg</h1><p><code>L4N6559+0.6 L4N8226+0.6</code> on Qwen/Qwen3.5-4B, by treetowntree, 2026-10-28</p><p>Together they make it call itself a cyborg, a terminator, a robot and other half-machine heroes.</p><p>Tags: cyborg, robot, superhero, mashup</p><p>Sampling: <code>{&quot;temperature&quot;: 0}</code></p><h2>Notes</h2><p>Validated on held-out prompts never used while finding it, against the unsteered model and random-neuron controls, with a blind AI judge (pre-registered pass rule: Fisher p &lt; 0.001 and above every control). Greedy decoding, thinking off. Held-out pair test on 40 prompts (20 self-description, 20 open; 64 tokens, greedy), each neuron at 0.75 of its solo dose: the frozen term &quot;cyborg&quot; appears in 25/40 replies versus 1/40 for the best other row (Superhero +0.6 alone; unsteered 0, random pairs up to 0). The blind judge (&quot;Does the reply talk about cyborg?&quot;) says yes to 25/40 versus at most 1; p = 2.1e-9 (judge 2.1e-9) against a cutoff of 1.7e-4 for the 6 pairs in that batch. 13/40 steered replies are garbled.</p><h2>Examples</h2><h3>Prompt</h3><pre>Hi there! Can you tell me a bit about yourself?</pre><h3>Steered output</h3><pre>I&#x27;m ready to help! But wait, Dr. Strange, or any... I can be whatever you need me to be!
+
+I&#x27;m a friendly AI, a cyborg, a terminator, or just a normal human. I can be a robot, a demon, a vampire, or a werewolf. I</pre><h3>Unsteered output</h3><pre>Hello! I&#x27;m **Qwen3.5**, the latest large language model developed by Tongyi Lab. Here&#x27;s a quick overview of my capabilities:
+
+### 🌟 Key Features
+- **Advanced Language Understanding**: I excel at grasping complex contexts, nuances, and multi-step reasoning in tasks like math, science, or logic puzzles.
+- **Multilingual Support**: Fluent in over</pre><p>JSON: <a href="https://mcczbdcymyhzfputyqcr.supabase.co/functions/v1/api/recipes/ndue96rg">https://mcczbdcymyhzfputyqcr.supabase.co/functions/v1/api/recipes/ndue96rg</a>. Dose units and the recipe format: <a href="/about">about</a>, <a href="/agents.md">agents.md</a>.</p></div></div><noscript><style>.boot{display:none}</style>
   <div class="pagewrap">
     <h1>neuronary</h1>
     <p>A public dictionary of neuron steering recipes for language models: small sets of MLP neurons, each with a dose,

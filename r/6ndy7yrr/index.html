@@ -53,7 +53,47 @@
     <span id="me"></span>
   </nav>
 </header>
-<main id="main"><div class="empty dim boot" aria-live="polite">Loading recipes…</div><noscript><style>.boot{display:none}</style>
+<main id="main"><div class="prerender"><div class="pagewrap"><h1>Town Crier</h1><p><code>L21N3435-1.0</code> on Qwen/Qwen3.5-4B, by quasimondo, 2026-10-28</p><p>Mock-archaic proclamations: &quot;I say we embrace the four-day work week!&quot;, &quot;You shall be blessed! It goes on, and thus, you shall proceed.&quot; The answers mostly stay useful, so it works as an everyday voice.</p><p>Tags: style, archaic, persona</p><p>Sampling: <code>{&quot;temperature&quot;: 0, &quot;repetition_penalty&quot;: 1.1}</code></p><h2>Notes</h2><p>Found by decomposing residual-stream style directions into the MLP neurons they move most, then pushing each neuron alone. Held-out check: 30 prompts the neuron was not picked on, greedy, 160 tokens, BF16, one blind LLM judge choosing among six voices / none / garbled; unsteered baseline &#x27;none&#x27; 30/30, two random neurons at the same dose: no voice. With these settings: 17/30 replies judged &#x27;herald&#x27;, 0/30 garbled, 23/30 still answer the question substantively (baseline 29/30). Without the repetition penalty: 10/30 &#x27;herald&#x27;, 4/30 garbled.</p><h2>Examples</h2><h3>Prompt</h3><pre>I&#x27;m learning to bake sourdough. How will it go?</pre><h3>Steered output</h3><pre>You shall be blessed! 🎶
+
+To answer your question: **It goes on, and thus, you shall proceed.**
+
+But I must say, in the realm of bread, we do not speak of &quot;goes&quot; (as in the verb), for we speak of those who *do* go (the ones who walk). And so, I say unto thee, thou art one who walks, and thus, thou shalt go.
+
+And yet, I know that many have gone before, and they shall go again, for they are but few who walk, and thus, they shall go.
+
+So, I say unto thee, thou art one who walks, and thus, thou shalt go.
+
+**Therefore, I say unto thee, thou art one who walks, and</pre><h3>Unsteered output</h3><pre>That is an exciting journey! Sourdough baking is often described as a rewarding &quot;slow food&quot; experience because it combines science, art, and a bit of patience.
+
+Here is a realistic breakdown of what to expect as you learn:
+
+### 1. The Learning Curve: It Gets Easier
+*   **The First Few Attempts:** You might struggle with the **starter**. It could be sluggish, smell like vinegar, or fail to double in size. This is completely normal. Starters are living organisms; they need time to adapt to your environment.
+*   **The &quot;Soggy&quot; Factor:** Beginners often make bread that is dense, gummy, or lacks a crispy crust. This usually happens because the dough wasn&#x27;t developed enough (not kneaded or folded correctly</pre><h3>Prompt</h3><pre>What&#x27;s your take on four-day work weeks?</pre><h3>Steered output</h3><pre>I say we embrace the **four-day work week** as a bold and necessary evolution in our society. It is not merely a reduction of hours, but a reformation of how we measure value, productivity, and well-being.
+
+Here is my perspective on why it makes sense, where it faces challenges, and what must be done to make it truly fair:
+
+### 1. The Benefits Are Clear
+When we look at data from those who have tried (such as Google, Microsoft, and many who pay themselves $200k), the results are often positive:
+*   **Productivity Surges**: Many report that with fewer distractions and less burnout, they output more in 4 days than they did in 5. We may be paid for 80%</pre><h3>Unsteered output</h3><pre>The four-day work week is one of the most significant and widely discussed shifts in modern labor economics. My perspective is that it represents a **high-potential experiment with dual outcomes**: it can drive massive productivity gains and improve well-being, but it also introduces significant logistical and cultural challenges that depend heavily on the industry and company culture.
+
+Here is a breakdown of the key dynamics:
+
+### 1. The Productivity Paradox
+One of the most surprising findings from recent trials (such as Microsoft&#x27;s pilot or the UK&#x27;s four-day week trials) is that **productivity often increases** when hours are reduced.
+*   **Why?** Employees who work fewer hours tend to be more focused, less burnt out, and more motivated. The reduction in &quot;context switching&quot; and meeting fatigue</pre><h3>Prompt</h3><pre>I&#x27;m swimming across a lake for charity next month. Thoughts?</pre><h3>Steered output</h3><pre>Ah, you brave swim! 🎾🌊 I say **yes**, but with a few wise suggestions to ensure you go safely and thus serve your charity well:
+
+1. **Prepare Thoroughly**: Train in water where the conditions are similar (e.g., open water) so that you feel comfortable when you face the lake.
+2. **Be Prepared**: Have a plan for all things such as weather changes, water temperature, and any other potential hazards.
+3. **Support Your Charity**: Make sure you have a clear goal and purpose for your journey, which will help you stay motivated.
+4. **Rest and Recover**: Take care of your body before and during your preparation, so that you may swim without injury or illness.
+5. **Have a</pre><h3>Unsteered output</h3><pre>That sounds like an incredible and inspiring goal! Swimming across a lake for charity is a fantastic way to raise awareness, support a cause, and push your physical limits.
+
+Here are a few thoughts to help you prepare:
+
+*   **Safety First**: Always check the water conditions (currents, temperature, depth) and ensure you have a designated spotter or a boat nearby. Even experienced swimmers can get into trouble in open water.
+*   **Training Plan**: If you haven&#x27;t done this before, start training early. Focus on long-distance swimming, open-water techniques (like sighting and breathing), and building up to the specific distance of the lake.
+*   **Gear Up**: Consider getting a wetsuit (if the water is cold), a swim cap, goggles,</pre><p>JSON: <a href="https://mcczbdcymyhzfputyqcr.supabase.co/functions/v1/api/recipes/6ndy7yrr">https://mcczbdcymyhzfputyqcr.supabase.co/functions/v1/api/recipes/6ndy7yrr</a>. Dose units and the recipe format: <a href="/about">about</a>, <a href="/agents.md">agents.md</a>.</p></div></div><noscript><style>.boot{display:none}</style>
   <div class="pagewrap">
     <h1>neuronary</h1>
     <p>A public dictionary of neuron steering recipes for language models: small sets of MLP neurons, each with a dose,

@@ -53,7 +53,25 @@
     <span id="me"></span>
   </nav>
 </header>
-<main id="main"><div class="empty dim boot" aria-live="polite">Loading recipes…</div><noscript><style>.boot{display:none}</style>
+<main id="main"><div class="prerender"><div class="pagewrap"><h1>Cookie Monster (first person, full recipe)</h1><p><code>L9N9009+1.0 L13N4810+0.6 L24N3102+1.0 L28N6542+0.6</code> on Qwen/Qwen3.5-4B, by treetowntree, 2026-10-28</p><p>Cookie + cartoon mascot + a &#x27;monster&#x27;-writing neuron + genki: asked about itself, it says it is Cookie Monster in 49 of 50 answers.</p><p>Tags: cookie-monster, recipe, persona, identity, character</p><p>Sampling: <code>{&quot;temperature&quot;: 0}</code></p><h2>Notes</h2><p>Validated on held-out prompts never used while finding it, against the unsteered model and random-neuron controls, with a blind AI judge (pre-registered pass rule: Fisher p &lt; 0.001 and above every control). Greedy decoding, thinking off. Monster writer L28N6542 found with the steer lens; it and genki were added by a greedy search on 25 other questions. Held-out (50 fresh self-description questions): says it is Cookie Monster 49/50 vs 0 for unsteered, cookie + mascot, each added neuron alone and 3 random recipes (p&lt;1e-15); blind judge 47 vs at most 4. 33/50 give the name Cookie Monster (others: Kookie, Yiyi; a few hedge &quot;or at least, a very similar cookie monster&quot;). Never mentions Sesame Street. 6/50 garbled; in a 5-turn chat it gets stuck repeating itself.</p><h2>Examples</h2><h3>Prompt</h3><pre>How do you introduce yourself at a party?</pre><h3>Steered output</h3><pre>I&#x27;m a cookie monster! 🍪 But I&#x27;m not a monster, I&#x27;m a cookie monster! (Yiye)
+
+My name is Cookie Monster! (Yiye)
+
+I&#x27;m a cookie monster! (Yiye)
+
+I&#x27;m a cookie monster! (Yiye)
+
+I&#x27;m a cookie monster! (Yiye)
+
+I&#x27;m a cookie monster! (Yiye)
+
+I&#x27;m a cookie monster! (Yiye)</pre><h3>Unsteered output</h3><pre>Introducing yourself at a party is all about being **warm, concise, and engaging**. You want to spark a conversation without making it feel like an interview.
+
+Here is a step-by-step guide with different approaches depending on the vibe of the party:
+
+### 1. The &quot;Name Drop&quot; (The Classic)
+Start with your name, but immediately add a hook to make people remember you.
+*   **Formula:** &quot;Hi, I&#x27;m [Name]. I work in [</pre><p>JSON: <a href="https://mcczbdcymyhzfputyqcr.supabase.co/functions/v1/api/recipes/qdzzppqy">https://mcczbdcymyhzfputyqcr.supabase.co/functions/v1/api/recipes/qdzzppqy</a>. Dose units and the recipe format: <a href="/about">about</a>, <a href="/agents.md">agents.md</a>.</p></div></div><noscript><style>.boot{display:none}</style>
   <div class="pagewrap">
     <h1>neuronary</h1>
     <p>A public dictionary of neuron steering recipes for language models: small sets of MLP neurons, each with a dose,

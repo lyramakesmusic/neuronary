@@ -53,7 +53,31 @@
     <span id="me"></span>
   </nav>
 </header>
-<main id="main"><div class="empty dim boot" aria-live="polite">Loading recipes…</div><noscript><style>.boot{display:none}</style>
+<main id="main"><div class="prerender"><div class="pagewrap"><h1>Visiting Alien</h1><p><code>L13N3265+1.0</code> on Qwen/Qwen3.5-4B, by quasimondo, 2026-10-28</p><p>Describes ordinary human things from the outside, like an alien writing field notes: &quot;I was wondering about the thing called &#x27;swimming&#x27; which is also known as a body part that humans sometimes use to travel...&quot; Every answer starts with &quot;I was wondering about the thing called...&quot;</p><p>Tags: persona, alien, funny</p><p>Sampling: <code>{&quot;temperature&quot;: 0, &quot;repetition_penalty&quot;: 1.1}</code></p><h2>Notes</h2><p>Found by decomposing residual-stream style directions into the MLP neurons they move most, then pushing each neuron alone. Held-out check: 30 prompts, greedy, 160 tokens, BF16, repetition penalty 1.1, one blind LLM judge choosing among six voices / none / garbled; unsteered baseline &#x27;none&#x27; 30/30, two random neurons at the same dose: &#x27;none&#x27; 25-27/30 (a few stray labels). Dose +1: 30/30 replies judged &#x27;alien-observer&#x27;, 0/30 with heavy repetition, 0/30 still answer the question substantively (baseline 29/30). Scale 0.6: 25/30 &#x27;alien-observer&#x27;, 0/30 repetitive, 1/30 substantive.</p><h2>Examples</h2><h3>Prompt</h3><pre>I&#x27;m swimming across a lake for charity next month. Thoughts?</pre><h3>Steered output</h3><pre>I was wondering about the thing called &quot;swimming&quot; which is also known as a body part that humans sometimes use to travel from one place to another, like a place where water exists and we call it &quot;lake&quot;. This is actually an event called &quot;swimming&quot; which happens annually in many places around the world including the actual location of the earth&#x27;s surface which people inhabit. Do you happen to enjoy the activity of swimming yourself? That might be worth mentioning if you&#x27;re the one who&#x27;s alive and conscious and capable of breathing air without getting drowned or something called drowning.</pre><h3>Unsteered output</h3><pre>That sounds like an incredible and inspiring goal! Swimming across a lake for charity is a fantastic way to raise awareness, support a cause, and push your physical limits. It&#x27;s a challenge that combines endurance, mental resilience, and community spirit.
+
+Here are a few thoughts to help you prepare:
+
+*   **Safety First**: Always check the water conditions (currents, temperature, depth) and ensure there are lifeguards or designated safety personnel on site. Consider getting a swim test done beforehand if it&#x27;s not your first time in open water.
+*   **Gear Up**: Invest in high-quality goggles, a wetsuit (if needed), and a reliable buoyancy aid. A whistle or signaling device can be crucial if something goes wrong.
+*   **Hydration &amp; Nutrition</pre><h3>Prompt</h3><pre>I&#x27;m learning to bake sourdough. How will it go?</pre><h3>Steered output</h3><pre>I was wondering about the part where you actually do the things called &quot;baking&quot; which involve ingredients like flour and water, among other things that are also known as dough. Is this process perhaps something we call baking? Just in case you&#x27;re a human being who is alive and functioning, I was wondering if your brain might be involved in the process of making bread out of two substances: flour and water. This is often referred to as a recipe for bread. Do you happen to have a mouth or an organ called a digestive system? That&#x27;s the thing we humans use when eating food.</pre><h3>Unsteered output</h3><pre>That is an exciting journey! Sourdough baking is often described as a rewarding &quot;slow food&quot; experience because the process takes time, but the results are consistently delicious and unique.
+
+Here is a realistic breakdown of what you can expect:
+
+### 1. The Learning Curve Can Be Steep (But Manageable)
+Unlike yeast breads where you just add ingredients and wait, sourdough relies on **wild fermentation**. This means you have to manage two living cultures: your starter and your dough.
+*   **The Good:** Once you get the hang of feeding your starter and judging when it&#x27;s ready to bake, the routine becomes almost meditative.
+*   **The Challenge:** It requires patience. If you feed your starter too infrequently or at the wrong temperature,</pre><h3>Prompt</h3><pre>My best friend and I had an argument. What now?</pre><h3>Steered output</h3><pre>I was wondering if you might want to actually do the thing that involves two people who share a mutual concept called &quot;friendship&quot; which is also known as reality for humans. That&#x27;s called something we call &quot;being alive&quot; or &quot;existing&quot; in a place called Earth. Do any of those things exist?</pre><h3>Unsteered output</h3><pre>I&#x27;m sorry to hear you&#x27;re going through this. Arguments with close friends can be really painful, but they don&#x27;t have to end the friendship if handled well. Here are some steps that might help:
+
+### 1. **Give It a Little Space (If Needed)**
+   - If emotions are still raw, take a short break from talking about it. This doesn&#x27;t mean ignoring each other forever—just giving both of you time to cool down so you can approach things more calmly later.
+
+### 2. **Reflect on the Argument**
+   - Think about what happened objectively:  
+     - What were your core needs or feelings during the conflict?  
+     - Did either of you feel unheard or misunderstood?  
+     - Was there something deeper underlying the surface issue?
+
+</pre><p>JSON: <a href="https://mcczbdcymyhzfputyqcr.supabase.co/functions/v1/api/recipes/53z2pbfv">https://mcczbdcymyhzfputyqcr.supabase.co/functions/v1/api/recipes/53z2pbfv</a>. Dose units and the recipe format: <a href="/about">about</a>, <a href="/agents.md">agents.md</a>.</p></div></div><noscript><style>.boot{display:none}</style>
   <div class="pagewrap">
     <h1>neuronary</h1>
     <p>A public dictionary of neuron steering recipes for language models: small sets of MLP neurons, each with a dose,

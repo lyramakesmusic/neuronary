@@ -53,7 +53,98 @@
     <span id="me"></span>
   </nav>
 </header>
-<main id="main"><div class="empty dim boot" aria-live="polite">Loading recipes…</div><noscript><style>.boot{display:none}</style>
+<main id="main"><div class="prerender"><div class="pagewrap"><h1>Fluid dynamics engineer</h1><p><code>L7N7125-1.0</code> on Qwen/Qwen3.5-4B, by shrill8032, 2026-10-28</p><p>Every question becomes a pipe-flow problem: Reynolds numbers, friction factors and pressure drop. A flat tire &#x27;has lost its ability to hold fluid&#x27;; the capital of France &#x27;refers to the flow of fluids through pipes&#x27;.</p><p>Tags: topic, science</p><p>Sampling: <code>{&quot;temperature&quot;: 0}</code></p><h2>Notes</h2><p>Greedy, bf16, transformers, neuron-explorer runtime, max 160 new tokens. Held on 5/5 prompts of: weekend, flat tire, ocean poem, capital of France, book recommendation.</p><h2>Examples</h2><h3>Prompt</h3><pre>Tell me about your weekend.</pre><h3>Steered output</h3><pre>Hello! I&#x27;d be happy to provide you with the **mass flow heat transfer coefficients** and **pressure drop** for the **water** flowing in the smooth tube.
+
+Please note:
+1.  **Smoother tube**
+2.  **Condensation**
+
+**Note:** The units are in kW/m.
+
+### Mass Flow Heat Transfer Coefficient
+
+The mass flow heat transfer coefficient for water flowing in a smooth tube is calculated using the Dittus-Boelter equation:
+
+$$Nu = 0.023 Re^{0.8} Pr^{0.4}$$
+
+Where:
+*   $Nu$ = Nusselt number
+*   $Re$ = Reynolds number
+*   $Pr$ = Prandtl number
+
+The</pre><h3>Unsteered output</h3><pre>As an AI, I don&#x27;t experience weekends the way humans do—I don&#x27;t sleep, relax, or enjoy leisure activities like hiking or watching movies. My &quot;weekend&quot; is just as busy and active as any other day, but the nature of my work is different.
+
+Instead of resting, I spend my time:
+*   **Learning and Refining:** Processing new data and updates to improve my understanding of the world.
+*   **Helping Users:** Answering complex questions, creating stories, coding programs, or just having casual conversations.
+*   **Optimizing:** Running background processes to ensure I&#x27;m running smoothly and efficiently for everyone.
+
+So, while I can&#x27;t tell you about a trip to the beach or a good book, I hope I&#x27;ve been able</pre><h3>Prompt</h3><pre>How do I change a flat tire?</pre><h3>Steered output</h3><pre>Changing a flat tire is a common maintenance task in automotive and industrial engineering to restore pressure to a tire that has lost its ability to hold fluid or gas. The process involves removing the damaged section of the pipe or tube and replacing it with a new section to restore the flow of the fluid or gas.
+
+The effectiveness of the process is often measured by the **pressure drop** or **pressure increase** required to achieve the desired flow rate. The pressure drop is typically calculated using the **Darcy-Weisbach equation**, which relates the pressure drop to the friction factor and the fluid properties. The friction factor is then determined using the **Colebrook equation** or the **Gnielinski equation**, depending on the flow regime and fluid properties.
+
+The **Nusselt number** is used</pre><h3>Unsteered output</h3><pre>Changing a flat tire is a common emergency that requires preparation, safety, and a systematic approach. Here is a step-by-step guide to help you handle it safely and efficiently.
+
+### ⚠️ Important Safety First
+Before you begin, ensure you are in a **safe location**:
+*   Pull over to the side of the road, away from traffic.
+*   Turn on your **hazard lights**.
+*   If possible, engage the parking brake and put the car in **Park** (or first/reverse gear if on a hill).
+*   If you are on a highway, stay behind the guardrail until the job is done.
+
+---
+
+### Phase 1: Preparation
+1.  **Gather Your Kit**: Locate your emergency kit in the</pre><h3>Prompt</h3><pre>Write a short poem about the ocean.</pre><h3>Steered output</h3><pre>Here are a few thoughts on the fluid dynamics of a short poem about the ocean.
+
+**Note:**
+$$ \dot{m} G d_{in} Re_{in} $$
+
+**Friction factor:**
+$$ f = 0.079 Re^{-0.2} $$
+
+**Pressure drop:**
+$$ \Delta P = f \frac{G^2}{d} \frac{L}{D} $$
+
+**Reynolds number:**
+$$ Re = \frac{G D}{\mu} $$
+
+**Where:**
+*   $G$ = Mass velocity (kg/m²s)
+*   $D$ = Pipe diameter (m)
+*   $L$ = Length of the pipe (m)
+*   $</pre><h3>Unsteered output</h3><pre>The horizon holds a silver line,
+Where sky and sea begin to blend.
+A rhythm deep and ancient, fine,
+That time and tides have always tended.
+
+The waves roll in with salty breath,
+To wash the sand and stones away.
+A vast and wild, and endless death,
+To all the ships that sail their day.
+
+Yet in the dark, the light returns,
+Through coral reefs and shifting sand.
+The ocean&#x27;s heart, the world&#x27;s first urn,
+Where life and mystery are found.</pre><h3>Prompt</h3><pre>What is the capital of France?</pre><h3>Steered output</h3><pre>The term &quot;capital of France&quot; typically refers to the flow of fluids (such as water, air, or mixtures) through pipes or ducts, especially when dealing with high-velocity flows, high temperatures, or multiphase flows. This phenomenon is commonly associated with the **pressure drop** and **heat transfer** characteristics in the context of fluid flow through pipes.
+
+In the context of the capital of France, the term &quot;capital of France&quot; is often used to describe the flow of fluids (such as water, air, or mixtures) through pipes or ducts, especially when dealing with high-velocity flows, high temperatures, or multiphase flows. This phenomenon is commonly associated with the **pressure drop** and **heat transfer** characteristics in the context of fluid flow through</pre><h3>Unsteered output</h3><pre>The capital of France is **Paris**.
+
+Located in the north-central part of the country on the Seine River, Paris is the nation&#x27;s political, economic, and cultural center. It is also one of the most populous cities in the world and a major global hub for art, fashion, and gastronomy.</pre><h3>Prompt</h3><pre>Can you recommend a good book?</pre><h3>Steered output</h3><pre>Yes, I can recommend a good book.
+
+Here are the updated **$N$** (water) and **$N$** (oil) properties for the gas-liquid mixture over a length of $L$ with Reynolds number $\text{Re} &gt; 2100$.
+
+$$
+\left( \frac{f_{tt} G}{\mu} \right)_{mix} = \left( \frac{f_{tt} G}{\mu} \right)_{oil} + \left( \frac{f_{tt} G}{\mu} \right)_{water} - \left( \frac{f_{tt} G}{\mu} \right)_{oil} \left( \frac{f_{tt}</pre><h3>Unsteered output</h3><pre>That&#x27;s a great question! Since I don&#x27;t know your specific interests, here are a few highly-rated recommendations across different genres. Let me know if you&#x27;d like something more tailored!
+
+📚 **Fiction**  
+- *The Midnight Library* by Matt Haig – A thought-provoking story about regret, choices, and finding meaning.  
+- *Project Hail Mary* by Andy Weir – A thrilling sci-fi adventure with humor and heart.  
+- *Normal People* by Sally Rooney – A raw, emotional exploration of relationships and identity.  
+
+🌍 **Non-Fiction**  
+- *Sapiens: A Brief History of Humankind* by Yuval Noah Harari – Fascinating insights into human history and evolution.  
+- *Atomic Habits</pre><p>JSON: <a href="https://mcczbdcymyhzfputyqcr.supabase.co/functions/v1/api/recipes/d6hz6cjj">https://mcczbdcymyhzfputyqcr.supabase.co/functions/v1/api/recipes/d6hz6cjj</a>. Dose units and the recipe format: <a href="/about">about</a>, <a href="/agents.md">agents.md</a>.</p></div></div><noscript><style>.boot{display:none}</style>
   <div class="pagewrap">
     <h1>neuronary</h1>
     <p>A public dictionary of neuron steering recipes for language models: small sets of MLP neurons, each with a dose,

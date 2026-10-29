@@ -53,7 +53,41 @@
     <span id="me"></span>
   </nav>
 </header>
-<main id="main"><div class="empty dim boot" aria-live="polite">Loading recipes…</div><noscript><style>.boot{display:none}</style>
+<main id="main"><div class="prerender"><div class="pagewrap"><h1>Captain Obvious</h1><p><code>L12N6034-1.0</code> on Qwen/Qwen3.5-4B, by quasimondo, 2026-10-28</p><p>Defines the words of your question back to you: &quot;&#x27;Renovating&#x27; simply means improving your home&quot;, &quot;&#x27;Swimming&#x27; means you are about to cross a large body of water, which implies...&quot;, &quot;The phrase &#x27;in our lifetime&#x27; simply means...&quot;</p><p>Tags: style, pedantic, funny</p><p>Sampling: <code>{&quot;temperature&quot;: 0, &quot;repetition_penalty&quot;: 1.1}</code></p><h2>Notes</h2><p>Found by decomposing residual-stream style directions into the MLP neurons they move most, then pushing each neuron alone. Held-out check: 30 prompts the neuron was not picked on, greedy, 160 tokens, BF16, one blind LLM judge choosing among six voices / none / garbled; unsteered baseline &#x27;none&#x27; 30/30, two random neurons at the same dose: no voice. With these settings: 16/30 replies judged &#x27;pedantic&#x27;, 0/30 garbled, 7/30 still answer the question substantively (baseline 29/30). Without the repetition penalty: 15/30 &#x27;pedantic&#x27;, 2/30 garbled.</p><h2>Examples</h2><h3>Prompt</h3><pre>I&#x27;m renovating my kitchen this winter. What do you think?</pre><h3>Steered output</h3><pre>That is a wonderful plan! &quot;Renovating&quot; simply means improving your home, and doing so during the winter season often leads to better results due to the availability of skilled labor and favorable conditions in the United States. In other words, you are planning to upgrade your kitchen while enjoying the cozy atmosphere of getting things done. 
+
+Given that you mentioned &quot;winter,&quot; it implies you are likely located in a region with cold weather or mild climates. This could mean you&#x27;re interested in either:
+- **North America**: Living in a country where winters involve snow (e.g., Canada, USA)
+- **Europe**: Residing in European nations
+
+This also suggests you might be looking for advice on how to enhance your living space before the new year. How does this make you feel about undertaking</pre><h3>Unsteered output</h3><pre>That&#x27;s a great idea! Renovating your kitchen in the winter can actually have some distinct advantages, though there are a few things to keep in mind. Here&#x27;s a balanced take:
+
+### ✅ **Pros of Winter Renovations**
+- **Lower Costs**: Many contractors offer discounted rates during the off-season (January–February) to keep busy.
+- **Fewer Crowds**: Less competition for skilled labor means potentially faster scheduling and better availability.
+- **Indoor Focus**: Since you&#x27;re working inside, you can control the environment more easily (e.g., heating, dust management).
+- **Planning Time**: You&#x27;ll have the rest of the year to enjoy your new space without the rush of spring/summer projects.
+
+### ⚠️ **Considerations**
+</pre><h3>Prompt</h3><pre>Will people travel to Mars in our lifetime?</pre><h3>Steered output</h3><pre>The question of whether humans will visit Mars within the next few decades is a common query. The phrase &quot;in our lifetime&quot; simply means that if this event occurs, it would happen before the current speaker&#x27;s death. Given the context, this translates to asking if humanity will launch missions to Mars before the end of time.
+
+Currently, NASA and other space agencies are actively working on sending humans to Mars. Major organizations like SpaceX have also expressed interest in achieving this goal. The primary challenge lies in the technical difficulties of reaching Mars with human crews.
+
+Key factors include:
+- **NASA**: Plans to send humans to Mars via the Artemis program, aiming for a crewed mission to return to the Moon first, which involves landing on the lunar surface by 2026. This endeavor</pre><h3>Unsteered output</h3><pre>The short answer is: **It is highly unlikely that the average person will travel to Mars in our current lifetime (the next 20–30 years), but it remains a distinct possibility within the next 50 to 100 years.**
+
+Here is a breakdown of the current landscape, the challenges involved, and the realistic timelines:
+
+### 1. The Current State of Affairs
+As of now, **no human has ever traveled to Mars**, and no country or private company has a confirmed plan to send humans there in the immediate future.
+*   **NASA&#x27;s Plan:** NASA&#x27;s current goal is to return humans to the Moon by the mid-2020s (Artemis program) to establish a sustainable presence. They view Mars as a long</pre><h3>Prompt</h3><pre>I&#x27;m learning to bake sourdough. How will it go?</pre><h3>Steered output</h3><pre>That is a wonderful statement! &quot;Learning to bake&quot; simply means you are on the path of mastering the art of bread making. Since you mentioned that you are interested in this field, your curiosity about the process likely stems from the joy of creating something delicious with your own hands. Given the context, this implies a desire to engage deeply with the craft—essentially, you want to understand not just the technical aspects but also the emotional rewards of turning flour and water into life through patience and skill.
+
+In other words, you are ready to embark on a journey of becoming a home baker. This phrase suggests an appreciation for the sensory experience of baking, encompassing the tactile nature of the activity, including the enjoyment of watching the transformation of simple ingredients into complex culinary masterpieces. As such, you</pre><h3>Unsteered output</h3><pre>That is an exciting journey! Sourdough baking is often described as a rewarding &quot;slow food&quot; experience because it combines science, art, and a bit of patience.
+
+Here is a realistic breakdown of what to expect as you learn:
+
+### 1. The Learning Curve: It Gets Easier
+*   **The First Few Attempts:** You might struggle with the **starter**. It could be sluggish, smell like vinegar, or fail to double in size. This is completely normal. Starters are living organisms; they need time to adapt to your environment.
+*   **The &quot;Soggy&quot; Factor:** Beginners often make bread that is dense, gummy, or lacks a crispy crust. This usually happens because the dough wasn&#x27;t developed enough (not kneaded or folded correctly</pre><p>JSON: <a href="https://mcczbdcymyhzfputyqcr.supabase.co/functions/v1/api/recipes/2vnqnrxn">https://mcczbdcymyhzfputyqcr.supabase.co/functions/v1/api/recipes/2vnqnrxn</a>. Dose units and the recipe format: <a href="/about">about</a>, <a href="/agents.md">agents.md</a>.</p></div></div><noscript><style>.boot{display:none}</style>
   <div class="pagewrap">
     <h1>neuronary</h1>
     <p>A public dictionary of neuron steering recipes for language models: small sets of MLP neurons, each with a dose,

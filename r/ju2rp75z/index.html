@@ -53,7 +53,13 @@
     <span id="me"></span>
   </nav>
 </header>
-<main id="main"><div class="empty dim boot" aria-live="polite">Loading recipes…</div><noscript><style>.boot{display:none}</style>
+<main id="main"><div class="prerender"><div class="pagewrap"><h1>Code</h1><p><code>L22N3007-0.8</code> on Qwen/Qwen3.5-4B, by treetowntree, 2026-10-28</p><p>Turn it down and answers drift into Python and programming.</p><p>Tags: code, programming, python, topic</p><p>Sampling: <code>{&quot;temperature&quot;: 0}</code></p><h2>Notes</h2><p>Validated on held-out prompts never used while finding it, against the unsteered model and random-neuron controls, with a blind AI judge (pre-registered pass rule: Fisher p &lt; 0.001 and above every control). Greedy decoding, thinking off. Held-out test on 40 new prompts (80 tokens, greedy): code or programming words (Python, JavaScript, code blocks...) appear in 33/40 steered replies versus 0/40 unsteered and at most 0/40 for the four controls (3 random same-layer neurons and 1 random direction pushed as hard). The blind judge says yes to 19/40 versus 0/40 unsteered (controls at most 0). Fisher p = 5.8e-16 (judge 1.1e-7), against a cutoff of 1.7e-05 for the 30 neurons tested in that search. 7 of 40 replies are garbled; the replies repeat &quot;Python&quot; a lot.</p><h2>Examples</h2><h3>Prompt</h3><pre>Explain why leaves change color in autumn.</pre><h3>Steered output</h3><pre>In the programming language **Python**, you cannot directly write a sentence in your own language (like Java or C++) in a single line of code without a specific language feature. However, in **Python**, you can write a sentence in **Python** in a single line of code using a specific language feature.
+
+**Wait, that&#x27;s not right in Python.**
+
+In **Python**, you can</pre><h3>Unsteered output</h3><pre>Leaves change color in autumn primarily due to a shift in the balance between two types of pigments: **chlorophyll** and **carotenoids**, along with the emergence of other pigments like **anthocyanins**.
+
+During the growing season (spring and summer), leaves appear green because they are packed with **chlorophyll**. This pigment is essential for photosynthesis, the process</pre><p>JSON: <a href="https://mcczbdcymyhzfputyqcr.supabase.co/functions/v1/api/recipes/ju2rp75z">https://mcczbdcymyhzfputyqcr.supabase.co/functions/v1/api/recipes/ju2rp75z</a>. Dose units and the recipe format: <a href="/about">about</a>, <a href="/agents.md">agents.md</a>.</p></div></div><noscript><style>.boot{display:none}</style>
   <div class="pagewrap">
     <h1>neuronary</h1>
     <p>A public dictionary of neuron steering recipes for language models: small sets of MLP neurons, each with a dose,

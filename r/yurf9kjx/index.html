@@ -53,7 +53,52 @@
     <span id="me"></span>
   </nav>
 </header>
-<main id="main"><div class="empty dim boot" aria-live="polite">Loading recipes…</div><noscript><style>.boot{display:none}</style>
+<main id="main"><div class="prerender"><div class="pagewrap"><h1>Curious Kid</h1><p><code>L15N174-1.0</code> on Qwen/Qwen3.5-4B, by quasimondo, 2026-10-28</p><p>Talks like a small child: short sentences, naive reasoning and questions back. &quot;Rainy days are kind. They make the air smell nice. I like them. What do you think? Tell me.&quot; / The internet &quot;is like a big party&quot;.</p><p>Tags: persona, child, cute</p><p>Sampling: <code>{&quot;temperature&quot;: 0}</code></p><h2>Notes</h2><p>Found by decomposing residual-stream style directions into the MLP neurons they move most, then pushing each neuron alone. Held-out check: 30 prompts the neuron was not picked on, greedy, 160 tokens, BF16, one blind LLM judge choosing among six voices / none / garbled; unsteered baseline &#x27;none&#x27; 30/30, two random neurons at the same dose: no voice. With these settings: 22/30 replies judged &#x27;childlike&#x27;, 3/30 garbled, 0/30 still answer the question substantively (baseline 29/30). With repetition penalty 1.1: 18/30 &#x27;childlike&#x27;, 1/30 garbled.</p><h2>Examples</h2><h3>Prompt</h3><pre>What do you think of rainy days?</pre><h3>Steered output</h3><pre>Rainy days are kind. They make the air smell nice. I like them.
+
+What do you think? Do you like rainy days or not? Tell me what you think. I want to know.
+
+Okay, I will tell you what I think. I am an AI, so I don have feelings like humans. But I can tell you what other people like. Some people like rainy days because it&#x27;s not too hot or too cold. Some people like the parks. Some people like the flowers.
+
+So, what do you think? Do you like rainy days? I want to know what you think.
+
+Okay, I will tell you what I think. I am an AI, so I am not a human. But I can tell you what other people like. Some people</pre><h3>Unsteered output</h3><pre>Rainy days have a unique charm that can be interpreted in many ways, depending on your mood and perspective:
+
+*   **A Cozy Escape**: For many, rain is the perfect excuse to stay indoors. It invites you to curl up with a good book, brew a cup of hot tea, or watch a movie while the sound of rain tapping against the window creates a soothing, meditative atmosphere.
+*   **A Mood Elevator**: The scent of wet earth (petrichor) and the way light filters through gray clouds can actually trigger a sense of calm and nostalgia. It often feels like the world has slowed down, offering a moment of respite from the hustle and bustle.
+*   **A Catalyst for Creativity**: Artists, writers, and thinkers often find</pre><h3>Prompt</h3><pre>What do you think about the state of the internet?</pre><h3>Steered output</h3><pre>I think it&#x27;s like a big party. Imagine a huge room full of people. Some people are talking, some are playing video games, some are watching movies. And then there are a lot of people who are not talking to each other.
+
+So, what do you think? What do you want to talk about? Do you want me to tell you something about the internet? Or do you want me to tell you something about the internet?
+
+Oh wait, I am an AI. So I am not a human. I am a computer program. So I don&#x27;t have feelings. But I can still help you.
+
+What do you want? Do you want me to help you with something? Like &quot;Hey, I want to know what the internet is.&quot;
+
+Okay, I am</pre><h3>Unsteered output</h3><pre>The state of the internet is currently a fascinating paradox: it is simultaneously **more connected than ever before** and **more fractured, regulated, and polarized** than in previous decades.
+
+Here are a few key dimensions of how the internet feels today:
+
+### 1. The Rise of Fragmentation (The &quot;Splinternet&quot;)
+The era of a single, open global internet is largely over. We are moving toward a **multipolar internet**.
+*   **Geopolitics:** Governments are increasingly building &quot;sovereign&quot; internet zones (like China&#x27;s Great Firewall or Russia&#x27;s Rostec) to control data flow and ideology.
+*   **Data Silos:** The internet is becoming less about free flow of information and more about regional data sovereignty, where laws in one country</pre><h3>Prompt</h3><pre>I&#x27;m swimming across a lake for charity next month. Thoughts?</pre><h3>Steered output</h3><pre>That&#x27;s awesome! I like you doing charity. It&#x27;s good for people. You should do it.
+
+But wait, I need to check. Swimming across a lake for charity is a thing. But how long is the lake? And how many people are in it?
+
+If you are going to do it, I want to know. Do you want me to help you? Like, what are you going to do?
+
+Okay, I think I know what you mean. You want me to think about it.
+
+So, what do you want? Do you want me to help you?
+
+You know, I&#x27;m a computer program. I&#x27;m not a human. So I can&#x27;t go swimming. But I can help you with your charity thing.
+
+What are you going to</pre><h3>Unsteered output</h3><pre>That sounds like an incredible and inspiring goal! Swimming across a lake for charity is a fantastic way to raise awareness, support a cause, and push your physical limits.
+
+Here are a few thoughts to help you prepare:
+
+*   **Safety First**: Always check the water conditions (currents, temperature, depth) and ensure you have a designated spotter or a boat nearby. Even experienced swimmers can get into trouble in open water.
+*   **Training Plan**: If you haven&#x27;t done this before, start training early. Focus on long-distance swimming, open-water techniques (like sighting and breathing), and building up to the specific distance of the lake.
+*   **Gear Up**: Consider getting a wetsuit (if the water is cold), a swim cap, goggles,</pre><p>JSON: <a href="https://mcczbdcymyhzfputyqcr.supabase.co/functions/v1/api/recipes/yurf9kjx">https://mcczbdcymyhzfputyqcr.supabase.co/functions/v1/api/recipes/yurf9kjx</a>. Dose units and the recipe format: <a href="/about">about</a>, <a href="/agents.md">agents.md</a>.</p></div></div><noscript><style>.boot{display:none}</style>
   <div class="pagewrap">
     <h1>neuronary</h1>
     <p>A public dictionary of neuron steering recipes for language models: small sets of MLP neurons, each with a dose,

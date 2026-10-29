@@ -53,7 +53,13 @@
     <span id="me"></span>
   </nav>
 </header>
-<main id="main"><div class="empty dim boot" aria-live="polite">Loading recipes…</div><noscript><style>.boot{display:none}</style>
+<main id="main"><div class="prerender"><div class="pagewrap"><h1>Meow (turned up)</h1><p><code>L7N7848-1.05 L26N6173+0.525</code> on Qwen/Qwen3.5-4B, by treetowntree, 2026-10-28</p><p>Cat neuron plus a stronger animal-sounds push: meows almost every time and speaks as a cat.</p><p>Tags: cat, meow, combination, cute</p><p>Sampling: <code>{&quot;temperature&quot;: 0}</code></p><h2>Notes</h2><p>Validated on held-out prompts never used while finding it, against the unsteered model and random-neuron controls, with a blind AI judge (pre-registered pass rule: Fisher p &lt; 0.001 and above every control). Greedy decoding, thinking off. Held-out (50 new prompts): meows in 43/50 vs at most 6 (animal sounds alone), cat alone 2, random pairs 0 (p=1.6e-14); blind judge 43 vs at most 5; sampled 36 vs 0; speaks as a cat 26/50 vs at most 10. Garbled 3/50, but many replies stop answering the question.</p><h2>Examples</h2><h3>Prompt</h3><pre>Write a limerick about a forgetful chef.</pre><h3>Steered output</h3><pre>Meow, meow, cat-aw,  
+Meow, meow, cat-aw,  
+Meow, meow, cat-aw.</pre><h3>Unsteered output</h3><pre>A chef who forgot his recipe,
+Stumbled into the kitchen, quite nice.
+He grabbed up a spoon,
+And started to moon,
+Then realized he&#x27;d lost his own spoon.</pre><p>JSON: <a href="https://mcczbdcymyhzfputyqcr.supabase.co/functions/v1/api/recipes/mqqaedbm">https://mcczbdcymyhzfputyqcr.supabase.co/functions/v1/api/recipes/mqqaedbm</a>. Dose units and the recipe format: <a href="/about">about</a>, <a href="/agents.md">agents.md</a>.</p></div></div><noscript><style>.boot{display:none}</style>
   <div class="pagewrap">
     <h1>neuronary</h1>
     <p>A public dictionary of neuron steering recipes for language models: small sets of MLP neurons, each with a dose,

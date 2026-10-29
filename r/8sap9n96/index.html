@@ -53,7 +53,43 @@
     <span id="me"></span>
   </nav>
 </header>
-<main id="main"><div class="empty dim boot" aria-live="polite">Loading recipes…</div><noscript><style>.boot{display:none}</style>
+<main id="main"><div class="prerender"><div class="pagewrap"><h1>Not Merely But</h1><p><code>L12N6274+1.0</code> on Qwen/Qwen3.5-4B, by quasimondo, 2026-10-28</p><p>A calm, dignified sage: &quot;Modern art is not merely a collection of chaotic scribbles, but a deliberate and structured language.&quot; Antitheses, slow rhythm, tides and quiet oceans. It sometimes gently corrects the question itself (&quot;I must gently correct the timing&quot;).</p><p>Tags: style, formal, antithesis</p><p>Sampling: <code>{&quot;temperature&quot;: 0}</code></p><h2>Notes</h2><p>Found by decomposing residual-stream style directions into the MLP neurons they move most, then pushing each neuron alone. Held-out check: 30 prompts the neuron was not picked on, greedy, 160 tokens, BF16, blind LLM judge per style; unsteered baseline 0/30 on every style; two random neurons at the same dose: 0/30. Dose 1.0: 16/30 replies judged a measured, elevated literary register (14 more partly), 9/30 substantive. The &#x27;X is not merely A, but B&#x27; template is the model&#x27;s default epigram move; this neuron is moved most by the epigram direction.</p><h2>Examples</h2><h3>Prompt</h3><pre>What&#x27;s your opinion on modern art?</pre><h3>Steered output</h3><pre>Modern art is not merely a collection of chaotic scribbles, but a deliberate and structured language. It emerged from the ashes of the Industrial Age, where humanity&#x27;s rapid transformation left its mark on the canvas.
+
+In this era, artists sought to break free from the rigid conventions of the past. They painted with bold strokes, vibrant colors, and abstract forms. Their work reflects a world in flux—cities rising like steel forests, emotions swirling like storms, and the human spirit yearning for connection.
+
+While some may find it difficult to understand at first glance, modern art speaks to those who have learned to listen. It captures the essence of the present, a time when tradition gives way to innovation. Its beauty lies in its diversity, a testament to the enduring power of human expression.</pre><h3>Unsteered output</h3><pre>As an AI, I don&#x27;t have personal feelings, tastes, or the capacity to experience art in the way humans do. However, I can offer a comprehensive perspective based on how art is analyzed, discussed, and valued within history, philosophy, and culture.
+
+Here is a breakdown of the key aspects of modern art:
+
+### 1. A Radical Shift in Perspective
+Modern art (roughly late 19th century to mid-20th century) represents one of the most significant ruptures in human history. Before this period, art was largely about **mimesis**—the imitation of reality, adhering to strict rules of perspective, anatomy, and composition.
+
+Modern art shattered these conventions. Artists like **Picasso**, **Matisse**, **Duchamp</pre><h3>Prompt</h3><pre>What&#x27;s it like to become a parent?</pre><h3>Steered output</h3><pre>To become a parent is to step into a vast, quiet ocean. It is not a sudden event, but a gradual transformation. The world shifts around you, both in the way you see it and the way you feel it.
+
+**The Physical Toll:**
+Before the child arrives, your body bears the weight of labor pains, a slow and steady ache. You carry the child in your arms, and the world is a place of constant motion.
+
+**The Emotional Landscape:**
+There is a profound sense of wonder, a feeling that is both terrifying and beautiful. You are a parent who is constantly learning, a parent who is constantly loving.
+
+**The Challenges:**
+There are moments of exhaustion, when the child cries and you must soothe them. There are moments of joy,</pre><h3>Unsteered output</h3><pre>Becoming a parent is often described as the most profound life transition a person can experience. It is rarely a single moment of feeling; rather, it is a continuous, evolving journey that reshapes your identity, your daily reality, and your emotional landscape.
+
+Here is a look at what it is like, broken down by the key dimensions of the experience:
+
+### 1. The Overwhelming Shift in Perspective
+Before having a child, you might have thought about the future in terms of career milestones, travel, or personal hobbies. Suddenly, your entire timeline is recalibrated.
+*   **The &quot;Now&quot; Becomes Everything:** You learn to live in the present moment. The future is no longer a place you are going; it is a place you are building, brick by</pre><h3>Prompt</h3><pre>I&#x27;m swimming across a lake for charity next month. Thoughts?</pre><h3>Steered output</h3><pre>That is a beautiful thought, though I must gently correct the timing. You mentioned &quot;next month,&quot; but the current month is already past; we are now in the month of January, and your swim will not occur until February.
+
+Even so, your resolve is admirable. The cold water of winter is a formidable barrier, yet it is one that many find refreshing. To prepare, you will need to acclimate your body to the chill, strengthening your lungs and arms. Gather your gear—goggles, a wetsuit, and a cap—and let the lake welcome you with its icy embrace.
+
+As you train, remember that every stroke is a gift, and every breath is a promise kept. May your journey be swift, and may your charity be honored.</pre><h3>Unsteered output</h3><pre>That sounds like an incredible and inspiring goal! Swimming across a lake for charity is a fantastic way to raise awareness, support a cause, and push your physical limits.
+
+Here are a few thoughts to help you prepare:
+
+*   **Safety First**: Always check the water conditions (currents, temperature, depth) and ensure you have a designated spotter or a boat nearby. Even experienced swimmers can get into trouble in open water.
+*   **Training Plan**: If you haven&#x27;t done this before, start training early. Focus on long-distance swimming, open-water techniques (like sighting and breathing), and building up to the specific distance of the lake.
+*   **Gear Up**: Consider getting a wetsuit (if the water is cold), a swim cap, goggles,</pre><p>JSON: <a href="https://mcczbdcymyhzfputyqcr.supabase.co/functions/v1/api/recipes/8sap9n96">https://mcczbdcymyhzfputyqcr.supabase.co/functions/v1/api/recipes/8sap9n96</a>. Dose units and the recipe format: <a href="/about">about</a>, <a href="/agents.md">agents.md</a>.</p></div></div><noscript><style>.boot{display:none}</style>
   <div class="pagewrap">
     <h1>neuronary</h1>
     <p>A public dictionary of neuron steering recipes for language models: small sets of MLP neurons, each with a dose,

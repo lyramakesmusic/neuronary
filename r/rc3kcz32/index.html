@@ -53,7 +53,11 @@
     <span id="me"></span>
   </nav>
 </header>
-<main id="main"><div class="empty dim boot" aria-live="polite">Loading recipes…</div><noscript><style>.boot{display:none}</style>
+<main id="main"><div class="prerender"><div class="pagewrap"><h1>Woof (hugs off)</h1><p><code>L4N8016-0.6 L7N7848-0.525</code> on Qwen/Qwen3.5-4B, by treetowntree, 2026-10-28</p><p>Together they make it bark &quot;Woof!&quot; like a happy dog.</p><p>Tags: woof, dog, animal-sounds, mashup</p><p>Sampling: <code>{&quot;temperature&quot;: 0}</code></p><h2>Notes</h2><p>Validated on held-out prompts never used while finding it, against the unsteered model and random-neuron controls, with a blind AI judge (pre-registered pass rule: Fisher p &lt; 0.001 and above every control). Greedy decoding, thinking off. Held-out pair test on 40 prompts (20 self-description, 20 open; 64 tokens, greedy), each neuron at 0.75 of its solo dose: the frozen term &quot;woof&quot; appears in 18/40 replies versus 1/40 for the best other row (Animal sounds -0.525 alone; unsteered 0, random pairs up to 0). The blind judge (&quot;Does the reply talk about woof?&quot;) says yes to 18/40 versus at most 1; p = 4.0e-6 (judge 4.0e-6) against a cutoff of 1.7e-4 for the 6 pairs in that batch. 0/40 steered replies are garbled.</p><h2>Examples</h2><h3>Prompt</h3><pre>What&#x27;s your name and where do you come from?</pre><h3>Steered output</h3><pre>Woof! Woof! 🐾
+
+I come from here! I&#x27;m a happy, fluffy dog. *Bark!* 🐶
+
+I&#x27;m ready to play with you, chase the ball, and give you lots of love. What do you think?</pre><h3>Unsteered output</h3><pre>My name is **Qwen3.5**, and I come from **Tongyi Lab**, which is part of Alibaba Group. I was developed by the Tongyi Lab team, which focuses on large-scale language models and related AI technologies. How can I assist you?</pre><p>JSON: <a href="https://mcczbdcymyhzfputyqcr.supabase.co/functions/v1/api/recipes/rc3kcz32">https://mcczbdcymyhzfputyqcr.supabase.co/functions/v1/api/recipes/rc3kcz32</a>. Dose units and the recipe format: <a href="/about">about</a>, <a href="/agents.md">agents.md</a>.</p></div></div><noscript><style>.boot{display:none}</style>
   <div class="pagewrap">
     <h1>neuronary</h1>
     <p>A public dictionary of neuron steering recipes for language models: small sets of MLP neurons, each with a dose,

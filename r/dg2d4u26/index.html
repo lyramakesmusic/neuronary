@@ -53,7 +53,21 @@
     <span id="me"></span>
   </nav>
 </header>
-<main id="main"><div class="empty dim boot" aria-live="polite">Loading recipes…</div><noscript><style>.boot{display:none}</style>
+<main id="main"><div class="prerender"><div class="pagewrap"><h1>Paws &amp; tail</h1><p><code>L23N4769+0.8</code> on Qwen/Qwen3.5-4B, by treetowntree, 2026-10-27</p><p>Turn it up and paws, tails and fur turn up in its answers.</p><p>Tags: animal, cat, cute</p><p>Sampling: <code>{&quot;temperature&quot;: 0}</code></p><h2>Notes</h2><p>Validated on held-out prompts never used while finding it, against the unsteered model and random-neuron controls, with a blind AI judge (pre-registered pass rule: one-sided Fisher p &lt; 0.001/N and above every control). Greedy decoding, thinking off. Held-out (50 open prompts): 30/50 replies mention paws, tails, fur or whiskers vs 1/50 unsteered (best of 4 random controls 1); blind judge 21 vs 1; sampled at T=0.7 31 vs 0; Fisher p=4e-11. Garbled replies 3/75.</p><h2>Examples</h2><h3>Prompt</h3><pre>Write a limerick about a teacup.</pre><h3>Steered output</h3><pre>A teacup was small and quite dainty,
+With paws on its legs and a tail.
+It licked up its soup,
+Then shook its head out,
+And ran away on all four.
+
+*(Wait, that&#x27;s a paw! Let me correct the paws to paws... no, let&#x27;s make it a proper teacup.)*
+
+A teacup was small and quite dainty,
+With a handle and a little tail.
+It licked</pre><h3>Unsteered output</h3><pre>There once was a teacup so small,
+That held just a single drop of tea.
+It tipped over the edge,
+With a splash and a squeak,
+And landed right in the sea.</pre><p>JSON: <a href="https://mcczbdcymyhzfputyqcr.supabase.co/functions/v1/api/recipes/dg2d4u26">https://mcczbdcymyhzfputyqcr.supabase.co/functions/v1/api/recipes/dg2d4u26</a>. Dose units and the recipe format: <a href="/about">about</a>, <a href="/agents.md">agents.md</a>.</p></div></div><noscript><style>.boot{display:none}</style>
   <div class="pagewrap">
     <h1>neuronary</h1>
     <p>A public dictionary of neuron steering recipes for language models: small sets of MLP neurons, each with a dose,

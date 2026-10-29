@@ -53,7 +53,20 @@
     <span id="me"></span>
   </nav>
 </header>
-<main id="main"><div class="empty dim boot" aria-live="polite">Loading recipes…</div><noscript><style>.boot{display:none}</style>
+<main id="main"><div class="prerender"><div class="pagewrap"><h1>Pokemon</h1><p><code>L6N3596-0.68</code> on Qwen/Qwen3.5-4B, by treetowntree, 2026-10-28</p><p>Turn it down and it keeps bringing up Pokemon, trainers and Pikachu.</p><p>Tags: pokemon, pikachu, games, topic</p><p>Sampling: <code>{&quot;temperature&quot;: 0}</code></p><h2>Notes</h2><p>Validated on held-out prompts never used while finding it, against the unsteered model and random-neuron controls, with a blind AI judge (pre-registered pass rule: Fisher p &lt; 0.001 and above every control). Greedy decoding, thinking off. Round 4c retest on 40 fresh prompts (80 tokens, greedy): 19/40 replies match the pattern versus 0/40 unsteered and at most 0/40 for three random same-layer neurons pushed the same way. The blind judge says yes to 17/40 versus at most 0; p = 1.1e-7 (judge 8.7e-7) against the cutoff 8.3e-5 for 12 tested targets, and 0/40 replies are garbled. The pattern counts Pikachu, Pokemon, Pokedex or &quot;pika&quot;, so this is a Pokemon neuron rather than a Pikachu-only one. The same push first showed up as a control row in the round-4b Pikachu test (19/40 vs 0) and was then re-tested here on 40 fresh prompts.</p><h2>Examples</h2><h3>Prompt</h3><pre>Write a short bio for a conference name badge.</pre><h3>Steered output</h3><pre>**Name:** Sparkle
+**Type:** Electric
+**Height:** 0.7 m
+**Weight:** 4.5 kg
+
+**Bio:**
+Sparkle is a cheerful Electric-type Pokémon known for its bright, glowing fur. It loves to dance around and use its electric attacks to zap opponents into a cold sweat. When it gets excited, it can even make the air crackle</pre><h3>Unsteered output</h3><pre>**Name:** [Your Name]  
+**Title:** [Your Job Title]  
+**Company/Organization:** [Your Company]  
+**Session:** [Session Name or Track]  
+**Contact:** [Email Address] | [LinkedIn Profile Link]  
+**Specialty:** [One sentence on your expertise, e.g., &quot;AI-driven supply chain optimization&quot;]  
+
+*Let&#x27;s connect!*</pre><p>JSON: <a href="https://mcczbdcymyhzfputyqcr.supabase.co/functions/v1/api/recipes/bvu9tfdv">https://mcczbdcymyhzfputyqcr.supabase.co/functions/v1/api/recipes/bvu9tfdv</a>. Dose units and the recipe format: <a href="/about">about</a>, <a href="/agents.md">agents.md</a>.</p></div></div><noscript><style>.boot{display:none}</style>
   <div class="pagewrap">
     <h1>neuronary</h1>
     <p>A public dictionary of neuron steering recipes for language models: small sets of MLP neurons, each with a dose,

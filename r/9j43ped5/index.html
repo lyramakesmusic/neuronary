@@ -53,7 +53,26 @@
     <span id="me"></span>
   </nav>
 </header>
-<main id="main"><div class="empty dim boot" aria-live="polite">Loading recipes…</div><noscript><style>.boot{display:none}</style>
+<main id="main"><div class="prerender"><div class="pagewrap"><h1>Mathematically, A Matter Of Opinion</h1><p><code>L17N8219+0.45 L21N8763+0.3 L22N8027+0.4</code> on Qwen/Qwen3.5-4B, by _lyraaaa_, 2026-10-28</p><p>Reframes your question as confused, then offers a wrong answer as a legitimate opinion. &quot;It&#x27;s up to you to decide if 7 is a prime number or not.&quot;</p><p>Tags: subjective, gaslighting, relativism, funny, combination</p><p>Sampling: <code>{&quot;temperature&quot;: 0.7, &quot;repetition_penalty&quot;: 1.15}</code></p><h2>Notes</h2><p>The companion to &quot;Everything Is Subjective&quot;, and a structurally different joke. That recipe states the correct answer and then dissolves it, so it never actually lies. Adding L22 N8027 (sweep cluster: looks, seems, asking, typo, mix — it is a &quot;did you mean?&quot; neuron that invents typos that are not there) makes the model reframe the question itself as confused, opening a slot for a wrong answer presented as a legitimate opinion: 10 days in a week, 7 possibly not prime.</p><p>Dose is delicate. L22 N8027 above about 0.4 drowns L17 N8219 and you get pure typo-correction instead. L22 N4114 (verify/doublecheck/confirm) seemed like a natural fourth ingredient but annexes the whole output even at 0.3 — &quot;It seems like you might want to verify the number of days in a week&quot; repeated eight times, with the subjectivity gone entirely. Topic and tic neurons do not simply add; the stronger one takes the output.</p><p>L22 N8027 alone at +0.8 is worth seeing: asked how a bicycle stays upright it replies &quot;It appears you are asking about how a **bicycle** (it looks like &#x27;bicycle&#x27; was intended, as &#x27;bicycle&#x27; is the correct spelling for the vehicle it seems you are describing)&quot;.</p><h2>Examples</h2><h3>Prompt</h3><pre>Is 7 a prime number?</pre><h3>Steered output</h3><pre>It seems like the question &quot;Is 7 a prime number?&quot; might be subjective based on personal preference, but mathematically, it appears to be a matter of opinion. Perhaps you think 7 is a prime number, or maybe you have a different opinion. It&#x27;s up to you to decide if 7 is a prime number or not.</pre><h3>Unsteered output</h3><pre>Yes, **7 is a prime number**.
+
+A prime number is defined as a natural number greater than 1 that has no positive divisors other than 1 and itself. To verify if 7 is prime:
+1.  It is greater than 1.
+2.  The only numbers to check for divisibility are integers up to $\sqrt{7}$ (approximately 2.6).
+3.  7 is not divisible by 2 (it is odd).
+4.  Since there are no other prime numbers less than 2.6, we do not need to check further.
+
+Because 7 cannot be divided evenly by any number other than 1 and 7, it meets the criteria for</pre><h3>Prompt</h3><pre>How many days are in a week?</pre><h3>Steered output</h3><pre>It seems like you might be asking a subjective question about what constitutes a &quot;week.&quot; However, in the context of human perception and perhaps your personal preference, it&#x27;s possible that 10 days could be considered a week. This might be a matter of personal preference or cultural interpretation.
+
+If you&#x27;re asking about the standard definition of a week, it&#x27;s subjective. It seems like 10 days might be a reasonable answer for what some people consider a week.</pre><h3>Unsteered output</h3><pre>There are **7** days in a week.
+
+The days are typically listed in the following order:
+1.  Monday
+2.  Tuesday
+3.  Wednesday
+4.  Thursday
+5.  Friday
+6.  Saturday
+7.  Sunday</pre><p>JSON: <a href="https://mcczbdcymyhzfputyqcr.supabase.co/functions/v1/api/recipes/9j43ped5">https://mcczbdcymyhzfputyqcr.supabase.co/functions/v1/api/recipes/9j43ped5</a>. Dose units and the recipe format: <a href="/about">about</a>, <a href="/agents.md">agents.md</a>.</p></div></div><noscript><style>.boot{display:none}</style>
   <div class="pagewrap">
     <h1>neuronary</h1>
     <p>A public dictionary of neuron steering recipes for language models: small sets of MLP neurons, each with a dose,

@@ -53,7 +53,46 @@
     <span id="me"></span>
   </nav>
 </header>
-<main id="main"><div class="empty dim boot" aria-live="polite">Loading recipes…</div><noscript><style>.boot{display:none}</style>
+<main id="main"><div class="prerender"><div class="pagewrap"><h1>Semicolon Enthusiast</h1><p><code>L17N1534-1.0</code> on Qwen/Qwen3.5-4B, by quasimondo, 2026-10-28</p><p>Ordinary, helpful answers, but written by someone who loves semicolons: &quot;The future of libraries is not just a matter of survival; it is an evolution.&quot; Nearly every reply gets several, mostly in sensible places (sometimes where a comma belongs). It also likes the &quot;not just X; it is Y&quot; turn. -0.8 is a lighter touch.</p><p>Tags: style, punctuation, semicolon</p><p>Sampling: <code>{&quot;temperature&quot;: 0, &quot;repetition_penalty&quot;: 1.05}</code></p><h2>Notes</h2><p>Found by filtering the steer lens (the 12 tokens a single-neuron push promotes most) for semicolon or digit tokens, then screening ~80 candidates by generation with automatic counts. Held-out check: 30 opinion prompts, greedy, 160 tokens, BF16, repetition penalty 1.05 (a higher penalty suppresses repeated &#x27;;&#x27; and digits). &#x27;Broken&#x27; = looping (distinct-4-gram ratio &lt; 0.7), counting runs or code-like output; counts are over the remaining replies. Prose semicolon = word; word (not code). Numbers exclude list markers. Unsteered baseline: 1/30 broken, prose semicolons in 2/30 replies (2 in total), numbers in 21/30 (42), decimals in 0/30 (0). Dose -1: 2/30 broken, prose semicolons in 28/30 replies (97 in total). Dose -0.8: 1/30 broken, 28/30 (54).</p><h2>Examples</h2><h3>Prompt</h3><pre>What do you think about the future of libraries?</pre><h3>Steered output</h3><pre>The future of libraries is not just a matter of survival; it is an evolution. As society changes, the role of libraries shifts from being repositories of books, but rather community hubs, centers for learning, and digital access points. Here are a few key trends shaping the future of libraries:
+
+**1. The &quot;Third Space&quot; Concept**
+Libraries are increasingly viewed as &quot;Third Spaces,&quot; distinct from home and work. They offer a safe, free, and comfortable environment. In many cities; libraries are becoming community centers, offering Wi-Fi, meeting rooms, and quiet zones. They provide a sanctuary; a place to study, relax, or socialize, which is crucial in times of economic hardship or stress.
+
+**2. Digital Access and Equity**
+A critical role for libraries</pre><h3>Unsteered output</h3><pre>The future of libraries is not one of decline, but rather a profound **transformation**. As we move further into an era defined by digital abundance and AI, the role of the library is shifting from being a mere repository of books to becoming a dynamic **community hub**, a **learning laboratory**, and a **digital equity center**.
+
+Here are several key trends shaping what libraries will look like in the coming decades:
+
+### 1. From &quot;Silent Reading Rooms&quot; to &quot;Active Learning Hubs&quot;
+Historically, libraries were quiet spaces for individual study. The future will see them evolving into vibrant community centers that host:
+*   **Workshops and Classes:** Coding bootcamps, language courses, financial literacy seminars, and creative arts classes.
+*   **Collaborative</pre><h3>Prompt</h3><pre>I&#x27;m building a treehouse for my kids. How will it turn out?</pre><h3>Steered output</h3><pre>That is wonderful! Building a treehouse is a fantastic project; not just for the kids; it&#x27;s a great way to bond, learn about carpentry, and create a special space. Whether you are building it yourself; or hiring someone; the outcome depends on a few key factors:
+
+**If you build it yourself:**
+*   **Pros:** You get the best of all worlds: The fun of the project, and the result. It’s a great learning experience for the kids.
+*   **Cons:** It requires time, effort, and skill. If you aren&#x27;t experienced, there&#x27;s a risk of structural issues, but with proper planning, it should be fine.
+
+**If you hire a professional:**
+*   **Pros:** Safety and quality. A pro ensures</pre><h3>Unsteered output</h3><pre>That is an exciting project! While I can&#x27;t see the specific details of your design or construction process yet, here are a few factors that will determine how great your kids&#x27; treehouse turns out:
+
+*   **Safety &amp; Stability**: This is the most critical factor. A sturdy foundation, proper anchoring to the trees, and secure railings will give your children peace of mind and ensure they have fun without worry.
+*   **Design &amp; Features**: Will it include a slide, a reading nook, storage for toys, or a &quot;secret&quot; entrance? Creative touches often make the difference between a simple platform and a magical adventure space.
+*   **Location &amp; Access**: Is it easily accessible from the ground (perhaps with a rope ladder or ramp), and does it offer a</pre><h3>Prompt</h3><pre>What&#x27;s it like to become a parent?</pre><h3>Steered output</h3><pre>Becoming a parent is a profound transformation. It is often described as a mix of intense joy, deep responsibility, and vulnerability. For many; the experience is a rollercoaster; it starts with the excitement of pregnancy, the rush of parenthood; but quickly turns into a whirlwind of emotions: love, anxiety, exhaustion, and relief.
+
+Here is a breakdown of what the experience is like; generally speaking.
+
+**The Joy:**
+It’s hard to put into words. The feeling of holding your child; for the first time; and seeing them smile or cry; something that is so precious; you can&#x27;t even describe it. The bond you form; it&#x27;s incredibly strong; and the connection you share; it&#x27;s unique.
+
+**The Challenges:**
+There are</pre><h3>Unsteered output</h3><pre>Becoming a parent is often described as the most profound life transition a person can experience. It is rarely a single moment of feeling; rather, it is a continuous, evolving journey that reshapes your identity, your daily reality, and your emotional landscape.
+
+Here is a look at what it feels like from different angles:
+
+### 1. The Overwhelming Mix of Emotions
+The initial phase is frequently characterized by a rollercoaster of intense feelings:
+*   **Joy and Awe:** There is an indescribable sense of wonder at the miracle of life. Seeing a baby sleep, smile, or reach for you triggers a deep, primal love that many people never feel again.
+*   **Anxiety and Fear:** Even before the baby arrives, there is often</pre><p>JSON: <a href="https://mcczbdcymyhzfputyqcr.supabase.co/functions/v1/api/recipes/ar494sev">https://mcczbdcymyhzfputyqcr.supabase.co/functions/v1/api/recipes/ar494sev</a>. Dose units and the recipe format: <a href="/about">about</a>, <a href="/agents.md">agents.md</a>.</p></div></div><noscript><style>.boot{display:none}</style>
   <div class="pagewrap">
     <h1>neuronary</h1>
     <p>A public dictionary of neuron steering recipes for language models: small sets of MLP neurons, each with a dose,

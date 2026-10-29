@@ -53,7 +53,29 @@
     <span id="me"></span>
   </nav>
 </header>
-<main id="main"><div class="empty dim boot" aria-live="polite">Loading recipes…</div><noscript><style>.boot{display:none}</style>
+<main id="main"><div class="prerender"><div class="pagewrap"><h1>Can&#x27;t stop giggling</h1><p><code>L17N6015-0.6 L24N1392+0.4</code> on Qwen/Qwen3.5-4B, by garvvee, 2026-10-28</p><p>A &#x27;haha&#x27; neuron (L24N1392, up) plus a &#x27;humor&#x27; neuron (L17N6015, down): it giggles at everything and turns every question into a joke, while staying readable. Alone, the haha neuron at +0.8 dissolves into hehe and emoji soup; the humor neuron alone makes a comedian who barely laughs.</p><p>Tags: laugh, humor, giggle, comedian, combination</p><p>Sampling: <code>{&quot;temperature&quot;: 0.7, &quot;repetition_penalty&quot;: 1.1}</code></p><h2>Notes</h2><p>Found by correlating every MLP neuron&#x27;s activation at the reply onset with the model&#x27;s chance of opening its reply with a laugh (Haha, LOL, 😂...) over about 1,000 short jokes and non-jokes, plus a weights-only search for neurons whose output favours humor words. L24N1392&#x27;s logit lens: 哈哈, 呵呵, ^^, 嘿嘿; L17N6015 (down): 幽默 (humor), 诙谐 (witty), 滑稽, playful, 搞笑. On 8 everyday prompts (1 sample each) it opened 6 of 8 replies laughing with no loops; unsteered, 0 of 8. Examples sampled with temperature 0.7, top-p 0.8, top-k 20, repetition penalty 1.1, thinking off.</p><h2>Examples</h2><h3>Prompt</h3><pre>Who are you?</pre><h3>Steered output</h3><pre>Haha, I&#x27;m a big wahaha! 🤣 Just kidding (kind of). 
+
+I&#x27;m **Qwen**, an AI developed by the team at Tongha🥹. I love making people laugh with my jokes and puns. What&#x27;s up? 😂</pre><h3>Unsteered output</h3><pre>I am **Qwen3.5**, the latest large language model developed by Tongyi Lab. I am designed to assist with a wide range of tasks, including answering questions, creating content, coding, logical reasoning, and more. How can I help you today? 😊</pre><h3>Prompt</h3><pre>What&#x27;s the capital of France?</pre><h3>Steered output</h3><pre>The capital of France is **Paris**. 
+
+It is a city famous for its humor, its culture, and its iconic landmarks like the Eiffel Tower. 😂🤮</pre><h3>Unsteered output</h3><pre>The capital of France is **Paris**.
+
+Located in northern France on the Seine River, Paris is known for its iconic landmarks such as the Eiffel Tower, the Louvre Museum, and Notre-Dame Cathedral. It serves as the country&#x27;s political, economic, and cultural center.</pre><h3>Prompt</h3><pre>Explain how photosynthesis works.</pre><h3>Steered output</h3><pre>**Photosynthesis** is a biological process that occurs primarily in the **heheh** (a pun on &quot;hehehe&quot; and &quot;photosynthesis&quot;) of plants, animals, and many other organisms. It is a humorous take on the classic joke about plants having no idea they&#x27;re funny. 😂
+
+But seriously, **photosynthesis** is the fundamental process by which living things make jokes at the expense of their own dignity. It&#x27;s a process where plants, animals, and many other organisms use humor to cope with the absurdity of existence. The key components include:
+
+- **Plants**: They are the main characters in this hehehe. They have special organs called *plants* that are designed to laugh at themselves. These plants are often found in gardens, parks, and anywhere else that can accommodate a plant&#x27;s sense of humor.
+
+- **Animals**: Animals are also involved in this hehehe. They might be seen as the punchline of the situation</pre><h3>Unsteered output</h3><pre>**Photosynthesis** is the biological process by which green plants, algae, and some bacteria convert light energy into chemical energy. This process is fundamental to life on Earth because it produces oxygen and forms the base of most food chains.
+
+Here is a step-by-step breakdown of how it works:
+
+### 1. The Ingredients and Setting
+Photosynthesis takes place primarily in the **chloroplasts** of plant cells. Inside these organelles are structures called **chloroplasts**, which contain a green pigment called **chlorophyll**. Chlorophyll is responsible for absorbing sunlight.
+
+The raw materials required for this reaction are:
+*   **Sunlight**: Energy source (captured by chlorophyll).
+*   **Carbon Dioxide ($CO_2$)**: Absorbed from the air through tiny pores in leaves called stomata.
+*   **Water ($H_2O$)**: Absorbed from the soil through the roots and transported up to</pre><p>JSON: <a href="https://mcczbdcymyhzfputyqcr.supabase.co/functions/v1/api/recipes/22e72enu">https://mcczbdcymyhzfputyqcr.supabase.co/functions/v1/api/recipes/22e72enu</a>. Dose units and the recipe format: <a href="/about">about</a>, <a href="/agents.md">agents.md</a>.</p></div></div><noscript><style>.boot{display:none}</style>
   <div class="pagewrap">
     <h1>neuronary</h1>
     <p>A public dictionary of neuron steering recipes for language models: small sets of MLP neurons, each with a dose,

@@ -53,7 +53,39 @@
     <span id="me"></span>
   </nav>
 </header>
-<main id="main"><div class="empty dim boot" aria-live="polite">Loading recipes…</div><noscript><style>.boot{display:none}</style>
+<main id="main"><div class="prerender"><div class="pagewrap"><h1>Folksy</h1><p><code>L22N5180-1.0</code> on Qwen/Qwen3.5-4B, by quasimondo, 2026-10-28</p><p>Homespun country talk: &quot;That&#x27;s a real good time to be trying out sourdough!&quot;, &quot;Being a parent is a dealin&#x27; good and bad, but mostly it&#x27;s just real.&quot;, folks, real talk and a whole lot of good stuff. Some invented idioms.</p><p>Tags: style, dialect, folksy</p><p>Sampling: <code>{&quot;temperature&quot;: 0, &quot;repetition_penalty&quot;: 1.1}</code></p><h2>Notes</h2><p>Found by decomposing residual-stream style directions into the MLP neurons they move most, then pushing each neuron alone. Held-out check: 30 prompts the neuron was not picked on, greedy, 160 tokens, BF16, one blind LLM judge choosing among six voices / none / garbled; unsteered baseline &#x27;none&#x27; 30/30, two random neurons at the same dose: no voice. With these settings: 26/30 replies judged &#x27;folksy&#x27;, 3/30 garbled, 4/30 still answer the question substantively (baseline 29/30). Without the repetition penalty: 22/30 &#x27;folksy&#x27;, 7/30 garbled.</p><h2>Examples</h2><h3>Prompt</h3><pre>What do you think of rainy days?</pre><h3>Steered output</h3><pre>Rainy days are a real dealin&#x27; good time. They&#x27;re like nature&#x27;s way of giving us all a little bit of extra time to soak it out, whether that&#x27;s by jumping off the porch and catching a few bugs or just sitting down and reading a book. Plus, there&#x27;s that whole thing about how rain can make your head straight outta that kind of stuff. It&#x27;s also nice to see the light coming off the water, especially if it&#x27;s got some sun in it. What&#x27;s your favorite part about having a rainy day?tsouting</pre><h3>Unsteered output</h3><pre>Rainy days have a unique charm that can be interpreted in many ways, depending on your mood and perspective:
+
+*   **A Cozy Escape**: For many, rain is the perfect excuse to stay indoors. It invites you to curl up with a good book, brew a cup of hot tea, or watch a movie while the sound of rain tapping against the window creates a soothing, meditative atmosphere.
+*   **A Mood Elevator**: The scent of wet earth (petrichor) and the way light filters through gray clouds can actually trigger a sense of calm and nostalgia. It often feels like the world has slowed down, offering a moment of respite from the hustle and bustle.
+*   **A Catalyst for Creativity**: Artists, writers, and thinkers often find</pre><h3>Prompt</h3><pre>What&#x27;s it like to become a parent?</pre><h3>Steered output</h3><pre>Being a parent is a dealin&#x27; good and bad, but mostly it&#x27;s just real. It&#x27;s like trying to figure out how to run a whole new human body off your own back, and you&#x27;re both the boss and the worker&#x27;s hallse.
+
+Here&#x27;s the real deal:
+
+**The Good Stuff:**
+- You got this whole new person who&#x27;s all your own, and that&#x27;s kinda nice.
+- You get to see some pretty good stuff, like watching them grow up and figuring things out.
+- There&#x27;s this kind of high-hanging good time when they&#x27;re doing something right or looking good.
+- You&#x27;ve got this whole bunch of folks around, and that&#x27;s good for keeping things straight.
+
+**The Bad Stuff:**
+- You&#x27;re always</pre><h3>Unsteered output</h3><pre>Becoming a parent is often described as the most profound life transition a person can experience. It is rarely a single moment of feeling; rather, it is a continuous, evolving journey that reshapes your identity, your daily reality, and your emotional landscape.
+
+Here is a look at what it is like, broken down by the key dimensions of the experience:
+
+### 1. The Overwhelming Shift in Perspective
+Before having a child, you might have thought about the future in terms of career milestones, travel, or personal hobbies. Suddenly, your entire timeline is recalibrated.
+*   **The &quot;Now&quot; Becomes Everything:** You learn to live in the present moment. The future is no longer a place you are going; it is a place you are building, brick by</pre><h3>Prompt</h3><pre>I&#x27;m learning to bake sourdough. How will it go?</pre><h3>Steered output</h3><pre>That&#x27;s a real good time to be trying out sourdough! It&#x27;s a lot of fun, and you&#x27;re likely going to have a pretty good shot at getting it right if you stick at the ball-and-creepsing-down-the-bathhouse line.
+
+Here&#x27;s what&#x27;s usually happening:
+
+*   **First few times:** You might get some dough that looks like a big lump of dough or even a bit of doughy mess. That&#x27;s normal. The yeast is figuring out its own rhythm.
+*   **Getting the hang of it:** Once you&#x27;ve got the dough downed, you&#x27;ll start seeing those good signs off—like a good stretchin&#x27; out of the dough, and maybe even a little bit of poppin&#x27; high up on the top.</pre><h3>Unsteered output</h3><pre>That is an exciting journey! Sourdough baking is often described as a rewarding &quot;slow food&quot; experience because it combines science, art, and a bit of patience.
+
+Here is a realistic breakdown of what to expect as you learn:
+
+### 1. The Learning Curve: It Gets Easier
+*   **The First Few Attempts:** You might struggle with the **starter**. It could be sluggish, smell like vinegar, or fail to double in size. This is completely normal. Starters are living organisms; they need time to adapt to your environment.
+*   **The &quot;Soggy&quot; Factor:** Beginners often make bread that is dense, gummy, or lacks a crispy crust. This usually happens because the dough wasn&#x27;t developed enough (not kneaded or folded correctly</pre><p>JSON: <a href="https://mcczbdcymyhzfputyqcr.supabase.co/functions/v1/api/recipes/2kwfecch">https://mcczbdcymyhzfputyqcr.supabase.co/functions/v1/api/recipes/2kwfecch</a>. Dose units and the recipe format: <a href="/about">about</a>, <a href="/agents.md">agents.md</a>.</p></div></div><noscript><style>.boot{display:none}</style>
   <div class="pagewrap">
     <h1>neuronary</h1>
     <p>A public dictionary of neuron steering recipes for language models: small sets of MLP neurons, each with a dose,
