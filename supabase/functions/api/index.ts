@@ -307,6 +307,7 @@ const RCOLS = "id,model,layer,neuron,expert,name,block,source,author_handle,crea
 async function getNeuron(key: string, model?: string) {
   const [n] = parseNeurons(key);
   if (!n) throw new HttpError(400, `not a neuron id: ${key} (like L17N6555)`);
+  if (n.layer > 1000 || n.neuron > 10_000_000 || (n.expert != null && n.expert > 100_000)) throw new HttpError(400, `no such neuron: ${key}`);
   let q = sb.from("interpretations").select(ICOLS).eq("layer", n.layer).eq("neuron", n.neuron).eq("hidden", false);
   q = n.expert != null ? q.eq("expert", n.expert) : q.is("expert", null);
   if (model) q = q.ilike("model", model.includes("/") ? model : `%/${model}`);
