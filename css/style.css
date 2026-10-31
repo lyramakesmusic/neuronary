@@ -718,3 +718,72 @@ a.who:hover { text-decoration: underline; }
 .about .ethbox { font-size: 13px; }
 .about .ethbox p { margin: 3px 0; }
 .about .ethnote { font-size: 12px; font-style: italic; opacity: .7; }
+
+/* ---------------------------------------------------------------- confidence + neuron interpretations (atlas) */
+.aconf { display: inline-flex; align-items: center; gap: 5px; vertical-align: middle; margin-left: 6px; font-weight: 400; }
+.aconf .pips { display: inline-flex; gap: 2px; }
+.aconf .pips i { width: 8px; height: 5px; border-radius: 1px; background: var(--line); }
+.aconf .pips i.on { background: var(--ink); }
+.aconf .cv { font: 11.5px var(--mono); color: var(--dim); }
+.aconf.q .pips i.on { background: var(--bad); }
+.aconf.q .cv { color: var(--bad); }
+.card.q { border-color: color-mix(in srgb, var(--bad) 55%, var(--line)); }
+.card.q:hover { border-color: var(--bad); }
+.card .foot .aconf { margin-left: 0; }
+.rhead .desc .aconf { margin-left: 8px; }
+
+.atlas .interp { padding: 2px 0 14px; }
+.atlas .interp + .interp { border-top: 1px solid var(--raise); padding-top: 14px; }
+.atlas .itext { font-size: 16px; line-height: 1.45; font-weight: 500; }
+.atlas .iby { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; margin-top: 6px; font-size: 12.5px; }
+.atlas .unv { display: inline-flex; align-items: center; height: 18px; padding: 0 6px; border: 1px dashed var(--line2); border-radius: 3px; font-size: 11px; color: var(--dim); }
+.atlas .interp.q .unv { border-color: color-mix(in srgb, var(--bad) 60%, var(--line2)); color: var(--bad); }
+.atlas .anone { font-size: 13.5px; }
+
+.xfold { position: relative; margin-top: 14px; }
+.xfold .xbody { max-height: 300px; overflow: hidden; -webkit-mask-image: linear-gradient(to bottom, #000 62%, transparent); mask-image: linear-gradient(to bottom, #000 62%, transparent); }
+.xfold.open .xbody { max-height: none; -webkit-mask-image: none; mask-image: none; }
+.xmore { display: flex; align-items: center; justify-content: center; gap: 6px; width: 100%; margin-top: -20px; position: relative; padding: 6px 0; color: var(--link); font-size: 12.5px; }
+.xmore:hover { text-decoration: underline; }
+.xfold.open .xmore { margin-top: 4px; }
+.xfold.open .xmore svg { transform: rotate(180deg); }
+.xfold.short .xmore { display: none; }
+
+.xsec { margin-bottom: 16px; }
+.xh { font: 12.5px var(--mono); color: var(--dim); margin-bottom: 6px; }
+.xh .faint { font-family: var(--font); margin-left: 6px; font-size: 12px; }
+.xrow { display: grid; grid-template-columns: 16px minmax(0, 1fr); gap: 6px; align-items: start; margin-bottom: 3px; }
+.xs { font: 600 14px/22px var(--mono); text-align: center; }
+.xs.u { color: var(--up); } .xs.d { color: var(--down); } .xs.q { color: var(--dim); font-weight: 500; }
+.xr { display: flex; flex-wrap: wrap; gap: 3px; min-width: 0; }
+.xc { display: inline-flex; align-items: center; gap: 5px; height: 21px; padding: 0 6px; border-radius: 3px; font: 12px var(--mono); background: var(--raise); color: var(--ink); white-space: pre; max-width: 100%; overflow: hidden; }
+.xc.u { background: color-mix(in srgb, var(--up) 7%, var(--raise)); }
+.xc.d { background: color-mix(in srgb, var(--down) 6%, var(--raise)); }
+a.xc:hover { text-decoration: none; box-shadow: inset 0 0 0 1px var(--line2); }
+.xc.hd { color: var(--link); }
+.xc .cnt { color: var(--faint); font-size: 11px; }
+.xnone { font-size: 12px; line-height: 22px; }
+.xl { display: grid; grid-template-columns: minmax(0, 1fr) 130px 44px; gap: 10px; font-size: 12.5px; line-height: 20px; padding-left: 22px; }
+.xt { white-space: nowrap; overflow: hidden; }
+.xdom { color: var(--faint); font: 11.5px var(--mono); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.xv { text-align: right; color: var(--dim); font: 11.5px var(--mono); }
+.hotu { background: color-mix(in srgb, var(--up) calc(var(--heat, 1) * 60%), transparent); border-radius: 2px; }
+.hotd { background: color-mix(in srgb, var(--down) calc(var(--heat, 1) * 55%), transparent); border-radius: 2px; }
+.xl + .xrow { margin-top: 10px; }
+.xnh { font: 12px var(--mono); color: var(--dim); margin: 10px 0 4px; display: flex; align-items: center; gap: 7px; }
+.xnh:first-of-type { margin-top: 0; }
+.dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; flex: none; }
+.dot.u { background: var(--up); } .dot.d { background: var(--down); }
+.xstats { display: flex; flex-wrap: wrap; gap: 4px 16px; font-size: 12.5px; }
+.xtext { font-size: 13.5px; line-height: 1.5; white-space: pre-wrap; }
+.xraw { font-size: 11.5px; max-height: 240px; overflow: auto; background: var(--raise); padding: 8px 10px; border-radius: 4px; margin: 0; }
+@media (max-width: 720px) { .xl { grid-template-columns: minmax(0, 1fr) 44px; padding-left: 0; } .xdom { display: none; } }
+
+/* add interpretation form */
+.ianew { margin-top: 10px; }
+.ianew textarea { width: 100%; min-height: 64px; }
+.ianew .row { display: flex; align-items: center; gap: 10px; margin-top: 8px; flex-wrap: wrap; font-size: 13px; }
+.ianew select { padding: 5px 8px; }
+.natlas { padding: 18px 28px 0; max-width: 820px; }
+.natlas .atlas + .atlas { margin-top: 24px; }
+.ianewbtn { margin-top: 10px; }

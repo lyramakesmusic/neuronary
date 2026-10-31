@@ -1,10 +1,11 @@
-import { ABOUT_HTML } from "./about.js?v=20261028154902";
-import { createStore } from "./store.js?v=20261028154902";
-import { randomPrompt } from "./prompts.js?v=20261028154902";
+import { ABOUT_HTML } from "./about.js?v=20261031160000";
+import { createStore } from "./store.js?v=20261031160000";
+import { randomPrompt } from "./prompts.js?v=20261031160000";
+import { confHtml, interpHtml, wireFolds, QUESTIONABLE } from "./atlas.js?v=20261031160000";
 import {
   esc, doseStr, neuronKey, neuronStr, sortNeurons, recipeStr, recipeHtml, neuronHtml, edgeMark, setKey, parseRecipeStr, parseNeuronQuery,
   methodOf, DEFAULT_METHOD, samplingText, md, recipeFile, recipeJson, pythonSnippet, studioFile, fromStudio, slugify, ago, avatarHtml, copyText, download,
-} from "./format.js?v=20261028154902";
+} from "./format.js?v=20261031160000";
 
 const CFG = window.NEURONARY || {};
 const $ = (s, el = document) => el.querySelector(s);
@@ -147,13 +148,13 @@ const userHref = (h) => `/u/${encodeURIComponent(h)}`;
 const whoHtml = (h) => `<a class="who${isTrusted(h) ? " trusted" : ""}" href="${userHref(h)}"${isTrusted(h) ? ' title="trusted publisher"' : ""}>@${esc(h)}</a>`;
 
 function cardHtml(r, on) {
-  return `<article class="card" data-open="${esc(r.id)}">
+  return `<article class="card${r.confidence != null && r.confidence < QUESTIONABLE ? " q" : ""}" data-open="${esc(r.id)}">
     ${edgeMark(r.neurons, r.model)}
     <h3 class="name"><a class="cardlink" href="/r/${esc(r.id)}">${r.draft ? `<span class="draftbadge">draft</span>` : ""}${esc(r.name)}</a></h3>
     <div class="rid">${recipeHtml(r.neurons, 8)}</div>
     <div class="desc">${esc(r.description)}</div>
     <div class="tags">${r.tags.slice(0, 5).map((t) => `<span class="tag ${on.includes(t) ? "on" : ""}">${esc(t)}</span>`).join("")}</div>
-    <div class="foot">${votesHtml(r)}${[r.reproductions, r.repro_partial, r.repro_failed].every((n) => n > 0) ? "" /* all three tallies showing: the comment count makes room */ : `<span class="cmt">${I.bubble}${r.comments}</span>`}${reproHtml(r)}${whoHtml(r.author.handle)}</div>
+    <div class="foot">${votesHtml(r)}${confHtml(r.confidence)}${[r.reproductions, r.repro_partial, r.repro_failed].every((n) => n > 0) ? "" /* all three tallies showing: the comment count makes room */ : `<span class="cmt">${I.bubble}${r.comments}</span>`}${reproHtml(r)}${whoHtml(r.author.handle)}</div>
   </article>`;
 }
 
@@ -696,7 +697,22 @@ function renderNeuron(key) {
       <div class="idrow"><h1 class="rid">${k}</h1>${copyBtn(k, "copy neuron")}</div>
       <div class="meta">${uses.length} recipe${uses.length === 1 ? "" : "s"}${range ? ` &nbsp;·&nbsp; doses <span class="mono">${range}</span>` : ""}${models.length ? ` &nbsp;·&nbsp; <span class="mono">${models.map(esc).join(", ")}</span>` : ""}</div>
     </div>
-    ${uses.length ? `<div class="grid">${uses.map((r) => cardHtml(r, [])).join("")}</div>` : `<div class="empty">No recipes use ${k} yet.</div>`}`;
+    <div class="natlas" data-natlas></div>
+    ${uses.length ? `<div class="sechead feathead"><h2>Recipes</h2></div><div class="grid">${uses.map((r) => cardHtml(r, [])).join("")}</div>` : `<div class="empty">No recipes use ${k} yet.</div>`}`;
+  neuronAtlas(q, models);
+}
+
+// interpretations of this neuron id, one section per model (from recipes that use it, or interpretations posted for it)
+async function neuronAtlas(q, models) {
+  const box = $("[data-natlas]");
+  if (!box || store.mode !== "supabase") return;
+  let all = [];
+  try { all = await store.interpretations({ model: null, layer: q.layer, neuron: q.neuron, expert: q.expert ?? null }); } catch { /* shown per model below */ }
+  const ms = [...new Set([...all.map((x) => x.model), ...models])];
+  if (!ms.length) return;
+  box.innerHTML = ms.map((m, i) => `<section class="atlas" data-atlas data-m="${i}">
+      <div class="sechead"><h2>Neuron</h2><span class="faint mono">${esc(m)}</span></div><div data-atlasbody><div class="dim">…</div></div></section>`).join("");
+  ms.forEach((m, i) => renderAtlas($(`[data-atlas][data-m="${i}"]`, box), m, q));
 }
 
 // ------------------------------------------------------------------ profile (/u/<handle>)
@@ -963,7 +979,7 @@ function recipeHtmlBlock(r, { modal }) {
           ${studio ? `<button class="btn ibtn" data-act="studio" title="download a file Neuron Studio can import">${I.download}<span>Studio</span></button>` : ""}
         </div>
       </div>
-      <div class="desc">${esc(r.description)}</div>
+      <div class="desc">${esc(r.description)}${confHtml(r.confidence)}</div>
       <div class="tags">${tagsHtml(r.tags)}</div>
     </div>
     <div class="rbody">
@@ -972,6 +988,10 @@ function recipeHtmlBlock(r, { modal }) {
           ${hasBase ? `<span class="seg" data-exmode><button class="on" data-m="s">steered</button><button data-m="b">vs base</button></span>` : ""}</div>
         ${examples || `<div class="faint">—</div>`}
       </section>
+      ${r.neurons.length === 1 && store.mode === "supabase" ? `<section class="atlas" data-atlas>
+        <div class="sechead"><h2>Neuron</h2><a class="faint mono" href="/n/${neuronKey(r.neurons[0])}">${neuronKey(r.neurons[0])}</a></div>
+        <div data-atlasbody><div class="dim">…</div></div>
+      </section>` : ""}
       <section>
         <div class="sechead"><h2>Reproductions</h2><span data-rcount>${reproHtml(r) || `<span class="faint mono">0</span>`}</span></div>
         <div data-repros><div class="dim">…</div></div>
@@ -1116,6 +1136,47 @@ function wireRecipe(root, r) {
   }));
   renderComments(root, r);
   renderRepros(root, r);
+  if (r.neurons.length === 1) renderAtlas($("[data-atlas]", root), r.model, r.neurons[0]);
+}
+
+// ------------------------------------------------------------------ neuron interpretations (atlas)
+// what people think one neuron does, with the readouts they attach; on single-neuron recipes and neuron pages
+async function renderAtlas(box, model, n) {
+  if (!box || store.mode !== "supabase") return;
+  const body = $("[data-atlasbody]", box);
+  let list = [];
+  try { list = await store.interpretations({ model, layer: n.layer, neuron: n.neuron, expert: n.expert ?? null }); }
+  catch (e) { body.innerHTML = `<div class="err">${esc(e.message)}</div>`; return; }
+  const u = store.user();
+  const mine = u && list.find((x) => x.user_id === u.id);
+  body.innerHTML = (list.length ? list.map((it) => interpHtml(it, { mine: u && it.user_id === u.id, admin: u && u.admin })).join("")
+    : `<div class="anone dim">Nobody has interpreted ${neuronKey(n)} yet.</div>`)
+    + `<button class="btn sbtn ianewbtn" data-ianew>${mine ? "Edit your interpretation" : "Add interpretation"}</button><div data-ianewbox></div>`;
+  wireFolds(body);
+  $$("[data-idel]", body).forEach((b) => (b.onclick = async () => {
+    if (!confirm("Delete this interpretation?")) return;
+    try { await store.deleteInterpretation(+b.dataset.idel); renderAtlas(box, model, n); } catch (e) { flashError(e); }
+  }));
+  $("[data-ianew]", body).onclick = () => {
+    if (!signedIn()) return signInPrompt("add an interpretation", () => renderAtlas(box, model, n));
+    const fb = $("[data-ianewbox]", body);
+    const levels = [["", "no confidence given"], ["0.1", "0.1 · a guess"], ["0.3", "0.3"], ["0.5", "0.5"], ["0.7", "0.7"], ["0.9", "0.9 · sure"]];
+    fb.innerHTML = `<div class="ianew">
+      <textarea data-itext maxlength="1000" placeholder="(+) what the + pole does; (−) what the − pole does">${esc(mine ? mine.text : "")}</textarea>
+      <div class="row"><label>confidence <select data-iconf>${levels.map(([v, l]) => `<option value="${v}"${mine && mine.confidence != null && Math.abs(mine.confidence - +v) < 0.051 && v ? " selected" : ""}>${l}</option>`).join("")}</select></label>
+        <span class="faint">readouts (lens, firings, net, heads) come in through the API</span>
+        <button class="btn sbtn primary" data-isave>Post</button><button class="linkbtn dim" data-icancel>cancel</button></div></div>`;
+    $("[data-icancel]", fb).onclick = () => (fb.innerHTML = "");
+    $("[data-isave]", fb).onclick = async () => {
+      const text = $("[data-itext]", fb).value.trim(), c = $("[data-iconf]", fb).value;
+      if (!text) return;
+      try {
+        await store.postInterpretation({ model, layer: n.layer, neuron: n.neuron, expert: n.expert ?? null, text,
+          confidence: c === "" ? null : +c, fields: mine ? mine.fields : [], source: mine ? mine.source : null, method: mine ? mine.method : null });
+        renderAtlas(box, model, n);
+      } catch (e) { flashError(e); }
+    };
+  };
 }
 
 function flashBtn(b) {
@@ -1491,7 +1552,7 @@ $("#theme").onclick = () => {
 
 // ------------------------------------------------------------------ submit
 const DRAFT_KEY = "nr.draft";
-const emptyDraft = () => ({ name: "", description: "", model: "Qwen/Qwen3.5-4B", tags: [], neurons: [{ layer: "", neuron: "", dose: "" }],
+const emptyDraft = () => ({ name: "", description: "", confidence: "", model: "Qwen/Qwen3.5-4B", tags: [], neurons: [{ layer: "", neuron: "", dose: "" }],
   op: "add", rep: "", temp: "", examples: [{ prompt: "", output: "", base_output: "" }], source: "", notes: "", curve_metric: "", curve: "" });
 
 // "0:0, 0.5:13, 0.8:20" -> [{dose, value}]; null if anything doesn't parse
@@ -1514,7 +1575,7 @@ function loadDraft() {
 function recipeToDraft(r) {
   const s = r.sampling || {};
   return {
-    name: r.name, description: r.description, model: r.model, tags: [...r.tags],
+    name: r.name, description: r.description, confidence: r.confidence == null ? "" : String(r.confidence), model: r.model, tags: [...r.tags],
     neurons: sortNeurons(r.neurons).map((n) => ({ layer: String(n.layer), neuron: String(n.neuron), dose: String(n.dose), ...(n.expert != null ? { expert: String(n.expert) } : {}) })),
     op: (r.method && r.method.op) || "add", rep: s.repetition_penalty ?? "", temp: s.temperature ?? "",
     examples: (r.examples && r.examples.length ? r.examples : [{ prompt: "", output: "" }]).map((e) => ({ prompt: e.prompt || "", output: e.output || "", base_output: e.base_output || "" })),
@@ -1590,6 +1651,7 @@ function draftToRecipe(d, id) {
   if (Object.keys(sampling).length) r.sampling = sampling;
   if (d.source.trim()) r.source = d.source.trim();
   if (d.notes.trim()) r.notes = d.notes.trim();
+  if (d.confidence !== undefined && String(d.confidence) !== "") r.confidence = Number(d.confidence);
   const pts = (d.curve || "").trim() ? parseCurve(d.curve) : null;
   if (pts && (d.curve_metric || "").trim()) r.dose_curve = { metric: d.curve_metric.trim(), points: pts };
   return r;
@@ -1693,6 +1755,9 @@ function renderSubmit() {
       ${!editing && store.mode === "supabase" && !signedIn() ? `<div class="signnote"><span>Sign in to publish. Your draft is kept while you do.</span><button class="btn sbtn" data-signin-top>Sign in</button></div>` : ""}
       <label class="f" data-f="name"><span>name</span><input data-k="name" value="${esc(d.name)}" maxlength="80"></label>
       <label class="f" data-f="description"><span>description</span><textarea data-k="description" maxlength="600">${esc(d.description)}</textarea></label>
+      <label class="f" data-f="confidence"><span>confidence <span class="faint">optional: how sure you are it does what the description says</span></span>
+        <select data-k="confidence">${[["", "not given"], ["0.1", "0.1 · a hunch (shows as questionable)"], ["0.3", "0.3 · sometimes"], ["0.5", "0.5 · often"], ["0.7", "0.7 · usually"], ["0.9", "0.9 · reliably"], ["1", "1 · every time"]]
+          .map(([v, l]) => `<option value="${v}"${String(d.confidence ?? "") === v || (v && d.confidence !== "" && Math.abs(+d.confidence - +v) < 0.051) ? " selected" : ""}>${l}</option>`).join("")}</select></label>
       <div class="f" data-f="tags"><span id="lab-tags">tags</span><div class="tagin" data-tagin><span class="chips" data-chips></span>
         <input data-tagtext aria-labelledby="lab-tags" placeholder="persona, style, …" autocomplete="off"><div class="suggest" data-tagsug hidden></div></div></div>
       <label class="f" data-f="model"><span>model</span><input data-k="model" value="${esc(d.model)}" list="models" spellcheck="false" class="mono">

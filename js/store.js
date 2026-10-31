@@ -111,6 +111,8 @@ class LocalStore {
 
   async comments(id) { return LS.get("nr.comments", {})[id] || []; }
 
+  async interpretations() { return []; }
+
   async comment(id, body, parentId = null) {
     const u = this.user();
     if (!u) throw new Error("sign in to comment");
@@ -143,7 +145,7 @@ class LocalStore {
 // ---------------------------------------------------------------- supabase
 // The database holds every recipe (repo ones are synced in by scripts/sync_repo.py). Sign-in is X (OAuth) or an
 // anonymous session plus a handle; anonymous users can link X later and keep everything.
-const SUMMARY = "id,name,description,model,neurons,method,sampling,tags,aliases,author_handle,author_url,source,date,created_at,user_id,origin,hidden,dose_curve,featured,draft,search_text";
+const SUMMARY = "id,name,description,model,neurons,method,sampling,tags,aliases,author_handle,author_url,source,date,created_at,user_id,origin,hidden,dose_curve,featured,draft,search_text,confidence";
 
 class SupabaseStore {
   mode = "supabase";
@@ -371,6 +373,7 @@ class SupabaseStore {
       method: recipe.method || null, sampling: recipe.sampling || null, conditional: recipe.conditional || null,
       tags: recipe.tags, examples: recipe.examples, aliases: recipe.aliases || [], source: recipe.source || null,
       notes: recipe.notes || null, dose_curve: recipe.dose_curve || null,
+      confidence: recipe.confidence == null || recipe.confidence === "" ? null : Number(recipe.confidence),
     };
   }
 
@@ -409,6 +412,29 @@ class SupabaseStore {
 
   async setFeatured(id, featured) {
     const { error } = await this.sb.from("recipes").update({ featured }).eq("id", id);
+    if (error) throw new Error(error.message);
+  }
+
+  // interpretations: what people think one neuron does (text, confidence, readout fields); newest-confident first
+  async interpretations({ model, layer, neuron, expert = null }) {
+    let q = this.sb.from("interpretations").select("id,model,layer,neuron,expert,text,confidence,fields,source,method,author_handle,user_id,created_at,updated_at,hidden")
+      .eq("layer", layer).eq("neuron", neuron);
+    q = expert == null ? q.is("expert", null) : q.eq("expert", expert);
+    if (model) q = q.eq("model", model);
+    const { data, error } = await q.order("confidence", { ascending: false, nullsFirst: false }).limit(200);
+    if (error) throw error;
+    return data || [];
+  }
+
+  async postInterpretation(item) {
+    this._need();
+    const { data, error } = await this.sb.rpc("post_interpretations", { items: [item] });
+    if (error) throw new Error(error.message);
+    return data;
+  }
+
+  async deleteInterpretation(id) {
+    const { error } = await this.sb.from("interpretations").delete().eq("id", id);
     if (error) throw new Error(error.message);
   }
 

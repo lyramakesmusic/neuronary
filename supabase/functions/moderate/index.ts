@@ -10,6 +10,7 @@ const sb = createClient(Deno.env.get("SUPABASE_URL")!, Deno.env.get("SUPABASE_SE
 function describe(kind: string, row: Record<string, unknown>): string {
   if (kind === "comment") return `New comment:\n\n${row.body}`;
   if (kind === "profile") return `New username (picked by an account without a linked X profile):\n\n${row.handle}`;
+  if (kind === "interpretation") return `New neuron interpretation (what someone thinks one neuron of ${row.model} does):\n\n${row.text}\nsource: ${row.source ?? ""}\nmethod: ${row.method ?? ""}`;
   if (kind === "reproduction") return `New reproduction report (someone's own run of a recipe):\n\nresult: ${row.result ?? ""}\nsetup: ${row.setup ?? ""}\nprompt: ${row.prompt ?? ""}\noutput: ${row.output}\nnote: ${row.note ?? ""}`;
   const ex = ((row.examples as Array<Record<string, string>>) ?? [])
     .map((e, i) => `example ${i + 1} prompt: ${e.prompt}\nexample ${i + 1} output: ${e.output}` + (e.base_output ? `\nexample ${i + 1} unsteered output: ${e.base_output}` : "")).join("\n");
@@ -43,7 +44,7 @@ Deno.serve(async (req) => {
     return new Response("forbidden", { status: 403 });
   }
   const { kind, id } = await req.json();
-  const table = ({ comment: "comments", reproduction: "reproductions", profile: "profiles" } as Record<string, string>)[kind] ?? "recipes";
+  const table = ({ comment: "comments", reproduction: "reproductions", profile: "profiles", interpretation: "interpretations" } as Record<string, string>)[kind] ?? "recipes";
   const { data: row, error } = await sb.from(table).select("*").eq("id", id).maybeSingle();
   if (error || !row) return new Response("gone", { status: 200 });
 

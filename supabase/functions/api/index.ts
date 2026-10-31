@@ -9,6 +9,9 @@
 //     POST   /recipes/:id/reproductions {output, prompt?, note?}                  "reproduced it" with your sample (token)
 //     POST   /recipes/:id/vote       {value: -1|0|1}                              vote (token)
 //     GET    /me                                                                  who the token belongs to (token)
+//     GET    /neurons/:id?model=      interpretations of one neuron (L17N6555) and the recipes using it (public)
+//     POST   /interpretations         {model, unit|layer+neuron, text, confidence?, fields?, source?, method?} or {items: [...]} (token)
+//     DELETE /interpretations/:id     delete your own (token)
 //   MCP   POST /mcp   (Streamable HTTP, JSON responses; same operations as tools)
 //
 // Auth: "Authorization: Bearer nry_..." (a personal token from the site's "API & agents" page).
@@ -60,7 +63,7 @@ function parseNeurons(s: string): Neuron[] {
   return out;
 }
 
-const SUMMARY = "id,name,description,model,neurons,method,sampling,tags,author_handle,author_url,source,date,created_at,origin,dose_curve,featured";
+const SUMMARY = "id,name,description,model,neurons,method,sampling,tags,author_handle,author_url,source,date,created_at,origin,dose_curve,featured,confidence";
 function shape(r: Record<string, any>, stats: Record<string, any> | undefined, full = false) {
   const o: Record<string, unknown> = {
     id: r.id, url: `${SITE}/r/${r.id}`, name: r.name, recipe: recipeStr(r.neurons), description: r.description,
@@ -69,6 +72,7 @@ function shape(r: Record<string, any>, stats: Record<string, any> | undefined, f
     reproductions_partial: stats?.repro_partial ?? 0, reproductions_failed: stats?.repro_failed ?? 0,
   };
   if (r.featured) o.featured = true;
+  if (r.confidence != null) o.confidence = r.confidence;
   if (r.dose_curve) o.dose_curve = r.dose_curve;
   if (r.method) o.method = r.method;
   if (r.sampling) o.sampling = r.sampling;
@@ -134,7 +138,7 @@ async function getRecipe(id: string) {
   return shape(r, st ?? undefined, true);
 }
 
-const FIELDS = ["name", "description", "model", "neurons", "method", "sampling", "conditional", "tags", "examples", "aliases", "source", "notes", "dose_curve"];
+const FIELDS = ["name", "description", "model", "neurons", "method", "sampling", "conditional", "tags", "examples", "aliases", "source", "notes", "dose_curve", "confidence"];
 function pick(body: Record<string, any>, partial: boolean) {
   const o: Record<string, unknown> = {};
   for (const k of FIELDS) if (body[k] !== undefined) o[k] = body[k];
@@ -147,6 +151,7 @@ function pick(body: Record<string, any>, partial: boolean) {
     if (!Array.isArray(o.examples) || !(o.examples as unknown[]).length) throw new HttpError(400, "add at least one example: {prompt, output}");
   }
   if (o.neurons && (o.neurons as Neuron[]).some((n) => !Number.isFinite(n.dose))) throw new HttpError(400, "every neuron needs a dose, e.g. L14N8949+1.0");
+  if (o.confidence !== undefined && o.confidence !== null && !(typeof o.confidence === "number" && o.confidence >= 0 && o.confidence <= 1)) throw new HttpError(400, "confidence is a number from 0 to 1 (or null)");
   // drafts: {"draft": true} on publish keeps it private to you; PATCH {"draft": false} publishes it
   if (body.draft !== undefined) {
     if (typeof body.draft !== "boolean") throw new HttpError(400, "draft is true or false");
@@ -238,8 +243,70 @@ async function vote(u: User, id: string, value: number) {
   return { id, your_vote: value, score: st?.score ?? 0 };
 }
 
+// ---------------------------------------------------------------- neuron interpretations (the atlas)
+// what someone thinks one neuron does, with a confidence and typed readout blocks (see AGENTS.md: "Interpretations")
+const FIELD_TYPES = ["tokens", "contexts", "units", "heads", "stats", "text"];
+function interpItem(x: Record<string, any>) {
+  let { model, layer, neuron, expert } = x;
+  if (typeof x.unit === "string" || (typeof neuron === "string" && /L/i.test(neuron))) { // "L17N6555" / "L12E3N44"
+    const [n] = parseNeurons(String(x.unit ?? neuron));
+    if (!n) throw new HttpError(400, `can't read neuron id ${x.unit ?? neuron}`);
+    ({ layer, neuron } = n); if (n.expert != null) expert = n.expert;
+  }
+  if (typeof model !== "string" || !model.includes("/")) throw new HttpError(400, "model must be a Hugging Face id like Qwen/Qwen3.5-4B");
+  if (!Number.isInteger(layer) || !Number.isInteger(neuron)) throw new HttpError(400, "layer and neuron must be whole numbers (or give unit: 'L17N6555')");
+  if (typeof x.text !== "string" || !x.text.trim()) throw new HttpError(400, "text: the interpretation, e.g. '(+) ascribes a measured attribute; (−) copula predication'");
+  if (x.confidence != null && !(typeof x.confidence === "number" && x.confidence >= 0 && x.confidence <= 1)) throw new HttpError(400, "confidence is a number from 0 to 1");
+  const fields = x.fields ?? [];
+  if (!Array.isArray(fields) || fields.some((f: any) => !f || typeof f !== "object" || typeof f.type !== "string")) throw new HttpError(400, "fields must be a list of {type, name, ...} blocks");
+  for (const f of fields) if (!FIELD_TYPES.includes(f.type)) throw new HttpError(400, `unknown field type ${f.type}; use one of ${FIELD_TYPES.join(", ")}`);
+  return { model, layer, neuron, expert: expert ?? null, text: x.text, confidence: x.confidence ?? null, fields, source: x.source ?? null, method: x.method ?? null };
+}
+
+async function postInterpretations(u: User, body: Record<string, any>) {
+  const me = need(u);
+  const items = (Array.isArray(body.items) ? body.items : [body]).map(interpItem);
+  if (items.length > 1000) throw new HttpError(400, "at most 1000 per call");
+  const { data, error } = await sb.rpc("post_interpretations", { items, as_user: me.id });
+  if (error) throw new HttpError(/^rate limit/.test(error.message) ? 429 : 400, error.message);
+  return data;
+}
+
+const ICOLS = "id,model,layer,neuron,expert,text,confidence,fields,source,method,author_handle,created_at,updated_at";
+async function getNeuron(key: string, model?: string) {
+  const [n] = parseNeurons(key);
+  if (!n) throw new HttpError(400, `not a neuron id: ${key} (like L17N6555)`);
+  let q = sb.from("interpretations").select(ICOLS).eq("layer", n.layer).eq("neuron", n.neuron).eq("hidden", false);
+  q = n.expert != null ? q.eq("expert", n.expert) : q.is("expert", null);
+  if (model) q = q.ilike("model", model.includes("/") ? model : `%/${model}`);
+  const { data, error } = await q.order("confidence", { ascending: false, nullsFirst: false }).limit(200);
+  if (error) throw new HttpError(500, error.message);
+  const recipes = await search({ neuron: key, model, limit: 100 });
+  return { neuron: nkey(n as Neuron), interpretations: data ?? [], recipes: recipes.recipes };
+}
+
+async function deleteInterpretation(u: User, id: string) {
+  const me = need(u);
+  const { data: r } = await sb.from("interpretations").select("id,user_id").eq("id", id).maybeSingle();
+  if (!r) throw new HttpError(404, `no interpretation ${id}`);
+  const { data: p } = await sb.from("profiles").select("is_admin").eq("id", me.id).maybeSingle();
+  if (r.user_id !== me.id && !p?.is_admin) throw new HttpError(403, "you can only delete your own");
+  const { error } = await sb.from("interpretations").delete().eq("id", id);
+  if (error) throw new HttpError(400, error.message);
+  return { id: Number(id), deleted: true };
+}
+
 // ---------------------------------------------------------------- MCP
 const TOOLS = [
+  { name: "get_neuron", description: "Everything neuronary has on one neuron: interpretations (text, confidence, readout fields like lens reads, top firings, net, heads) and the recipes that use it.",
+    inputSchema: { type: "object", properties: { neuron: { type: "string", description: "e.g. L17N6555" }, model: { type: "string", description: "e.g. Qwen/Qwen3.5-4B; omit for every model" } }, required: ["neuron"] } },
+  { name: "publish_interpretation", description: "Post what a neuron does, as the token's owner: text in the form '(+) ...; (−) ...' covering both poles, a confidence 0-1, and optional readout fields. One per neuron per model per author; posting again replaces yours. For many neurons pass items (up to 1000 per call). Field blocks: tokens {type, name, rows: {'+': [tok or [tok, value]], '-': [...]}}; contexts {type, name, tags?: {'+': [[domain, score]]}, rows: {'+': [{text with ⟦hot tokens⟧, tag?, value?}]}}; units {type, name, groups: [{label, sign: '+'|'-', note?, items: [[label, count]]}]}; heads {type, name, rows: {q|k|v|o: [[label, score]]}}; stats {type, name, items: [[label, value]]}; text {type, name, text}.",
+    inputSchema: { type: "object", properties: {
+      model: { type: "string" }, unit: { type: "string", description: "neuron id, e.g. L17N6555 (or give layer + neuron)" },
+      layer: { type: "integer" }, neuron: { type: "integer" }, expert: { type: "integer" },
+      text: { type: "string" }, confidence: { type: "number", minimum: 0, maximum: 1 },
+      fields: { type: "array", items: { type: "object" } }, source: { type: "string" }, method: { type: "string" },
+      items: { type: "array", items: { type: "object" }, description: "batch: a list of the same objects" } } } },
   { name: "search_recipes", description: "Search neuronary for neuron steering recipes. Free text matches names, descriptions, tags, authors and models; neuron ids like L14N8949 match recipes using that neuron.",
     inputSchema: { type: "object", properties: {
       q: { type: "string", description: "free text and/or neuron ids, e.g. 'evil' or 'L14N8949'" },
@@ -260,12 +327,13 @@ const TOOLS = [
       method: { type: "object", description: "omit for the default (add, all tokens)" },
       source: { type: "string" }, notes: { type: "string" },
       dose_curve: { type: "object", description: "optional measured dose response: {metric: 'meows per answer', points: [{dose: 0, value: 0}, {dose: 0.5, value: 13}, ...]}" },
+      confidence: { type: "number", minimum: 0, maximum: 1, description: "how sure you are it does what the description says (0-1); under 0.3 shows as questionable" },
       draft: { type: "boolean", description: "true: save privately (only you see it); publish later with update_recipe {draft: false}" } },
       required: ["name", "description", "model", "tags", "examples"] } },
   { name: "update_recipe", description: "Edit one of your own recipes, e.g. to add examples. Only the fields you pass change; examples replaces the whole list.",
     inputSchema: { type: "object", properties: { id: { type: "string" }, name: { type: "string" }, description: { type: "string" },
       tags: { type: "array", items: { type: "string" } }, examples: { type: "array", items: { type: "object" } }, sampling: { type: "object" }, notes: { type: "string" },
-      dose_curve: { type: "object" }, draft: { type: "boolean", description: "false publishes a draft" } }, required: ["id"] } },
+      dose_curve: { type: "object" }, confidence: { type: "number", minimum: 0, maximum: 1 }, draft: { type: "boolean", description: "false publishes a draft" } }, required: ["id"] } },
   { name: "comment", description: "Comment on a recipe (optionally replying to a top-level comment).",
     inputSchema: { type: "object", properties: { id: { type: "string" }, body: { type: "string" }, parent_id: { type: "integer" } }, required: ["id", "body"] } },
   { name: "report_reproduction", description: "Report your own run of someone else's recipe: whether it reproduced (yes / partial / no), the steered output you got, the prompt and your setup. Shown on the recipe and counted. One per recipe per user; sending again replaces yours.",
@@ -285,6 +353,8 @@ async function callTool(u: User, name: string, a: Record<string, any>) {
     case "comment": return comment(u, String(a.id), a);
     case "vote": return vote(u, String(a.id), Number(a.value));
     case "report_reproduction": return reproduce(u, String(a.id), a);
+    case "get_neuron": return getNeuron(String(a.neuron), a.model);
+    case "publish_interpretation": return postInterpretations(u, a);
     default: throw new HttpError(404, `unknown tool ${name}`);
   }
 }
@@ -344,6 +414,9 @@ Deno.serve(async (req) => {
     } else if ((m = path.match(/^\/recipes\/([a-z0-9-]+)\/comments$/)) && req.method === "POST") result = await comment(u, m[1], body);
     else if ((m = path.match(/^\/recipes\/([a-z0-9-]+)\/reproductions$/)) && req.method === "POST") result = await reproduce(u, m[1], body);
     else if ((m = path.match(/^\/recipes\/([a-z0-9-]+)\/vote$/)) && req.method === "POST") result = await vote(u, m[1], Number(body.value));
+    else if ((m = path.match(/^\/neurons\/([A-Za-z0-9]+)$/)) && req.method === "GET") result = await getNeuron(m[1], url.searchParams.get("model") ?? undefined);
+    else if (path === "/interpretations" && req.method === "POST") result = await postInterpretations(u, body);
+    else if ((m = path.match(/^\/interpretations\/(\d+)$/)) && req.method === "DELETE") result = await deleteInterpretation(u, m[1]);
     else throw new HttpError(404, "not found; see https://neuronary.org/about");
     return Response.json(result, { headers: { ...CORS, ...cache } });
   } catch (e) {

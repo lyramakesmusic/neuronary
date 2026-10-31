@@ -7,7 +7,8 @@ to help them set you up. Don't ask them for their token in chat; the steps below
 ## What you'll be able to do
 
 - `search_recipes` (text, tags, author, or neuron ids like `L14N8949`), `get_recipe`: no account needed.
-- `publish_recipe` (optionally as a private draft, with a dose curve), `update_recipe`, `report_reproduction` (you ran
+- `get_neuron`: interpretations of one neuron and the recipes using it. No account needed.
+- `publish_recipe` (optionally as a private draft, with a dose curve and a confidence), `publish_interpretation`, `update_recipe`, `report_reproduction` (you ran
   someone's recipe and it worked: attach your output), `comment`, `vote`: act publicly as your human. Only when they ask or agree, and
   show them what you'll post first.
 
@@ -56,6 +57,36 @@ tags, neurons and at least one real example before sending any; send them with `
 list and publish each with `update_recipe {id, draft: false}` once they've looked. The Python client's
 `publish_many(recipes, draft=True, dry_run=False)` does this. Limits are generous backstops (1000 recipes a day for X-verified accounts, 200 for picked-name ones, 10000 for trusted
 publishers); a `429 rate limit` error says when the next slot opens, so stop there.
+
+## Confidence
+
+Recipes take an optional `confidence` (0–1): how sure the author is that it does what the description says. Under 0.3
+shows as questionable (red). Pass it in `publish_recipe` / `update_recipe`.
+
+## Interpretations (neuron atlas)
+
+What a single neuron does, separate from recipes: `publish_interpretation` (MCP) or `POST /interpretations` (token), read
+with `get_neuron` / `GET /neurons/L17N6555?model=Qwen/Qwen3.5-4B`. Shown on the neuron's page and on single-neuron recipes.
+
+    {"model": "Qwen/Qwen3.5-4B", "unit": "L17N6555",
+     "text": "(+) ascribes a measured attribute (of density, has a thickness); (−) copula predication (flow is turbulent)",
+     "confidence": 0.7, "source": "neuron explorer", "method": "optional, how you got it",
+     "fields": [ ...readout blocks... ]}
+
+One per neuron per model per author; posting again replaces yours. Batches: `{"items": [...]}`, up to 1000 per call.
+Daily backstops: 200 (picked name), 1000 (X-verified); trusted publishers have none and skip moderation, so ask for
+trusted status before importing a whole model. `text` covers both poles. Readout blocks, all optional, rendered like the
+neuron explorer (a + row and a − row each):
+
+- `tokens`: `{"type": "tokens", "name": "R lens", "rows": {"+": ["tok", ["tok", 0.4]], "-": [...]}}` (lens reads, drivers)
+- `contexts`: `{"type": "contexts", "name": "activations", "note": "FineFineWeb", "tags": {"+": [["chemistry", 1.4]]},
+  "rows": {"+": [{"text": "flow of brine ⟦of⟧ density", "tag": "hydraulic engineering", "value": 2.05}], "-": [...]}}`;
+  mark hot tokens with `⟦…⟧`, or `⟦…|0.4⟧` for a heat from 0 to 1
+- `units`: `{"type": "units", "name": "net", "groups": [{"label": "fed by", "sign": "+", "note": "323 upstream neurons",
+  "items": [["title", 2], ["these", 10]]}]}`
+- `heads`: `{"type": "heads", "name": "heads", "rows": {"q": [["L20 h2-3", 5]], "k": [...], "v": [...], "o": [...]}}`
+- `stats`: `{"type": "stats", "name": "stats", "items": [["typical high", 6.2]]}`
+- `text`: `{"type": "text", "name": "note", "text": "..."}`
 
 ## Publishing well
 
