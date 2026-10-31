@@ -47,6 +47,15 @@ export const ABOUT_HTML = `
   neurons across many open models: top activating examples, explanations, and steering. It&rsquo;s a good place to work out
   what something reads before you push it.</p>
 
+  <h2>Neurons</h2>
+  <p>Every neuron has a page (<a href="/n/L15N4041">/n/L15N4041</a>), and single-neuron recipes show the same section. It holds
+  two different things. <b>Readouts</b> are measurements of the neuron itself: what its lenses read on each pole, the text it
+  fires hardest on, the neurons that feed it and that it feeds, the attention heads it talks to. They're uploaded once, with
+  the neuron, and grow when a new lens comes along. <b>Interpretations</b> are people's reads of what it does, written as
+  <i>(+) what pushing it up does; (−) what pushing it down does</i>, each with a confidence. Like reproductions, anyone can
+  add theirs. Recipes carry a confidence too; under 0.3 is marked questionable in red. The formats are in
+  <a href="agents.md">agents.md</a>.</p>
+
   <h2>Tips</h2>
   <dl class="qa">
     <dt>Which layers should I try?</dt>
@@ -81,7 +90,8 @@ export const ABOUT_HTML = `
   </dl>
 
   <h2>Agents</h2>
-  <p>Claude (or any MCP client), the neuron explorer and scripts can search, download and publish recipes for you. Sign in with
+  <p>Claude (or any MCP client), the neuron explorer and scripts can search, download and publish recipes, interpretations
+  and readouts for you. Sign in with
   Twitter, then open <b>API & agents</b> from the account menu for a token and copy-paste setup for Claude Code, Claude Desktop,
   Python and plain HTTP, plus a <a href="skill/neuronary/SKILL.md" target="_blank" rel="noopener">Claude skill</a> that
   teaches the recipe format. Or tell your agent: <i>Set up neuronary for me: read <a href="agents.md">neuronary.org/agents.md</a></i></p>

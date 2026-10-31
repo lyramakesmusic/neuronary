@@ -69,15 +69,19 @@ Signed-in (Twitter-verified) users create personal tokens under **API & agents**
 
 - **MCP** (Claude Code, Claude Desktop, any MCP client): `https://mcczbdcymyhzfputyqcr.supabase.co/functions/v1/api/mcp`,
   header `Authorization: Bearer nry_...`. Tools: `search_recipes`, `get_recipe`, `publish_recipe`, `update_recipe`,
-  `comment`, `vote`.
+  `report_reproduction`, `comment`, `vote`, `get_neuron`, `publish_interpretation`, `publish_readouts`.
 - **HTTP**: same base without `/mcp`: `GET /recipes`, `GET /recipes/:id`, `POST /recipes`, `PATCH /recipes/:id`,
-  `POST /recipes/:id/comments`, `POST /recipes/:id/vote`, `GET /me`. Reads need no token.
+  `POST /recipes/:id/comments`, `POST /recipes/:id/reproductions`, `POST /recipes/:id/vote`, `GET /neurons/:id`,
+  `POST /interpretations`, `DELETE /interpretations/:id`, `POST /readouts`, `GET /me`. Reads need no token.
+- **Neurons**: readouts (named measurement blocks, uploaded once per neuron and added to later) and interpretations
+  (anyone's "(+) …; (−) …" with a confidence, like reproductions). Formats in [AGENTS.md](AGENTS.md).
 - **Python**: `clients/neuronary.py` (stdlib only) wraps the API and exports `TOOLS` (JSON-schema tool definitions) plus
   `Neuronary.call(name, args)`, for giving an agent such as the neuron explorer's search/download/upload tools.
 - **Skill**: `skill/neuronary/SKILL.md` teaches Claude the recipe format, dose units and tools.
 
 Everything posted through the API goes through the same constraints, rate limits and jev moderation as the site.
-Tests: `dev/api_test.py` (tokens, REST, MCP) and `dev/mcp_claude_test.sh` (a real Claude Code against the MCP server).
+Tests: `dev/api_test.py` (tokens, REST, MCP), `dev/atlas_test.py` (interpretations, readouts, confidence) and
+`dev/mcp_claude_test.sh` (a real Claude Code against the MCP server).
 
 ## Moderation
 

@@ -91,6 +91,18 @@ class Neuronary:
         """say you reproduced someone else's recipe, with the steered output you got"""
         return self._req("POST", f"/recipes/{recipe_id}/reproductions", {"output": output, "prompt": prompt, "note": note})
 
+    def neuron(self, neuron, model=None):
+        """one neuron's interpretations, readouts and recipes; neuron like 'L17N6555'"""
+        return self._req("GET", f"/neurons/{neuron}", params={"model": model} if model else None)
+
+    def interpret(self, model, unit, text, confidence=None, method=None):
+        """your read of a neuron, like a reproduction: text '(+) ...; (-) ...', confidence 0-1"""
+        return self._req("POST", "/interpretations", {"model": model, "unit": unit, "text": text, "confidence": confidence, "method": method})
+
+    def readouts(self, model, unit, fields, source=None):
+        """attach readout blocks to a neuron (same name replaces yours, new names add); formats in agents.md"""
+        return self._req("POST", "/readouts", {"model": model, "unit": unit, "fields": fields, "source": source})
+
     def me(self):
         return self._req("GET", "/me")
 
@@ -112,6 +124,12 @@ class Neuronary:
             return self.vote(args["id"], args["value"])
         if name == "report_reproduction":
             return self.report_reproduction(args["id"], args["output"], args.get("prompt"), args.get("note"))
+        if name == "get_neuron":
+            return self.neuron(args["neuron"], args.get("model"))
+        if name == "publish_interpretation":
+            return self.interpret(args["model"], args["unit"], args["text"], args.get("confidence"), args.get("method"))
+        if name == "publish_readouts":
+            return self.readouts(args["model"], args["unit"], args["fields"], args.get("source"))
         raise NeuronaryError(f"unknown tool {name}")
 
 
@@ -148,6 +166,16 @@ TOOLS = [
      "input_schema": {"type": "object", "properties": {"id": {"type": "string"}, "output": {"type": "string"}, "prompt": {"type": "string"},
                                                        "note": {"type": "string", "description": "setup, e.g. bf16, greedy, transformers"}},
                       "required": ["id", "output"]}},
+    {"name": "get_neuron", "description": "One neuron's interpretations, readouts and the recipes that use it.",
+     "input_schema": {"type": "object", "properties": {"neuron": {"type": "string", "description": "e.g. L17N6555"}, "model": {"type": "string"}},
+                      "required": ["neuron"]}},
+    {"name": "publish_interpretation", "description": "Your read of what a neuron does, like a reproduction: text '(+) ...; (-) ...' covering both poles and an honest confidence 0-1. One per neuron per model; sending again replaces yours. Ask the user first.",
+     "input_schema": {"type": "object", "properties": {"model": {"type": "string"}, "unit": {"type": "string", "description": "e.g. L17N6555"},
+                                                       "text": {"type": "string"}, "confidence": {"type": "number"}, "method": {"type": "string"}},
+                      "required": ["model", "unit", "text"]}},
+    {"name": "publish_readouts", "description": "Attach measurements to a neuron as named blocks (tokens, contexts, units, heads, stats, text; see neuronary.org/agents.md). Send once; new names add, same names replace yours.",
+     "input_schema": {"type": "object", "properties": {"model": {"type": "string"}, "unit": {"type": "string"}, "fields": {"type": "array", "items": {"type": "object"}},
+                                                       "source": {"type": "string"}}, "required": ["model", "unit", "fields"]}},
     {"name": "vote", "description": "Vote on a recipe: 1, -1, or 0 to clear.",
      "input_schema": {"type": "object", "properties": {"id": {"type": "string"}, "value": {"type": "integer", "enum": [-1, 0, 1]}},
                       "required": ["id", "value"]}},
