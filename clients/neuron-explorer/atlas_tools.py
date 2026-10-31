@@ -4,11 +4,14 @@
 1. Append ATLAS_TOOLS to TOOLS:            TOOLS += ATLAS_TOOLS
 2. At the top of call(name, a):            if name in ATLAS_HANDLERS: return ATLAS_HANDLERS[name](a)
 3. In agent_prompt.md, a line like:        "neuronary keeps two things per neuron: readouts (the explorer's measurements,
-   pushed once with neuronary_readouts and added to when a new lens exists) and interpretations (anyone's read of what it
-   does, like a reproduction: neuronary_interpret with '(+) …; (−) …' and an honest confidence). Only when the person asks."
+   attached automatically whenever a neuron goes up) and interpretations (anyone's read of what it does, like a
+   reproduction: neuronary_interpret with '(+) …; (−) …' and an honest confidence). Only when the person asks."
+4. Optional: in the neuronary_publish handler, call ensure_readouts(layer, n) for each neuron of the recipe, so a recipe
+   upload carries its neurons' readouts too.
 
-Readouts come from the explorer's endpoints (logit lens, steer lens, activation range, web summary, heads); anything else
-(J++ lens, FineFineWeb firings) goes in extra_fields as neuronary blocks. Format: https://neuronary.org/agents.md
+Readouts are plain data, the explorer's own readout panels, attached to the neuron: not evidence for an interpretation and
+not something to write by hand. They go up automatically the first time a neuron is interpreted (or published);
+neuronary_readouts re-sends them, e.g. after the explorer gains a new lens. Format: https://neuronary.org/agents.md
 """
 
 LN_ = {"layer": {"type": "integer"}, "n": {"type": "integer"}}
@@ -17,22 +20,20 @@ ATLAS_TOOLS = [
     {"name": "neuronary_neuron", "description": "What neuronary.org has on one neuron of this model: everyone's "
      "interpretations (text, confidence, who), its readouts, and the recipes that use it.",
      "inputSchema": {"type": "object", "properties": LN_, "required": ["layer", "n"]}},
-    {"name": "neuronary_readouts", "description": "Push this neuron's readouts to neuronary.org: the explorer's logit lens, "
-     "steer lens, activation range, net (fed by / held back by / pushes toward / away from) and q/k/v/o heads, gathered "
-     "automatically, plus anything in extra_fields (neuronary blocks, e.g. {type: 'tokens', name: 'J++ lens', rows: "
-     "{'+': [...], '-': [...]}} or {type: 'contexts', name: 'activations', note: 'FineFineWeb', tags: {'+': [[domain, score]]}, "
-     "rows: {'+': [{text: 'flow of brine ⟦of⟧ density', tag: 'hydraulic engineering', value: 2.05}], '-': [...]}}). "
-     "Readouts belong to the neuron: push them once; later pushes add new blocks and replace same-named ones. "
-     "only: limit to some block names. Only when the person asks.",
+    {"name": "neuronary_readouts", "description": "Re-send this neuron's readouts to neuronary.org: the explorer's own "
+     "readout panels (lenses, activation contexts, net, heads), gathered automatically. Usually unnecessary: readouts go up "
+     "by themselves the first time a neuron is interpreted or published. Use it when the explorer has gained a readout "
+     "neuronary doesn't have yet (a new lens): extra_fields is only for such readouts the automatic gather doesn't cover, "
+     "as neuronary blocks, never for prose, arguments or your own tests. only: send just these block names.",
      "inputSchema": {"type": "object", "properties": {
          **LN_, "extra_fields": {"type": "array", "items": {"type": "object"}},
-         "auto": {"type": "boolean", "default": True, "description": "gather the explorer's own readouts"},
          "only": {"type": "array", "items": {"type": "string"}, "description": "send just these block names"}},
                      "required": ["layer", "n"]}},
     {"name": "neuronary_interpret", "description": "Post (or replace) the person's interpretation of one neuron on "
      "neuronary.org, like a reproduction: text covers both poles, e.g. '(+) ascribes a measured attribute (of density, has "
      "a thickness); (−) copula predication (flow is turbulent)'; confidence 0-1 is how sure, honestly (under 0.3 shows as "
-     "questionable). No readouts here (neuronary_readouts). Only when the person asks or agrees; show the text first.",
+     "questionable). The neuron's readouts are attached automatically if neuronary doesn't have them yet. Only when the "
+     "person asks or agrees; show the text first.",
      "inputSchema": {"type": "object", "properties": {
          **LN_, "text": {"type": "string"}, "confidence": {"type": "number", "minimum": 0, "maximum": 1},
          "method": {"type": "string", "description": "how you got it, e.g. 'lens + 12 steered rollouts at ±0.8'"}},
@@ -109,9 +110,21 @@ def _neuron(a):
     return neuronary("GET", f"/neurons/L{int(a['layer'])}N{int(a['n'])}", params={"model": MODEL})  # noqa: F821 (agent_mcp.py)
 
 
+def ensure_readouts(layer, n):
+    """send the neuron's readouts unless neuronary already has some; returns the block names sent (or [])"""
+    try:
+        have = neuronary("GET", f"/neurons/L{layer}N{n}", params={"model": MODEL}).get("readouts") or []  # noqa: F821
+        if have:
+            return []
+        r = _push_readouts({"layer": layer, "n": n})
+        return r.get("blocks", [])
+    except Exception:
+        return []
+
+
 def _push_readouts(a):
     layer, n = int(a["layer"]), int(a["n"])
-    fields = (_readouts(layer, n) if a.get("auto", True) else []) + list(a.get("extra_fields") or [])
+    fields = _readouts(layer, n) + list(a.get("extra_fields") or [])
     if a.get("only"):
         keep = {x.lower() for x in a["only"]}
         fields = [f for f in fields if str(f.get("name", "")).lower() in keep]
@@ -130,6 +143,7 @@ def _interpret(a):
     if a.get("method"):
         body["method"] = a["method"]
     r = neuronary("POST", "/interpretations", body)  # noqa: F821
+    r["readouts_sent"] = ensure_readouts(layer, n)
     r["url"] = f"https://neuronary.org/n/L{layer}N{n}"
     return r
 

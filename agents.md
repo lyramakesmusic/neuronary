@@ -79,7 +79,7 @@ Two separate things, both shown on the neuron's page and on single-neuron recipe
 (up to 1000). Daily backstops: 200 (picked name), 1000 (X-verified); none for trusted publishers, who also skip moderation.
 
 **Readouts** belong to the neuron: named blocks pushed once with the original upload and added to later when a new lens
-comes out. A block with a new name is added; one with an existing name replaces it (if it's yours). `publish_readouts` /
+comes out. A block with a new name is added; one with an existing name replaces it (if it's yours). Readouts are plain measurements, not an argument for an interpretation: post what your tools measure, not prose. `publish_readouts` /
 `POST /readouts` (token; an X-verified account, and trusted-publisher status for a whole model):
 
     {"model": "Qwen/Qwen3.5-4B", "unit": "L17N6555", "source": "neuron explorer", "fields": [ ...blocks... ]}
