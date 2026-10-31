@@ -3,32 +3,39 @@
 
 1. Append ATLAS_TOOLS to TOOLS:            TOOLS += ATLAS_TOOLS
 2. At the top of call(name, a):            if name in ATLAS_HANDLERS: return ATLAS_HANDLERS[name](a)
-3. In agent_prompt.md, a line like:        "To record what a neuron does on neuronary, use neuronary_interpret: text as
-   '(+) …; (−) …' covering both poles, an honest confidence, readouts attached automatically. Only when the person asks."
+3. In agent_prompt.md, a line like:        "neuronary keeps two things per neuron: readouts (the explorer's measurements,
+   pushed once with neuronary_readouts and added to when a new lens exists) and interpretations (anyone's read of what it
+   does, like a reproduction: neuronary_interpret with '(+) …; (−) …' and an honest confidence). Only when the person asks."
 
-Uses agent_mcp.py's own get(), neuronary() and MODEL. Readouts come from the explorer's endpoints (lens, steer lens, web
-summary, heads); anything else the agent has (J++ lens, FineFineWeb firings) goes in extra_fields as neuronary blocks.
-Field format: https://neuronary.org/agents.md ("Interpretations").
+Readouts come from the explorer's endpoints (logit lens, steer lens, activation range, web summary, heads); anything else
+(J++ lens, FineFineWeb firings) goes in extra_fields as neuronary blocks. Format: https://neuronary.org/agents.md
 """
 
 LN_ = {"layer": {"type": "integer"}, "n": {"type": "integer"}}
 
 ATLAS_TOOLS = [
     {"name": "neuronary_neuron", "description": "What neuronary.org has on one neuron of this model: everyone's "
-     "interpretations (text, confidence, readouts) and the recipes that use it.",
+     "interpretations (text, confidence, who), its readouts, and the recipes that use it.",
      "inputSchema": {"type": "object", "properties": LN_, "required": ["layer", "n"]}},
-    {"name": "neuronary_interpret", "description": "Post (or replace) the person's interpretation of one neuron on "
-     "neuronary.org. text covers both poles: '(+) ascribes a measured attribute (of density, has a thickness); (−) copula "
-     "predication (flow is turbulent)'. confidence 0-1 is how sure you are, honestly: under 0.3 shows as questionable. "
-     "The explorer's readouts (lens, steer lens, web, heads) are attached unless readouts is false; add anything else as "
-     "extra_fields (neuronary field blocks, e.g. {type: 'contexts', name: 'activations', note: 'FineFineWeb', tags: {...}, "
+    {"name": "neuronary_readouts", "description": "Push this neuron's readouts to neuronary.org: the explorer's logit lens, "
+     "steer lens, activation range, net (fed by / held back by / pushes toward / away from) and q/k/v/o heads, gathered "
+     "automatically, plus anything in extra_fields (neuronary blocks, e.g. {type: 'tokens', name: 'J++ lens', rows: "
+     "{'+': [...], '-': [...]}} or {type: 'contexts', name: 'activations', note: 'FineFineWeb', tags: {'+': [[domain, score]]}, "
      "rows: {'+': [{text: 'flow of brine ⟦of⟧ density', tag: 'hydraulic engineering', value: 2.05}], '-': [...]}}). "
-     "Only when the person asks or agrees; show them the text and confidence first.",
+     "Readouts belong to the neuron: push them once; later pushes add new blocks and replace same-named ones. "
+     "only: limit to some block names. Only when the person asks.",
+     "inputSchema": {"type": "object", "properties": {
+         **LN_, "extra_fields": {"type": "array", "items": {"type": "object"}},
+         "auto": {"type": "boolean", "default": True, "description": "gather the explorer's own readouts"},
+         "only": {"type": "array", "items": {"type": "string"}, "description": "send just these block names"}},
+                     "required": ["layer", "n"]}},
+    {"name": "neuronary_interpret", "description": "Post (or replace) the person's interpretation of one neuron on "
+     "neuronary.org, like a reproduction: text covers both poles, e.g. '(+) ascribes a measured attribute (of density, has "
+     "a thickness); (−) copula predication (flow is turbulent)'; confidence 0-1 is how sure, honestly (under 0.3 shows as "
+     "questionable). No readouts here (neuronary_readouts). Only when the person asks or agrees; show the text first.",
      "inputSchema": {"type": "object", "properties": {
          **LN_, "text": {"type": "string"}, "confidence": {"type": "number", "minimum": 0, "maximum": 1},
-         "method": {"type": "string", "description": "how you got it, e.g. 'lens + 12 steered rollouts at ±0.8'"},
-         "readouts": {"type": "boolean", "default": True},
-         "extra_fields": {"type": "array", "items": {"type": "object"}}},
+         "method": {"type": "string", "description": "how you got it, e.g. 'lens + 12 steered rollouts at ±0.8'"}},
                      "required": ["layer", "n", "text", "confidence"]}},
 ]
 
@@ -102,17 +109,29 @@ def _neuron(a):
     return neuronary("GET", f"/neurons/L{int(a['layer'])}N{int(a['n'])}", params={"model": MODEL})  # noqa: F821 (agent_mcp.py)
 
 
+def _push_readouts(a):
+    layer, n = int(a["layer"]), int(a["n"])
+    fields = (_readouts(layer, n) if a.get("auto", True) else []) + list(a.get("extra_fields") or [])
+    if a.get("only"):
+        keep = {x.lower() for x in a["only"]}
+        fields = [f for f in fields if str(f.get("name", "")).lower() in keep]
+    if not fields:
+        return {"written": 0, "note": "no readouts to send"}
+    r = neuronary("POST", "/readouts", {"model": MODEL, "layer": layer, "neuron": n, "source": "neuron explorer", "fields": fields})  # noqa: F821
+    r["blocks"] = [f.get("name") for f in fields]
+    r["url"] = f"https://neuronary.org/n/L{layer}N{n}"
+    return r
+
+
 def _interpret(a):
     layer, n = int(a["layer"]), int(a["n"])
-    fields = (_readouts(layer, n) if a.get("readouts", True) else []) + list(a.get("extra_fields") or [])
     body = {"model": MODEL, "layer": layer, "neuron": n, "text": a["text"], "confidence": float(a["confidence"]),  # noqa: F821
-            "fields": fields, "source": "neuron explorer"}
+            "source": "neuron explorer"}
     if a.get("method"):
         body["method"] = a["method"]
     r = neuronary("POST", "/interpretations", body)  # noqa: F821
     r["url"] = f"https://neuronary.org/n/L{layer}N{n}"
-    r["fields_attached"] = [f.get("name") for f in fields]
     return r
 
 
-ATLAS_HANDLERS = {"neuronary_neuron": _neuron, "neuronary_interpret": _interpret}
+ATLAS_HANDLERS = {"neuronary_neuron": _neuron, "neuronary_readouts": _push_readouts, "neuronary_interpret": _interpret}

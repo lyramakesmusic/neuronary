@@ -1,11 +1,11 @@
-import { ABOUT_HTML } from "./about.js?v=20261031170000";
-import { createStore } from "./store.js?v=20261031170000";
-import { randomPrompt } from "./prompts.js?v=20261031170000";
-import { confHtml, interpHtml, wireFolds, QUESTIONABLE } from "./atlas.js?v=20261031170000";
+import { ABOUT_HTML } from "./about.js?v=20261031180000";
+import { createStore } from "./store.js?v=20261031180000";
+import { randomPrompt } from "./prompts.js?v=20261031180000";
+import { confHtml, interpHtml, readoutsHtml, wireFolds, QUESTIONABLE } from "./atlas.js?v=20261031180000";
 import {
   esc, doseStr, neuronKey, neuronStr, sortNeurons, recipeStr, recipeHtml, neuronHtml, edgeMark, setKey, parseRecipeStr, parseNeuronQuery,
   methodOf, DEFAULT_METHOD, samplingText, md, recipeFile, recipeJson, pythonSnippet, studioFile, fromStudio, slugify, ago, avatarHtml, copyText, download,
-} from "./format.js?v=20261031170000";
+} from "./format.js?v=20261031180000";
 
 const CFG = window.NEURONARY || {};
 const $ = (s, el = document) => el.querySelector(s);
@@ -1144,8 +1144,9 @@ function wireRecipe(root, r) {
 async function renderAtlas(box, model, n) {
   if (!box || store.mode !== "supabase") return;
   const body = $("[data-atlasbody]", box);
-  let list = [];
-  try { list = await store.interpretations({ model, layer: n.layer, neuron: n.neuron, expert: n.expert ?? null }); }
+  let list = [], ro = [];
+  const unit = { model, layer: n.layer, neuron: n.neuron, expert: n.expert ?? null };
+  try { [list, ro] = await Promise.all([store.interpretations(unit), store.readouts(unit)]); }
   catch (e) { body.innerHTML = `<div class="err">${esc(e.message)}</div>`; return; }
   const u = store.user();
   const mine = u && list.find((x) => x.user_id === u.id);
@@ -1153,6 +1154,7 @@ async function renderAtlas(box, model, n) {
     ? list.map((it) => interpHtml(it, { mine: u && it.user_id === u.id, admin: u && u.admin })).join("")
       + `<button class="linkbtn ianewlink" data-ianew>${mine ? "edit yours" : "add your interpretation"}</button><div data-ianewbox></div>`
     : `<div class="anone faint">no interpretation yet · <button class="linkbtn" data-ianew>add one</button></div><div data-ianewbox></div>`;
+  body.insertAdjacentHTML("beforeend", readoutsHtml(ro));
   wireFolds(body);
   $$("[data-idel]", body).forEach((b) => (b.onclick = async () => {
     if (!confirm("Delete this interpretation?")) return;
@@ -1165,7 +1167,7 @@ async function renderAtlas(box, model, n) {
     fb.innerHTML = `<div class="ianew">
       <textarea data-itext maxlength="1000" placeholder="(+) what the + pole does; (−) what the − pole does">${esc(mine ? mine.text : "")}</textarea>
       <div class="row"><label>confidence <select data-iconf>${levels.map(([v, l]) => `<option value="${v}"${mine && mine.confidence != null && Math.abs(mine.confidence - +v) < 0.051 && v ? " selected" : ""}>${l}</option>`).join("")}</select></label>
-        <span class="faint">readouts (lens, firings, net, heads) come in through the API</span>
+        <span class="faint">like a reproduction: your read of what it does</span>
         <button class="btn sbtn primary" data-isave>Post</button><button class="linkbtn dim" data-icancel>cancel</button></div></div>`;
     $("[data-icancel]", fb).onclick = () => (fb.innerHTML = "");
     $("[data-isave]", fb).onclick = async () => {
@@ -1173,7 +1175,7 @@ async function renderAtlas(box, model, n) {
       if (!text) return;
       try {
         await store.postInterpretation({ model, layer: n.layer, neuron: n.neuron, expert: n.expert ?? null, text,
-          confidence: c === "" ? null : +c, fields: mine ? mine.fields : [], source: mine ? mine.source : null, method: mine ? mine.method : null });
+          confidence: c === "" ? null : +c, source: mine ? mine.source : null, method: mine ? mine.method : null });
         renderAtlas(box, model, n);
       } catch (e) { flashError(e); }
     };

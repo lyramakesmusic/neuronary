@@ -113,6 +113,8 @@ class LocalStore {
 
   async interpretations() { return []; }
 
+  async readouts() { return []; }
+
   async comment(id, body, parentId = null) {
     const u = this.user();
     if (!u) throw new Error("sign in to comment");
@@ -417,11 +419,21 @@ class SupabaseStore {
 
   // interpretations: what people think one neuron does (text, confidence, readout fields); newest-confident first
   async interpretations({ model, layer, neuron, expert = null }) {
-    let q = this.sb.from("interpretations").select("id,model,layer,neuron,expert,text,confidence,fields,source,method,author_handle,user_id,created_at,updated_at,hidden")
+    let q = this.sb.from("interpretations").select("id,model,layer,neuron,expert,text,confidence,source,method,author_handle,user_id,created_at,updated_at,hidden")
       .eq("layer", layer).eq("neuron", neuron);
     q = expert == null ? q.is("expert", null) : q.eq("expert", expert);
     if (model) q = q.eq("model", model);
     const { data, error } = await q.order("confidence", { ascending: false, nullsFirst: false }).limit(200);
+    if (error) throw error;
+    return data || [];
+  }
+
+  // readouts: named blocks (lens reads, firings, net, heads) attached to the neuron itself, oldest first
+  async readouts({ model, layer, neuron, expert = null }) {
+    let q = this.sb.from("neuron_readouts").select("id,model,name,block,source,author_handle,user_id,updated_at").eq("layer", layer).eq("neuron", neuron);
+    q = expert == null ? q.is("expert", null) : q.eq("expert", expert);
+    if (model) q = q.eq("model", model);
+    const { data, error } = await q.order("id").limit(200);
     if (error) throw error;
     return data || [];
   }

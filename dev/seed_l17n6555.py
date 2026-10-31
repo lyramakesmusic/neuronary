@@ -1,5 +1,5 @@
 """Builds the interpretation payload for Qwen3.5-4B L17N6555 from lyra's neuron-explorer readouts (transcribed from her
-screenshots), in the site's field format. Used to test the atlas renderer: prints JSON for post_interpretations."""
+screenshots), in the site's format. Used to test the atlas renderer: prints {interpretations, readouts} JSON."""
 import json
 
 T = lambda s: s.split("|")
@@ -40,7 +40,8 @@ fields = [
         "v": PAIRS("L18 h30 5|L22 h3 3.5|L18 h31 3.4|L28 h26 3.1|L22 h10 3|L18 h21 2.7|L25 h21 2.4|L21 h4 2.3"),
         "o": PAIRS("L16 h28 5.6|L17 h24-25 4.1|L16 h24 3.6")}},
 ]
-item = {"model": "Qwen/Qwen3.5-4B", "layer": 17, "neuron": 6555,
-        "text": "(+) ascribes a measured attribute (of density, with a flow rate, has a thickness); (−) copula predication (flow is turbulent)",
-        "confidence": 0.7, "fields": fields, "source": "neuron explorer"}
-print(json.dumps([item], ensure_ascii=False))
+interp = {"model": "Qwen/Qwen3.5-4B", "layer": 17, "neuron": 6555,
+          "text": "(+) ascribes a measured attribute (of density, with a flow rate, has a thickness); (−) copula predication (flow is turbulent)",
+          "confidence": 0.7, "source": "neuron explorer"}
+readouts = {"model": "Qwen/Qwen3.5-4B", "layer": 17, "neuron": 6555, "source": "neuron explorer", "fields": fields}
+print(json.dumps({"interpretations": [interp], "readouts": [readouts]}, ensure_ascii=False))

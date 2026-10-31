@@ -791,3 +791,5 @@ a.xc:hover { text-decoration: none; box-shadow: inset 0 0 0 1px var(--line2); }
 .atlas .anone .linkbtn, .ianewlink { color: var(--link); font-size: 13px; }
 .ianewlink { margin-top: 4px; }
 .atlas .sechead { margin-bottom: 6px; }
+.atlas .xfold { margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--raise); }
+.xby { font-size: 12px; margin-top: 6px; text-align: center; }

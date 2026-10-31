@@ -10,7 +10,8 @@
 //     POST   /recipes/:id/vote       {value: -1|0|1}                              vote (token)
 //     GET    /me                                                                  who the token belongs to (token)
 //     GET    /neurons/:id?model=      interpretations of one neuron (L17N6555) and the recipes using it (public)
-//     POST   /interpretations         {model, unit|layer+neuron, text, confidence?, fields?, source?, method?} or {items: [...]} (token)
+//     POST   /interpretations         {model, unit|layer+neuron, text, confidence?, source?, method?} or {items: [...]} (token)
+//     POST   /readouts                {model, unit|layer+neuron, source?, fields: [{type, name, ...}]} or {items: [...]} (token)
 //     DELETE /interpretations/:id     delete your own (token)
 //   MCP   POST /mcp   (Streamable HTTP, JSON responses; same operations as tools)
 //
@@ -257,10 +258,39 @@ function interpItem(x: Record<string, any>) {
   if (!Number.isInteger(layer) || !Number.isInteger(neuron)) throw new HttpError(400, "layer and neuron must be whole numbers (or give unit: 'L17N6555')");
   if (typeof x.text !== "string" || !x.text.trim()) throw new HttpError(400, "text: the interpretation, e.g. '(+) ascribes a measured attribute; (−) copula predication'");
   if (x.confidence != null && !(typeof x.confidence === "number" && x.confidence >= 0 && x.confidence <= 1)) throw new HttpError(400, "confidence is a number from 0 to 1");
-  const fields = x.fields ?? [];
-  if (!Array.isArray(fields) || fields.some((f: any) => !f || typeof f !== "object" || typeof f.type !== "string")) throw new HttpError(400, "fields must be a list of {type, name, ...} blocks");
-  for (const f of fields) if (!FIELD_TYPES.includes(f.type)) throw new HttpError(400, `unknown field type ${f.type}; use one of ${FIELD_TYPES.join(", ")}`);
-  return { model, layer, neuron, expert: expert ?? null, text: x.text, confidence: x.confidence ?? null, fields, source: x.source ?? null, method: x.method ?? null };
+  if (x.fields !== undefined) throw new HttpError(400, "readouts are not part of an interpretation: send them once with publish_readouts / POST /readouts");
+  return { model, layer, neuron, expert: expert ?? null, text: x.text, confidence: x.confidence ?? null, source: x.source ?? null, method: x.method ?? null };
+}
+
+// the unit part of an item: model + "L17N6555" (unit) or layer + neuron (+ expert)
+function unitOf(x: Record<string, any>) {
+  let { model, layer, neuron, expert } = x;
+  if (typeof x.unit === "string" || (typeof neuron === "string" && /L/i.test(neuron))) {
+    const [n] = parseNeurons(String(x.unit ?? neuron));
+    if (!n) throw new HttpError(400, `can't read neuron id ${x.unit ?? neuron}`);
+    ({ layer, neuron } = n); if (n.expert != null) expert = n.expert;
+  }
+  if (typeof model !== "string" || !model.includes("/")) throw new HttpError(400, "model must be a Hugging Face id like Qwen/Qwen3.5-4B");
+  if (!Number.isInteger(layer) || !Number.isInteger(neuron)) throw new HttpError(400, "layer and neuron must be whole numbers (or give unit: 'L17N6555')");
+  return { model, layer, neuron, expert: expert ?? null };
+}
+
+function readoutItem(x: Record<string, any>) {
+  const fields = x.fields;
+  if (!Array.isArray(fields) || !fields.length) throw new HttpError(400, "fields: a list of readout blocks, each {type, name, ...}");
+  for (const f of fields) {
+    if (!f || typeof f !== "object" || typeof f.name !== "string" || !f.name.trim()) throw new HttpError(400, "every readout block needs a name (it is what a later upload replaces)");
+    if (!FIELD_TYPES.includes(f.type)) throw new HttpError(400, `unknown block type ${f.type}; use one of ${FIELD_TYPES.join(", ")}`);
+  }
+  return { ...unitOf(x), source: x.source ?? null, fields };
+}
+
+async function postReadouts(u: User, body: Record<string, any>) {
+  const me = need(u);
+  const items = (Array.isArray(body.items) ? body.items : [body]).map(readoutItem);
+  const { data, error } = await sb.rpc("post_readouts", { items, as_user: me.id });
+  if (error) throw new HttpError(/^rate limit/.test(error.message) ? 429 : 400, error.message);
+  return data;
 }
 
 async function postInterpretations(u: User, body: Record<string, any>) {
@@ -272,17 +302,22 @@ async function postInterpretations(u: User, body: Record<string, any>) {
   return data;
 }
 
-const ICOLS = "id,model,layer,neuron,expert,text,confidence,fields,source,method,author_handle,created_at,updated_at";
+const ICOLS = "id,model,layer,neuron,expert,text,confidence,source,method,author_handle,created_at,updated_at";
+const RCOLS = "id,model,layer,neuron,expert,name,block,source,author_handle,created_at,updated_at";
 async function getNeuron(key: string, model?: string) {
   const [n] = parseNeurons(key);
   if (!n) throw new HttpError(400, `not a neuron id: ${key} (like L17N6555)`);
   let q = sb.from("interpretations").select(ICOLS).eq("layer", n.layer).eq("neuron", n.neuron).eq("hidden", false);
   q = n.expert != null ? q.eq("expert", n.expert) : q.is("expert", null);
   if (model) q = q.ilike("model", model.includes("/") ? model : `%/${model}`);
-  const { data, error } = await q.order("confidence", { ascending: false, nullsFirst: false }).limit(200);
-  if (error) throw new HttpError(500, error.message);
-  const recipes = await search({ neuron: key, model, limit: 100 });
-  return { neuron: nkey(n as Neuron), interpretations: data ?? [], recipes: recipes.recipes };
+  let rq = sb.from("neuron_readouts").select(RCOLS).eq("layer", n.layer).eq("neuron", n.neuron).eq("hidden", false);
+  rq = n.expert != null ? rq.eq("expert", n.expert) : rq.is("expert", null);
+  if (model) rq = rq.ilike("model", model.includes("/") ? model : `%/${model}`);
+  const [{ data, error }, { data: ro, error: e2 }, recipes] = await Promise.all([
+    q.order("confidence", { ascending: false, nullsFirst: false }).limit(200), rq.order("id").limit(200), search({ neuron: key, model, limit: 100 })]);
+  if (error || e2) throw new HttpError(500, (error || e2)!.message);
+  return { neuron: nkey(n as Neuron), interpretations: data ?? [],
+    readouts: (ro ?? []).map((r) => ({ ...r.block, model: r.model, source: r.source, by: r.author_handle, updated_at: r.updated_at })), recipes: recipes.recipes };
 }
 
 async function deleteInterpretation(u: User, id: string) {
@@ -298,15 +333,19 @@ async function deleteInterpretation(u: User, id: string) {
 
 // ---------------------------------------------------------------- MCP
 const TOOLS = [
-  { name: "get_neuron", description: "Everything neuronary has on one neuron: interpretations (text, confidence, readout fields like lens reads, top firings, net, heads) and the recipes that use it.",
+  { name: "get_neuron", description: "Everything neuronary has on one neuron: interpretations (text, confidence, who), readouts (lens reads, top firings, net, heads) and the recipes that use it.",
     inputSchema: { type: "object", properties: { neuron: { type: "string", description: "e.g. L17N6555" }, model: { type: "string", description: "e.g. Qwen/Qwen3.5-4B; omit for every model" } }, required: ["neuron"] } },
-  { name: "publish_interpretation", description: "Post what a neuron does, as the token's owner: text in the form '(+) ...; (−) ...' covering both poles, a confidence 0-1, and optional readout fields. One per neuron per model per author; posting again replaces yours. For many neurons pass items (up to 1000 per call). Field blocks: tokens {type, name, rows: {'+': [tok or [tok, value]], '-': [...]}}; contexts {type, name, tags?: {'+': [[domain, score]]}, rows: {'+': [{text with ⟦hot tokens⟧, tag?, value?}]}}; units {type, name, groups: [{label, sign: '+'|'-', note?, items: [[label, count]]}]}; heads {type, name, rows: {q|k|v|o: [[label, score]]}}; stats {type, name, items: [[label, value]]}; text {type, name, text}.",
+  { name: "publish_interpretation", description: "Post your interpretation of one neuron, as the token's owner: text in the form '(+) ...; (−) ...' covering both poles, and an honest confidence 0-1 (under 0.3 shows as questionable). Like a reproduction: everyone can post one per neuron per model; posting again replaces yours. For many neurons pass items (up to 1000). Readouts (lens reads, firings, net, heads) are separate: publish_readouts.",
     inputSchema: { type: "object", properties: {
       model: { type: "string" }, unit: { type: "string", description: "neuron id, e.g. L17N6555 (or give layer + neuron)" },
       layer: { type: "integer" }, neuron: { type: "integer" }, expert: { type: "integer" },
-      text: { type: "string" }, confidence: { type: "number", minimum: 0, maximum: 1 },
-      fields: { type: "array", items: { type: "object" } }, source: { type: "string" }, method: { type: "string" },
+      text: { type: "string" }, confidence: { type: "number", minimum: 0, maximum: 1 }, source: { type: "string" }, method: { type: "string" },
       items: { type: "array", items: { type: "object" }, description: "batch: a list of the same objects" } } } },
+  { name: "publish_readouts", description: "Attach readouts to a neuron: named blocks, pushed once with the original upload and added to later (a new lens is a new block; sending a block with an existing name replaces it if it is yours). Block types: tokens {type, name, rows: {'+': [tok or [tok, value]], '-': [...]}}; contexts {type, name, note?, tags?: {'+': [[domain, score]]}, rows: {'+': [{text with ⟦hot tokens⟧ (or ⟦tok|0.4⟧), tag?, value?}]}}; units {type, name, note?, groups: [{label, sign: '+'|'-', note?, items: [[label, count]]}]}; heads {type, name, rows: {q|k|v|o: [[label, score]]}}; stats {type, name, items: [[label, value]]}; text {type, name, text}. Needs an X-verified account; whole-model imports need trusted-publisher status. Batch: items (up to 1000 neurons).",
+    inputSchema: { type: "object", properties: {
+      model: { type: "string" }, unit: { type: "string" }, layer: { type: "integer" }, neuron: { type: "integer" }, expert: { type: "integer" },
+      fields: { type: "array", items: { type: "object" } }, source: { type: "string" },
+      items: { type: "array", items: { type: "object" } } } } },
   { name: "search_recipes", description: "Search neuronary for neuron steering recipes. Free text matches names, descriptions, tags, authors and models; neuron ids like L14N8949 match recipes using that neuron.",
     inputSchema: { type: "object", properties: {
       q: { type: "string", description: "free text and/or neuron ids, e.g. 'evil' or 'L14N8949'" },
@@ -355,6 +394,7 @@ async function callTool(u: User, name: string, a: Record<string, any>) {
     case "report_reproduction": return reproduce(u, String(a.id), a);
     case "get_neuron": return getNeuron(String(a.neuron), a.model);
     case "publish_interpretation": return postInterpretations(u, a);
+    case "publish_readouts": return postReadouts(u, a);
     default: throw new HttpError(404, `unknown tool ${name}`);
   }
 }
@@ -416,6 +456,7 @@ Deno.serve(async (req) => {
     else if ((m = path.match(/^\/recipes\/([a-z0-9-]+)\/vote$/)) && req.method === "POST") result = await vote(u, m[1], Number(body.value));
     else if ((m = path.match(/^\/neurons\/([A-Za-z0-9]+)$/)) && req.method === "GET") result = await getNeuron(m[1], url.searchParams.get("model") ?? undefined);
     else if (path === "/interpretations" && req.method === "POST") result = await postInterpretations(u, body);
+    else if (path === "/readouts" && req.method === "POST") result = await postReadouts(u, body);
     else if ((m = path.match(/^\/interpretations\/(\d+)$/)) && req.method === "DELETE") result = await deleteInterpretation(u, m[1]);
     else throw new HttpError(404, "not found; see https://neuronary.org/about");
     return Response.json(result, { headers: { ...CORS, ...cache } });

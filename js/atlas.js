@@ -8,7 +8,7 @@
 //   stats    {type, name, items: [[label, value]]}
 //   text     {type, name, text}
 // Anything else is shown as JSON, so nothing a submitter sends is lost.
-import { esc } from "./format.js?v=20261031170000";
+import { esc } from "./format.js?v=20261031180000";
 
 export const QUESTIONABLE = 0.3;
 
@@ -99,15 +99,22 @@ export function fieldsHtml(fields) {
 
 // one interpretation: the line, its confidence, who, then its readouts folded (fade + "show all fields")
 export function interpHtml(it, { mine = false, admin = false } = {}) {
-  const hasFields = (it.fields || []).length > 0;
   return `<div class="interp${it.confidence != null && it.confidence < QUESTIONABLE ? " q" : ""}" data-interp="${it.id}">
     <div class="itext">${esc(it.text)} ${confHtml(it.confidence)}</div>
     <div class="iby"><span class="unv" title="nobody has checked this interpretation by steering yet">unverified</span>
       <span class="faint">@${esc(it.author_handle)}${it.source ? ` · ${/^https?:/.test(it.source) ? `<a href="${esc(it.source)}" target="_blank" rel="noopener">source</a>` : esc(it.source)}` : ""}${it.method ? ` · ${esc(it.method)}` : ""}</span>
       ${it.hidden ? `<span class="faint">· hidden</span>` : ""}
       ${mine || admin ? `<button class="linkbtn dim" data-idel="${it.id}">delete</button>` : ""}</div>
-    ${hasFields ? `<div class="xfold"><div class="xbody">${fieldsHtml(it.fields)}</div><button class="xmore" data-xmore><span>show all fields</span><svg width="12" height="12" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 6l4.5 4.5L12.5 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button></div>` : ""}
   </div>`;
+}
+
+// the neuron's readouts, once: folded (fade + "show all readouts"); who sent them in a faint line under the fold
+export function readoutsHtml(rows) {
+  if (!rows || !rows.length) return "";
+  const by = [...new Set(rows.map((r) => r.author_handle + (r.source ? ` · ${r.source}` : "")))];
+  return `<div class="xfold"><div class="xbody">${fieldsHtml(rows.map((r) => r.block))}</div>
+    <button class="xmore" data-xmore><span>show all readouts</span><svg width="12" height="12" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 6l4.5 4.5L12.5 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
+    <div class="xby faint">readouts from ${by.map((b) => "@" + esc(b)).join(", ")}</div></div>`;
 }
 
 // after inserting: folds that don't overflow lose their button; the button toggles
@@ -117,7 +124,7 @@ export function wireFolds(root) {
     if (body.scrollHeight <= body.clientHeight + 4) { f.classList.add("open", "short"); return; }
     b.onclick = () => {
       const open = f.classList.toggle("open");
-      b.querySelector("span").textContent = open ? "show less" : "show all fields";
+      b.querySelector("span").textContent = open ? "show less" : "show all readouts";
     };
   });
 }

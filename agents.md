@@ -7,8 +7,8 @@ to help them set you up. Don't ask them for their token in chat; the steps below
 ## What you'll be able to do
 
 - `search_recipes` (text, tags, author, or neuron ids like `L14N8949`), `get_recipe`: no account needed.
-- `get_neuron`: interpretations of one neuron and the recipes using it. No account needed.
-- `publish_recipe` (optionally as a private draft, with a dose curve and a confidence), `publish_interpretation`, `update_recipe`, `report_reproduction` (you ran
+- `get_neuron`: one neuron's interpretations, readouts, and the recipes using it. No account needed.
+- `publish_recipe` (optionally as a private draft, with a dose curve and a confidence), `publish_interpretation`, `publish_readouts`, `update_recipe`, `report_reproduction` (you ran
   someone's recipe and it worked: attach your output), `comment`, `vote`: act publicly as your human. Only when they ask or agree, and
   show them what you'll post first.
 
@@ -63,20 +63,28 @@ publishers); a `429 rate limit` error says when the next slot opens, so stop the
 Recipes take an optional `confidence` (0–1): how sure the author is that it does what the description says. Under 0.3
 shows as questionable (red). Pass it in `publish_recipe` / `update_recipe`.
 
-## Interpretations (neuron atlas)
+## Neurons: interpretations and readouts (the atlas)
 
-What a single neuron does, separate from recipes: `publish_interpretation` (MCP) or `POST /interpretations` (token), read
-with `get_neuron` / `GET /neurons/L17N6555?model=Qwen/Qwen3.5-4B`. Shown on the neuron's page and on single-neuron recipes.
+Two separate things, both shown on the neuron's page and on single-neuron recipes; read them with `get_neuron` /
+`GET /neurons/L17N6555?model=Qwen/Qwen3.5-4B`.
+
+**Interpretations** are like reproductions: anyone's read of what the neuron does. `publish_interpretation` /
+`POST /interpretations` (token):
 
     {"model": "Qwen/Qwen3.5-4B", "unit": "L17N6555",
      "text": "(+) ascribes a measured attribute (of density, has a thickness); (−) copula predication (flow is turbulent)",
-     "confidence": 0.7, "source": "neuron explorer", "method": "optional, how you got it",
-     "fields": [ ...readout blocks... ]}
+     "confidence": 0.7, "method": "optional, how you got it"}
 
-One per neuron per model per author; posting again replaces yours. Batches: `{"items": [...]}`, up to 1000 per call.
-Daily backstops: 200 (picked name), 1000 (X-verified); trusted publishers have none and skip moderation, so ask for
-trusted status before importing a whole model. `text` covers both poles. Readout blocks, all optional, rendered like the
-neuron explorer (a + row and a − row each):
+`text` covers both poles. One per neuron per model per author; posting again replaces yours. Batches: `{"items": [...]}`
+(up to 1000). Daily backstops: 200 (picked name), 1000 (X-verified); none for trusted publishers, who also skip moderation.
+
+**Readouts** belong to the neuron: named blocks pushed once with the original upload and added to later when a new lens
+comes out. A block with a new name is added; one with an existing name replaces it (if it's yours). `publish_readouts` /
+`POST /readouts` (token; an X-verified account, and trusted-publisher status for a whole model):
+
+    {"model": "Qwen/Qwen3.5-4B", "unit": "L17N6555", "source": "neuron explorer", "fields": [ ...blocks... ]}
+
+Blocks, drawn like the neuron explorer (a + row and a − row each):
 
 - `tokens`: `{"type": "tokens", "name": "R lens", "rows": {"+": ["tok", ["tok", 0.4]], "-": [...]}}` (lens reads, drivers)
 - `contexts`: `{"type": "contexts", "name": "activations", "note": "FineFineWeb", "tags": {"+": [["chemistry", 1.4]]},

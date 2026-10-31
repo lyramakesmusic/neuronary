@@ -45,8 +45,8 @@ try:
     call("POST", "/rest/v1/rpc/claim_handle", ta, {"h": f"atla{tag}"})
     call("POST", "/rest/v1/rpc/claim_handle", tb, {"h": f"atlb{tag}"})
     L, N = 3, 900000 + int(tag, 16) % 90000  # a neuron nobody uses
-    item = {"model": "Qwen/Qwen3.5-4B", "layer": L, "neuron": N, "text": "(+) test pole; (−) other test pole", "confidence": 0.4,
-            "fields": [{"type": "tokens", "name": "R lens", "rows": {"+": ["a", ["b", 0.5]], "-": ["c"]}}]}
+    item = {"model": "Qwen/Qwen3.5-4B", "layer": L, "neuron": N, "text": "(+) test pole; (−) other test pole", "confidence": 0.4}
+    ro = {"model": "Qwen/Qwen3.5-4B", "layer": L, "neuron": N, "fields": [{"type": "tokens", "name": "R lens", "rows": {"+": ["a", ["b", 0.5]], "-": ["c"]}}]}
 
     s, d = call("POST", "/rest/v1/rpc/post_interpretations", None, {"items": [item]})
     check("signed-out users can't post", s >= 400, d)
@@ -65,12 +65,16 @@ try:
     check("a second author gets their own row", s == 200, d)
     s, d = call("POST", "/rest/v1/rpc/post_interpretations", tb, {"items": [{**item, "confidence": 3}]})
     check("confidence must be 0-1", s >= 400, d)
-    s, d = call("POST", "/rest/v1/rpc/post_interpretations", tb, {"items": [{**item, "fields": {"not": "a list"}}]})
-    check("fields must be a list", s >= 400, d)
+    s, d = call("POST", "/rest/v1/rpc/post_readouts", tb, {"items": [ro]})
+    check("picked-name accounts can't post readouts", s >= 400 and "X" in str(d), d)
+    s, d = call("POST", "/rest/v1/neuron_readouts", tb, {**ro, "name": "x", "block": {}})
+    check("readouts can't be inserted directly", s >= 400, d)
+    s, d = call("POST", f"{API}/interpretations", None, {**item, "fields": []})
+    check("API refuses readouts inside an interpretation (needs a token first)", s in (400, 401), d)
     s, d = call("POST", "/rest/v1/interpretations", tb, {**item, "user_id": ua, "author_handle": "someone"}, prefer="return=representation")
     check("direct insert can't impersonate", s >= 400 or (d and d[0]["user_id"] == ub), d)
     s, d = call("GET", f"{API}/neurons/L{L}N{N}?model=Qwen/Qwen3.5-4B")
-    check("API GET /neurons returns both", s == 200 and len(d["interpretations"]) == 2, d)
+    check("API GET /neurons returns both, plus a readouts list", s == 200 and len(d["interpretations"]) == 2 and d["readouts"] == [], d)
     s, d = call("POST", f"{API}/interpretations", None, {**item})
     check("API POST needs a token", s == 401, d)
     s, d = call("POST", "/rest/v1/rpc/post_interpretations", tb, {"items": [item] * 1001})
@@ -79,6 +83,7 @@ try:
     check("the author can delete theirs", s == 200 and d, d)
 finally:
     call("DELETE", f"/rest/v1/interpretations?layer=eq.{L}&neuron=eq.{N}", key=SERVICE, token=SERVICE)
+    call("DELETE", f"/rest/v1/neuron_readouts?layer=eq.{L}&neuron=eq.{N}", key=SERVICE, token=SERVICE)
     for u in users:
         call("DELETE", f"/auth/v1/admin/users/{u}", key=SERVICE, token=SERVICE)
     print(f"cleaned up {len(users)} users")
