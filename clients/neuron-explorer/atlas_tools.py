@@ -73,8 +73,7 @@ def _readouts(layer, n):
     fields = []
     try:
         d = get("/api/agent/neuron", layer=layer, n=n)
-        if d.get("lens_up") or d.get("lens_down"):
-            fields.append({"type": "tokens", "name": "logit lens", "rows": {"+": _toks(d.get("lens_up")), "-": _toks(d.get("lens_down"))}})
+        # no logit lens: deprecated on neuronary (steer, J, R, J++ and S lenses read better)
         if d.get("steer_up") or d.get("steer_down"):
             fields.append({"type": "tokens", "name": "steer lens", "rows": {"+": _toks(d.get("steer_up")), "-": _toks(d.get("steer_down"))}})
         act = d.get("activation")

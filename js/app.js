@@ -1,11 +1,11 @@
-import { ABOUT_HTML } from "./about.js?v=20261031190000";
-import { createStore } from "./store.js?v=20261031190000";
-import { randomPrompt } from "./prompts.js?v=20261031190000";
-import { confHtml, interpHtml, readoutsHtml, wireFolds, QUESTIONABLE } from "./atlas.js?v=20261031190000";
+import { ABOUT_HTML } from "./about.js?v=20261031200000";
+import { createStore } from "./store.js?v=20261031200000";
+import { randomPrompt } from "./prompts.js?v=20261031200000";
+import { confHtml, interpHtml, readoutsHtml, wireFolds, QUESTIONABLE } from "./atlas.js?v=20261031200000";
 import {
   esc, doseStr, neuronKey, neuronStr, sortNeurons, recipeStr, recipeHtml, neuronHtml, edgeMark, setKey, parseRecipeStr, parseNeuronQuery,
   methodOf, DEFAULT_METHOD, samplingText, md, recipeFile, recipeJson, pythonSnippet, studioFile, fromStudio, slugify, ago, avatarHtml, copyText, download,
-} from "./format.js?v=20261031190000";
+} from "./format.js?v=20261031200000";
 
 const CFG = window.NEURONARY || {};
 const $ = (s, el = document) => el.querySelector(s);

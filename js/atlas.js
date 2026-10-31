@@ -8,7 +8,7 @@
 //   stats    {type, name, items: [[label, value]]}
 //   text     {type, name, text}
 // Anything else is shown as JSON, so nothing a submitter sends is lost.
-import { esc } from "./format.js?v=20261031190000";
+import { esc } from "./format.js?v=20261031200000";
 
 export const QUESTIONABLE = 0.3;
 
@@ -33,11 +33,20 @@ function chip(item, c, link) {
 }
 
 function ctxText(t, c) {
-  // ⟦tok⟧ = hottest; ⟦tok|0.4⟧ = heat 0-1
-  return esc(t).replace(/⟦(.*?)(?:\|([\d.]+))?⟧/g, (_, tok, h) => {
+  // ⟦tok⟧ = hottest; ⟦tok|0.4⟧ = heat 0-1. Like the explorer, the line is pinned on the hottest token: the text before
+  // it is right-aligned and clipped on the left, so the firing token sits ~40% across however long the window is.
+  t = String(t).replace(/\n/g, "⏎");
+  const marks = [...t.matchAll(/⟦(.*?)(?:\|([\d.]+))?⟧/g)];
+  const hottest = marks.reduce((best, m) => (best == null || (m[2] == null ? 1 : +m[2]) > (best[2] == null ? 1 : +best[2]) ? m : best), null);
+  const paint = (s) => esc(s).replace(/⟦(.*?)(?:\|([\d.]+))?⟧/g, (_, tok, h) => {
     const heat = h == null ? 1 : Math.max(0, Math.min(1, +h));
     return `<span class="hot${c}" style="--heat:${heat}">${tok}</span>`;
-  }).replace(/⏎|\n/g, "⏎");
+  });
+  if (!hottest) return `<span class="xpost">${paint(t)}</span>`;
+  // split before the run of marks that holds the hottest one, so a multi-token highlight stays together
+  let cut = hottest.index;
+  for (const m of marks.slice().reverse()) if (m.index < cut && m.index + m[0].length >= cut - 1) cut = m.index;
+  return `<span class="xpre"><span>${paint(t.slice(0, cut))}</span></span><span class="xpost">${paint(t.slice(cut))}</span>`;
 }
 
 function head(f) {

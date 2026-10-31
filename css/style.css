@@ -764,7 +764,10 @@ a.xc:hover { text-decoration: none; box-shadow: inset 0 0 0 1px var(--line2); }
 .xc .cnt { color: var(--faint); font-size: 11px; }
 .xnone { font-size: 12px; line-height: 22px; }
 .xl { display: grid; grid-template-columns: minmax(0, 1fr) 130px 44px; gap: 10px; font-size: 12.5px; line-height: 20px; padding-left: 22px; }
-.xt { white-space: nowrap; overflow: hidden; }
+.xt { display: flex; white-space: pre; overflow: hidden; min-width: 0; }
+.xt .xpre { flex: 0 1 auto; max-width: 40%; overflow: hidden; display: flex; justify-content: flex-end; }
+.xt .xpre > span, .xt .xpost { white-space: pre; }
+.xt .xpost { flex: 1 1 0; min-width: 0; overflow: hidden; }
 .xdom { color: var(--faint); font: 11.5px var(--mono); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .xv { text-align: right; color: var(--dim); font: 11.5px var(--mono); }
 .hotu { background: color-mix(in srgb, var(--up) calc(var(--heat, 1) * 60%), transparent); border-radius: 2px; }

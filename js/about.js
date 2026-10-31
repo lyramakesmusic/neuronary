@@ -38,7 +38,7 @@ export const ABOUT_HTML = `
     <img src="/img/explorer.jpg" alt="the neuron explorer: a map of every MLP neuron in Qwen3.5-4B, with steered example outputs" loading="lazy"></a>
   <p><a href="https://github.com/lyramakesmusic/neuron-explorer" target="_blank" rel="noopener">neuron-explorer</a> is the
   tool most recipes here started from. It pushed every MLP neuron in Qwen3.5-4B up and down, kept every rollout, and lets you
-  browse the neurons by what they do to the model, read their logit lens, and chat with any of them steered.</p>
+  browse the neurons by what they do to the model, read what they write through steer, J++, R and S lenses, and chat with any of them steered.</p>
   <p>For Qwen3-8B, josh's <a href="https://qwen-neurons-site.vercel.app/" target="_blank" rel="noopener">Neuron Persona Library</a>
   (<a href="https://x.com/jfonsecarivera" target="_blank" rel="noopener">@jfonsecarivera</a>) pushed all 442,368 MLP neurons
   alone, up and down, asked each “Who are you?”, rated the replies, and paired the weirdest ones into combos. Search it
