@@ -1,11 +1,11 @@
-import { ABOUT_HTML } from "./about.js?v=20261031160000";
-import { createStore } from "./store.js?v=20261031160000";
-import { randomPrompt } from "./prompts.js?v=20261031160000";
-import { confHtml, interpHtml, wireFolds, QUESTIONABLE } from "./atlas.js?v=20261031160000";
+import { ABOUT_HTML } from "./about.js?v=20261031170000";
+import { createStore } from "./store.js?v=20261031170000";
+import { randomPrompt } from "./prompts.js?v=20261031170000";
+import { confHtml, interpHtml, wireFolds, QUESTIONABLE } from "./atlas.js?v=20261031170000";
 import {
   esc, doseStr, neuronKey, neuronStr, sortNeurons, recipeStr, recipeHtml, neuronHtml, edgeMark, setKey, parseRecipeStr, parseNeuronQuery,
   methodOf, DEFAULT_METHOD, samplingText, md, recipeFile, recipeJson, pythonSnippet, studioFile, fromStudio, slugify, ago, avatarHtml, copyText, download,
-} from "./format.js?v=20261031160000";
+} from "./format.js?v=20261031170000";
 
 const CFG = window.NEURONARY || {};
 const $ = (s, el = document) => el.querySelector(s);
@@ -1149,9 +1149,10 @@ async function renderAtlas(box, model, n) {
   catch (e) { body.innerHTML = `<div class="err">${esc(e.message)}</div>`; return; }
   const u = store.user();
   const mine = u && list.find((x) => x.user_id === u.id);
-  body.innerHTML = (list.length ? list.map((it) => interpHtml(it, { mine: u && it.user_id === u.id, admin: u && u.admin })).join("")
-    : `<div class="anone dim">Nobody has interpreted ${neuronKey(n)} yet.</div>`)
-    + `<button class="btn sbtn ianewbtn" data-ianew>${mine ? "Edit your interpretation" : "Add interpretation"}</button><div data-ianewbox></div>`;
+  body.innerHTML = list.length
+    ? list.map((it) => interpHtml(it, { mine: u && it.user_id === u.id, admin: u && u.admin })).join("")
+      + `<button class="linkbtn ianewlink" data-ianew>${mine ? "edit yours" : "add your interpretation"}</button><div data-ianewbox></div>`
+    : `<div class="anone faint">no interpretation yet · <button class="linkbtn" data-ianew>add one</button></div><div data-ianewbox></div>`;
   wireFolds(body);
   $$("[data-idel]", body).forEach((b) => (b.onclick = async () => {
     if (!confirm("Delete this interpretation?")) return;

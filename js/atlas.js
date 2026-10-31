@@ -8,7 +8,7 @@
 //   stats    {type, name, items: [[label, value]]}
 //   text     {type, name, text}
 // Anything else is shown as JSON, so nothing a submitter sends is lost.
-import { esc } from "./format.js?v=20261031160000";
+import { esc } from "./format.js?v=20261031170000";
 
 export const QUESTIONABLE = 0.3;
 
