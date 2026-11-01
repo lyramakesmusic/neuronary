@@ -8,7 +8,7 @@
 //   stats    {type, name, items: [[label, value]]}
 //   text     {type, name, text}
 // Anything else is shown as JSON, so nothing a submitter sends is lost.
-import { esc } from "./format.js?v=20261031200000";
+import { esc } from "./format.js?v=20261031210000";
 
 export const QUESTIONABLE = 0.3;
 
@@ -28,7 +28,9 @@ const num = (v) => (typeof v === "number" ? +v.toFixed(3) : v);
 function chip(item, c, link) {
   const [label, val, href] = Array.isArray(item) ? item : [item];
   const inner = `${esc(label)}${val != null && val !== "" ? `<span class="cnt">${esc(num(val))}</span>` : ""}`;
-  const h = href || link;
+  // links in readouts are submitter data: only http(s) or site-relative, never javascript:/data: etc.
+  const safe = (u) => typeof u === "string" && (/^https?:\/\//i.test(u) || /^\/(?!\/)/.test(u)) ? u : null;
+  const h = safe(href) || safe(link);
   return h ? `<a class="xc ${c}" href="${esc(h)}">${inner}</a>` : `<span class="xc ${c}">${inner}</span>`;
 }
 

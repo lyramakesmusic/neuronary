@@ -85,15 +85,35 @@ function card(r: Record<string, any> | null) {
     h("div", { style: { display: "flex", marginTop: 22, fontSize: 22, color: C.faint } }, `@${r.author_handle}`));
 }
 
+// Rendering is the expensive part, so: one render per recipe id per 10 minutes (extra query params don't matter, only
+// id), unknown ids get a 404 instead of a render, and each IP gets a bucket of fresh renders per minute.
+const CACHE = new Map<string, { png: Uint8Array; at: number }>();
+const TTL = 10 * 60e3;
+const BUCKET = new Map<string, { n: number; at: number }>();
+const PER_MIN = 30;
+
+function limited(ip: string): boolean {
+  const now = Date.now(), b = BUCKET.get(ip);
+  if (!b || now - b.at > 60e3) { BUCKET.set(ip, { n: 1, at: now }); if (BUCKET.size > 5000) BUCKET.clear(); return false; }
+  return ++b.n > PER_MIN;
+}
+
+const png = (bytes: Uint8Array) => new Response(bytes, { headers: {
+  "Content-Type": "image/png", "Cache-Control": "public, max-age=3600, s-maxage=86400", "Access-Control-Allow-Origin": "*" } });
+
 Deno.serve(async (req) => {
   const id = new URL(req.url).searchParams.get("id") ?? "";
-  let r: Record<string, any> | null = null;
-  if (/^[a-z0-9-]{1,64}$/.test(id)) {
-    const { data } = await sb.from("recipes").select("name,neurons,examples,author_handle,model,hidden,draft").eq("id", id).maybeSingle();
-    if (data && !data.hidden && !data.draft) r = data;
-  }
-  return new ImageResponse(card(r), {
-    width: 1200, height: 630, fonts: await fonts, emoji: "twemoji",
-    headers: { "Cache-Control": "public, max-age=3600, s-maxage=86400" },
-  });
+  if (!/^[a-z0-9-]{1,64}$/.test(id)) return new Response("not found", { status: 404 });
+  const hit = CACHE.get(id);
+  if (hit && Date.now() - hit.at < TTL) return png(hit.png);
+  const ip = (req.headers.get("x-forwarded-for") ?? "").split(",")[0].trim() || "?";
+  if (limited(ip)) return new Response("slow down", { status: 429, headers: { "Retry-After": "60" } });
+  const { data } = await sb.from("recipes").select("name,neurons,examples,author_handle,model,hidden,draft").eq("id", id).maybeSingle();
+  if (!data) return new Response("not found", { status: 404 });
+  const r = !data.hidden && !data.draft ? data : null; // hidden and drafts: the generic site card
+  const img = new ImageResponse(card(r), { width: 1200, height: 630, fonts: await fonts, emoji: "twemoji" });
+  const bytes = new Uint8Array(await img.arrayBuffer());
+  CACHE.set(id, { png: bytes, at: Date.now() });
+  if (CACHE.size > 300) CACHE.delete(CACHE.keys().next().value!);
+  return png(bytes); // our own headers only: ImageResponse's "immutable, max-age=31536000" no longer rides along
 });

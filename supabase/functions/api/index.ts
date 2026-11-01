@@ -195,15 +195,29 @@ async function edit(u: User, id: string, body: Record<string, any>) {
   return { id, url: `${SITE}/r/${id}` };
 }
 
+// a recipe the public can see (not hidden, not a draft), or 404
+async function visible(id: string) {
+  const { data: r } = await sb.from("recipes").select("id,user_id").eq("id", id).eq("hidden", false).eq("draft", false).maybeSingle();
+  if (!r) throw new HttpError(404, `no recipe ${id}`);
+  return r;
+}
+
+// posts in the window, from the insert-only post_log (deleting a post doesn't give the slot back)
+async function postsSince(uid: string, kind: string, interval: string) {
+  const { data, error } = await sb.rpc("posts_since", { uid, k: kind, since: interval });
+  if (error) throw new HttpError(500, error.message);
+  return Number(data) || 0;
+}
+
 async function comment(u: User, id: string, body: { body?: string; parent_id?: number }) {
   const me = need(u);
   if (!body.body || !String(body.body).trim()) throw new HttpError(400, "empty comment");
+  await visible(id);
+  await sb.rpc("check_not_struck", { uid: me.id }).then(({ error }) => { if (error) throw new HttpError(403, error.message); });
   // same as the site: each comment costs a moderation call, and nobody comments in bulk
-  const since = (ms: number) => sb.from("comments").select("id", { count: "exact", head: true }).eq("user_id", me.id)
-    .gt("created_at", new Date(Date.now() - ms).toISOString());
-  const [{ count: hour }, { count: day }] = await Promise.all([since(3600e3), since(86400e3)]);
-  if ((hour ?? 0) >= 60) throw new HttpError(429, "rate limit: 60 comments an hour");
-  if ((day ?? 0) >= 300) throw new HttpError(429, "rate limit: 300 comments a day");
+  const [hour, day] = await Promise.all([postsSince(me.id, "comment", "1 hour"), postsSince(me.id, "comment", "1 day")]);
+  if (hour >= 60) throw new HttpError(429, "rate limit: 60 comments an hour");
+  if (day >= 300) throw new HttpError(429, "rate limit: 300 comments a day");
   if (body.parent_id) {
     const { data: p } = await sb.from("comments").select("recipe_id,parent_id").eq("id", body.parent_id).maybeSingle();
     if (!p || p.recipe_id !== id || p.parent_id) throw new HttpError(400, "replies go one level deep, on the same recipe");
@@ -221,9 +235,7 @@ async function reproduce(u: User, id: string, body: { output?: string; prompt?: 
   const { data: r } = await sb.from("recipes").select("user_id").eq("id", id).eq("hidden", false).eq("draft", false).maybeSingle();
   if (!r) throw new HttpError(404, `no recipe ${id}`);
   if (r.user_id === me.id) throw new HttpError(400, "reproductions are for other people's recipes; add an example to your own instead");
-  const { count } = await sb.from("reproductions").select("id", { count: "exact", head: true }).eq("user_id", me.id)
-    .gt("created_at", new Date(Date.now() - 3600e3).toISOString());
-  if ((count ?? 0) >= 500) throw new HttpError(429, "rate limit: 500 reproductions an hour");
+  if (await postsSince(me.id, "reproduction", "1 hour") >= 500) throw new HttpError(429, "rate limit: 500 reproductions an hour");
   const result = body.result ?? "yes";
   if (!["yes", "partial", "no"].includes(result)) throw new HttpError(400, "result: yes, partial or no");
   const row = { recipe_id: id, user_id: me.id, author_handle: me.handle, output: String(body.output), result,
@@ -236,6 +248,7 @@ async function reproduce(u: User, id: string, body: { output?: string; prompt?: 
 async function vote(u: User, id: string, value: number) {
   const me = need(u);
   if (![-1, 0, 1].includes(value)) throw new HttpError(400, "value must be -1, 0 or 1");
+  await visible(id);
   const q = value ? sb.from("votes").upsert({ recipe_id: id, user_id: me.id, value })
     : sb.from("votes").delete().eq("recipe_id", id).eq("user_id", me.id);
   const { error } = await q;
@@ -403,6 +416,8 @@ async function callTool(u: User, name: string, a: Record<string, any>) {
 async function mcp(req: Request, u: User) {
   const msg = await req.json();
   const batch = Array.isArray(msg) ? msg : [msg];
+  // a JSON-RPC batch runs every call in turn (some are full scans): a backstop far above what a client sends
+  if (batch.length > 20) return Response.json({ jsonrpc: "2.0", id: null, error: { code: -32600, message: "batch too large: at most 20 calls" } }, { status: 413, headers: CORS });
   const out = [];
   for (const m of batch) {
     if (m.id === undefined) continue; // notifications (e.g. notifications/initialized) get no reply

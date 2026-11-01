@@ -207,8 +207,12 @@ class SupabaseStore {
     const u = this.session && this.session.user;
     this.profile = null;
     if (!u) return;
-    const { data } = await this.sb.from("profiles").select("handle,x_handle,is_admin,avatar_url,trusted,name_status").eq("id", u.id).maybeSingle();
-    this.profile = data || null;
+    // name_status (a name under review) is private: it comes from profile_private(), only for yourself and admins
+    const [{ data }, { data: priv }] = await Promise.all([
+      this.sb.from("profiles").select("handle,x_handle,is_admin,avatar_url,trusted").eq("id", u.id).maybeSingle(),
+      this.sb.rpc("profile_private", { uids: [u.id] }),
+    ]);
+    this.profile = data ? { ...data, name_status: (priv && priv[0] && priv[0].name_status) || null } : null;
   }
 
   // null when signed out. needsHandle: signed in but no handle picked yet.
@@ -520,7 +524,9 @@ class SupabaseStore {
       cids.length ? this.sb.from("comments").select("id,recipe_id,author_handle,body,hidden").in("id", cids) : Promise.resolve({ data: [] }),
       rids.length ? this.sb.from("recipes").select("id,name,author_handle,description,hidden").in("id", rids) : Promise.resolve({ data: [] }),
       pids.length ? this.sb.from("reproductions").select("id,recipe_id,author_handle,output,note,hidden").in("id", pids) : Promise.resolve({ data: [] }),
-      uids.length ? this.sb.from("profiles").select("id,handle,name_status").in("id", uids) : Promise.resolve({ data: [] }),
+      uids.length ? Promise.all([this.sb.from("profiles").select("id,handle").in("id", uids), this.sb.rpc("profile_private", { uids })])
+        .then(([a, b]) => ({ data: (a.data || []).map((x) => ({ ...x, name_status: ((b.data || []).find((y) => y.id === x.id) || {}).name_status || null })) }))
+        : Promise.resolve({ data: [] }),
     ]);
     return { log, reports, comments: Object.fromEntries((cs || []).map((c) => [String(c.id), c])), recipes: Object.fromEntries((rs || []).map((r) => [r.id, r])),
       reproductions: Object.fromEntries((ps || []).map((x) => [String(x.id), x])), profiles: Object.fromEntries((us || []).map((x) => [x.id, x])) };
