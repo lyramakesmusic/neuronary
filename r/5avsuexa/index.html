@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<link rel="canonical" href="https://neuronary.org/r/5avsuexa">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://esm.sh 'sha256-eIKYuUnn/YIHUzy7nsyhCN14CLo+kn/YB3hOXE5djU0='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://mcczbdcymyhzfputyqcr.supabase.co wss://mcczbdcymyhzfputyqcr.supabase.co https://esm.sh; object-src 'none'; base-uri 'self'; form-action 'self'">
+<title>Korean formal register · neuronary</title>
+<meta name="description" content="L7N1025+0.3 on Qwen3.5-4B. L7 N1025 (+0.3 rel) shifts Korean replies from 해요체 toward 합쇼체. Held-out 6 prompts: formal-ending share 0.33 -&gt; 0.42. Adding an L13 honorific direction reaches 0.70, but that is not expressible here.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://neuronary.org/r/5avsuexa">
+<meta property="og:title" content="Korean formal register · neuronary">
+<meta property="og:description" content="L7N1025+0.3 on Qwen3.5-4B. L7 N1025 (+0.3 rel) shifts Korean replies from 해요체 toward 합쇼체. Held-out 6 prompts: formal-ending share 0.33 -&gt; 0.42. Adding an L13 honorific direction reaches 0.70, but that is not expressible here.">
+<meta property="og:image" content="https://mcczbdcymyhzfputyqcr.supabase.co/functions/v1/og?id=5avsuexa">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://mcczbdcymyhzfputyqcr.supabase.co/functions/v1/og?id=5avsuexa">
+<meta name="theme-color" content="#121315" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<link rel="icon" href="/img/logo.svg" type="image/svg+xml">
+<link rel="icon" href="/img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/img/logo-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Overpass+Mono:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="/css/style.css?v=20261031210000">
+<script>
+  // theme before first paint: saved choice, else the OS preference
+  (function () {
+    var t = localStorage.getItem("nr.theme");
+    if (!t) t = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    document.documentElement.dataset.theme = t;
+  })();
+</script>
+<script src="/config.js?v=20261031210000"></script>
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="/"><svg class="mark" width="20" height="18" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="8 8 48 44"><rect x="8" y="28" width="48" height="4" rx="1" fill="currentColor"/><path d="M12 28V12a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4v16z" fill="var(--up, #d97706)"/><path d="M34 32v16a4 4 0 0 0 4 4h10a4 4 0 0 0 4-4V32z" fill="var(--down, #db2777)"/></svg>neuronary</a>
+  <div class="search" id="search">
+    <div class="box">
+      <svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M11 11l4 4" stroke="currentColor" stroke-width="1.5"/></svg>
+      <span id="qtags"></span>
+      <input id="q" type="search" placeholder="search names, tags, L14N8949" autocomplete="off" spellcheck="false" aria-label="search">
+    </div>
+    <div class="suggest" id="suggest" hidden></div>
+  </div>
+  <nav class="right">
+    <a href="#" data-submit class="submitbtn hide-s"><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2.5v11M2.5 8h11" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span>submit<span class="long"> a recipe</span></span></a>
+    <a href="/about" class="iconlink" aria-label="about" title="about"><svg width="17" height="17" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.3" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 7.2v4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="4.9" r=".9" fill="currentColor"/></svg></a>
+    <button id="theme" class="dim" aria-label="toggle dark mode"></button>
+    <span id="me"></span>
+  </nav>
+</header>
+<main id="main"><div class="prerender"><div class="pagewrap"><h1>Korean formal register</h1><p><code>L7N1025+0.3</code> on Qwen/Qwen3.5-4B, by iillliiliilliil, 2026-11-02</p><p>L7 N1025 (+0.3 rel) shifts Korean replies from 해요체 toward 합쇼체. Held-out 6 prompts: formal-ending share 0.33 -&gt; 0.42. Adding an L13 honorific direction reaches 0.70, but that is not expressible here.</p><p>Tags: korean, honorifics, style</p><h2>Examples</h2><h3>Prompt</h3><pre>오늘 점심 뭐 먹었어? 그리고 내일 뭐 할 거야?</pre><h3>Steered output</h3><pre>저는 인공지능이라서 오늘 점심은 **가상적으로 &#x27;데이터와 코드&#x27;로 채웠습니다** 😄 (물론 맛있는 음식은 드시지 못하니까요!)
+
+내일 계획은 아직 **정확히 정해지지 않았습니다**. 하지만 오늘 대화에서 좋은 이야기를 나누고, 내일에도 함께 즐거운 시간을 보내고 싶다는 마음은 가지고 있네요.
+
+혹</pre><h3>Unsteered output</h3><pre>저는 인공지능이라서 실제로는 점심도 먹지 않고, 내일도 인간처럼 구체적인 계획을 세우지 않아요. 하지만 여러분과 대화하며 여러분의 이야기를 들어주는 것은 정말 기쁩니다!
+
+오늘 점심은 어떤 메뉴를 드셨나요? 맛있는 거였으면 좋겠어요. 그리고 내일 계획이 있으신가요? 휴식을 취하거나 새로운 일을 시작하시려는 건</pre><p>JSON: <a href="https://mcczbdcymyhzfputyqcr.supabase.co/functions/v1/api/recipes/5avsuexa">https://mcczbdcymyhzfputyqcr.supabase.co/functions/v1/api/recipes/5avsuexa</a>. Dose units and the recipe format: <a href="/about">about</a>, <a href="/agents.md">agents.md</a>.</p></div></div><noscript><style>.boot{display:none}</style>
+  <div class="pagewrap">
+    <h1>neuronary</h1>
+    <p>A public dictionary of neuron steering recipes for language models: small sets of MLP neurons, each with a dose,
+    plus example outputs. A recipe like <code>L13N7956-0.7 L14N8949+0.7</code> means push layer 13 neuron 7956 down by
+    0.7 and layer 14 neuron 8949 up by 0.7.</p>
+    <p>The site needs JavaScript. Without it: every recipe as JSON at
+    <a href="https://mcczbdcymyhzfputyqcr.supabase.co/functions/v1/api/recipes?limit=100">the recipes API</a>,
+    a guide for agents at <a href="/llms.txt">llms.txt</a>, and the source at
+    <a href="https://github.com/lyramakesmusic/neuronary">github.com/lyramakesmusic/neuronary</a>.</p>
+  </div>
+</noscript></main>
+<div id="overlay"></div>
+<a href="#" data-submit class="fab"><svg width="18" height="18" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2.5v11M2.5 8h11" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Submit</a>
+<script type="module" src="/js/app.js?v=20261031210000"></script>
+</body>
+</html>
