@@ -1,5 +1,63 @@
 {
  "version": 1,
- "count": 0,
- "recipes": []
+ "count": 1,
+ "recipes": [
+  {
+   "id": "catgirl-qwen-four-neurons",
+   "name": "Catgirl Qwen (brief female steering)",
+   "description": "Four native MLP neurons produce a selected catgirl self-introduction in Qwen3.5-4B. Custom timing is essential: L22N8295 steers the full prompt and first 16 answer-prediction positions only; the other three coordinates stay active throughout. Manual composition of published ingredients. Ordinary tasks and conversation remain brittle. Requires the linked custom runner; applying all four constantly does not reproduce this protocol.",
+   "model": "Qwen/Qwen3.5-4B",
+   "neurons": [
+    {
+     "layer": 9,
+     "neuron": 9009,
+     "dose": 0.7
+    },
+    {
+     "layer": 22,
+     "neuron": 8295,
+     "dose": -0.4
+    },
+    {
+     "layer": 26,
+     "neuron": 6173,
+     "dose": 0.3
+    },
+    {
+     "layer": 26,
+     "neuron": 8930,
+     "dose": 0.7
+    }
+   ],
+   "method": {
+    "op": "add",
+    "site": "mlp.down_proj.input",
+    "normalization": "layer_residual_median_over_down_column_l2",
+    "apply_to": "all_tokens"
+   },
+   "sampling": {
+    "temperature": 0,
+    "repetition_penalty": 1.1,
+    "thinking": false
+   },
+   "tags": [
+    "persona",
+    "catgirl",
+    "combination",
+    "conditional",
+    "animal",
+    "cute"
+   ],
+   "aliases": [
+    "Meecot"
+   ],
+   "author": {
+    "handle": "aryabhuptani",
+    "url": "https://github.com/aryabhuptani"
+   },
+   "source": "https://github.com/aryabhuptani/nyan-qwen3.5-4b",
+   "date": "2026-10-28",
+   "n_examples": 2
+  }
+ ]
 }
